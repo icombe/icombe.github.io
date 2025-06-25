@@ -1,11 +1,11 @@
 // src/components/Hero.jsx
 export default function Hero() {
   return (
-    <section className="min-h-screen flex flex-col items-center justify-center bg-dark-200 text-white text-center px-4">
-      <h1 className="text-5xl font-extrabold mb-4">Your Name Here</h1>
-      <p className="text-lg text-gray-300">
-        A brief professional tagline goes here.
-      </p>
+    <section id="hero" className="py-24 bg-dark-100">
+      <div className="container text-center">
+        <h1 className="text-5xl font-bold mb-4 text-primary-500">Your Name</h1>
+        <p className="text-xl text-gray-300 mb-8">Web Developer & Software Engineer</p>
+      </div>
     </section>
   );
 }
