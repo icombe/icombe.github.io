@@ -1,8 +1,8 @@
 // src/components/ContactForm.jsx
 export default function ContactForm() {
   return (
-    <section id="contact" className="py-16 px-4 bg-gray-50">
-      <div className="max-w-md mx-auto">
+    <section id="contact" className="py-16 bg-gray-50">
+      <div className="container">
         <h2 className="text-3xl font-bold mb-4">Contact Me</h2>
         <form className="space-y-4">
           <input type="text" placeholder="Name" className="w-full p-2 border rounded" />

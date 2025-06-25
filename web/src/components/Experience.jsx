@@ -27,8 +27,8 @@ export default function Experience() {
   }
 
   return (
-    <section id="experience" className="py-16 px-4 bg-dark">
-      <div className="container mx-auto px-4">
+    <section id="experience" className="py-16 bg-dark">
+      <div className="container">
         <h2 className="text-4xl font-bold mb-8 text-primary-500">
           Work Experience
         </h2>
