@@ -1,8 +1,16 @@
 // src/components/Experience.jsx
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
+
+type ExperienceItem = {
+  id: number;
+  title: string;
+  company: string;
+  dates: string;
+  bullets: string[];
+};
 
 export default function Experience() {
-  const [items, setItems] = useState([]);
+  const [items, setItems] = useState<ExperienceItem[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {

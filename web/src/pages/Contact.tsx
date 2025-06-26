@@ -1,4 +1,3 @@
-// src/pages/Contact.jsx
 import ContactForm from "../components/ContactForm";
 
 export default function ContactPage() {

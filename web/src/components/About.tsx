@@ -1,4 +1,5 @@
-// src/components/About.jsx
+import React from "react";
+
 export default function About() {
   return (
     <section id="about" className="py-16 bg-dark-200">

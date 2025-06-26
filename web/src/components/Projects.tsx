@@ -1,8 +1,15 @@
 // src/components/Projects.jsx
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
+
+type Project = {
+  id: number;
+  title: string;
+  description: string;
+  link: string;
+};
 
 export default function Projects() {
-  const [projects, setProjects] = useState([]);
+  const [projects, setProjects] = useState<Project[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {

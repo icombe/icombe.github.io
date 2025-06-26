@@ -1,4 +1,5 @@
-// src/components/Hero.jsx
+import React from "react";
+
 export default function Hero() {
   return (
     <section id="hero" className="py-24 bg-dark-100">
