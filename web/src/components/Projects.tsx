@@ -1,4 +1,3 @@
-// src/components/Projects.jsx
 import React, { useEffect, useState } from "react";
 
 type Project = {

@@ -1,8 +1,12 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from dotenv import load_dotenv
 
 from routes.experience import router as exp_router
 from routes.projects import router as proj_router
+from routes.contact import router as contact_router
+
+load_dotenv()
 
 app = FastAPI()
 
@@ -21,3 +25,4 @@ async def health():
 # Include our new routers
 app.include_router(exp_router)
 app.include_router(proj_router)
+app.include_router(contact_router)
