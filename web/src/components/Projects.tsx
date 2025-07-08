@@ -33,7 +33,7 @@ export default function Projects() {
   }
 
   return (
-    <section id="projects" className="py-16 bg-dark">
+    <section id="projects" className="py-16 bg-dark-200">
       <div className="container">
         <h2 className="text-4xl font-bold mb-8 text-primary-500">
           Projects

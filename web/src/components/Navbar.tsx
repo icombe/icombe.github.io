@@ -6,7 +6,7 @@ export default function Navbar() {
     <nav className="w-full bg-primary-900 text-white shadow-md">
       <div className="max-w-4xl mx-auto flex items-center justify-between p-4">
         <Link to="/" className="font-bold text-2xl">
-          YourName.dev
+          IanCombe.dev
         </Link>
         <div className="space-x-4">
           <Link to="/" className="hover:underline">Home</Link>

@@ -35,7 +35,7 @@ export default function Experience() {
   }
 
   return (
-    <section id="experience" className="py-16 bg-dark">
+    <section id="experience" className="py-16 bg-dark-200">
       <div className="container">
         <h2 className="text-4xl font-bold mb-8 text-primary-500">
           Work Experience

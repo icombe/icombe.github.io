@@ -2,33 +2,41 @@ import React, { useState } from "react";
 
 export default function ContactForm() {
   const [submitted, setSubmitted] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setError(null); // Reset error state
     const form = e.currentTarget;
     const formData = new FormData(form);
     const object = Object.fromEntries(formData);
     const json = JSON.stringify(object);
 
-    const res = await fetch("https://api.web3forms.com/submit", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-      body: json,
-    });
+    try {
+      const res = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: json,
+      });
 
-    if (res.status === 200) {
-      setSubmitted(true);
-      form.reset();
-    } else {
-      // Optionally handle error
+      if (res.ok) {
+        setSubmitted(true);
+        form.reset();
+      } else {
+        const data = await res.json();
+        setError(data.message || "Something went wrong. Please try again.");
+      }
+    } catch (err: any) {
+      setError("Network error. Please try again.");
+      console.error("Web3Forms error:", err);
     }
   };
 
   return (
-    <div className="max-w-md mx-auto py-16 px-6 bg-black rounded-lg shadow-lg">
+    <div className="max-w-md mx-auto py-16 px-6 bg-dark-100 rounded-lg shadow-lg">
       <h2 className="text-3xl font-bold mb-4 text-center text-white">Contact Me</h2>
       <p className="mb-6 text-lg text-center text-gray-300">
         Fill out the form below and I'll get back to you soon!
@@ -41,7 +49,7 @@ export default function ContactForm() {
         <form className="space-y-5" onSubmit={handleSubmit}>
           <input type="hidden" name="access_key" value="be284fdf-4eed-406f-931b-cbec43af9de6" />
           <div>
-            <label className="block text-sm font-medium mb-1 text-gray-200" htmlFor="name">
+            <label className="block text-md font-medium mb-1 text-gray-200" htmlFor="name">
               Name
             </label>
             <input
@@ -55,7 +63,7 @@ export default function ContactForm() {
             />
           </div>
           <div>
-            <label className="block text-sm font-medium mb-1 text-gray-200" htmlFor="email">
+            <label className="block text-md font-medium mb-1 text-gray-200" htmlFor="email">
               Email
             </label>
             <input
@@ -69,7 +77,7 @@ export default function ContactForm() {
             />
           </div>
           <div>
-            <label className="block text-sm font-medium mb-1 text-gray-200" htmlFor="message">
+            <label className="block text-md font-medium mb-1 text-gray-200" htmlFor="message">
               Message
             </label>
             <textarea
@@ -89,6 +97,9 @@ export default function ContactForm() {
             tabIndex={-1}
             autoComplete="off"
           />
+          {error && (
+            <div className="text-red-400 text-center font-semibold">{error}</div>
+          )}
           <button
             type="submit"
             className="w-full bg-blue-600 text-white font-semibold py-2 rounded hover:bg-blue-700 transition"
