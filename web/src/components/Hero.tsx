@@ -1,11 +1,12 @@
 import React from "react";
+import styles from "../styles/index.module.scss";
 
 export default function Hero() {
   return (
-    <section id="hero" className="pt-24 pb-0 bg-dark-200">
-      <div className="container text-center">
-        <h1 className="text-7xl font-bold mb-8 text-primary-500">Ian Combe</h1>
-        <p className="text-2xl text-gray-200 mb-8">Software Engineer & Computer Science Student</p>
+    <section id="hero" className={styles.hero}>
+      <div>
+        <h1>Ian Combe</h1>
+        <p>Software Engineer & Computer Science Student</p>
       </div>
     </section>
   );

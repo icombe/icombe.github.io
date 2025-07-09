@@ -1,0 +1,323 @@
+/* Gradient‐wave text */
+@keyframes wave {
+  0%   { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+
+.waveText {
+  color: #347fcb; // blue accent for brand
+  background: none; // remove gradient if you want solid blue
+}
+
+/* Button styles */
+.btn {
+  background-color: #347fcb;
+  color: #fff;
+  border: none;
+  border-radius: 0.5rem;
+  padding: 0.75rem 2rem;
+  font-size: 1.15rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s, box-shadow 0.2s, transform 0.2s;
+  box-shadow: 0 2px 8px rgba(52,127,203,0.15);
+  text-decoration: none; // remove underline
+  display: inline-block;
+}
+.btn:hover, .btn:focus {
+  background-color: #26599a;
+  text-decoration: none;
+  transform: translateY(-2px) scale(1.03);
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+  background: #181818;
+  border-bottom: 2px solid #347fcb;
+}
+
+.navbarButtons {
+  display: flex;
+  gap: 1.25rem; // space between buttons
+}
+
+.sectionBg {
+  background: #181818;
+  padding: 4rem 0;
+}
+
+.container {
+  max-width: 64rem;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.sectionTitle {
+  font-size: 2.25rem;
+  font-weight: bold;
+  margin-bottom: 2rem;
+  color: #347fcb;
+}
+
+.sectionParagraph {
+  font-size: 1.125rem;
+  color: #e5e7eb;
+  text-indent: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+.projectsGrid {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 640px) {
+  .projectsGrid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.projectCard {
+  display: block;
+  padding: 1.5rem;
+  background: #1e1e1e;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  border-left: 4px solid #347fcb;
+  transition: box-shadow 0.3s, transform 0.3s;
+  min-height: 300px;
+  color: inherit;
+  text-decoration: none;
+}
+.projectCard:hover {
+  box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+  transform: translateY(-4px);
+}
+
+.projectThumbnail {
+  height: 10rem;
+  background: #23272f;
+  border-radius: 0.5rem;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.projectThumbnailText {
+  color: #6b7280;
+}
+
+.projectTitle {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #f3f4f6;
+  margin-bottom: 0.5rem;
+}
+
+.projectDescription {
+  color: #d1d5db;
+}
+
+:global(html, body) {
+  font-family: 'Inter', 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  color: #e5e7eb;           // light text
+  background: #181818;      // dark background
+  letter-spacing: 0.01em;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.hero {
+  background: #181818;
+  color: #e5e7eb;
+  padding: 6rem 0 4rem 0;
+  text-align: center;
+}
+
+.hero h1 {
+  font-size: 3rem;
+  font-weight: 700;
+  color: #347fcb; // blue accent for your name
+  margin-bottom: 1rem;
+}
+
+.hero p {
+  font-size: 1.5rem;
+  color: #e5e7eb;
+}
+
+.footer {
+  background: #181818;
+  color: #e5e7eb;
+  border-top: 2px solid #347fcb;
+  text-align: right;
+  padding: 2rem 0;
+  font-size: 1rem;
+  margin-right: 2rem; // slight left margin
+  margin-left: 2rem; // slight right margin
+}
+
+.experienceSection {
+  padding: 4rem 1rem;
+  background: #181818;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.experienceContainer {
+  max-width: 48rem;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.experienceTitle {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 2rem;
+  color: #347fcb;
+  text-align: center;
+}
+
+.experienceList {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.experienceCard {
+  background: #23272f;
+  border-left: 4px solid #347fcb;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 8px rgba(52,127,203,0.15);
+  padding: 2rem;
+  min-height: 240px;
+  transition: box-shadow 0.3s, transform 0.3s, border-color 0.3s;
+  cursor: pointer;
+}
+.experienceCard:hover, .experienceCard:focus {
+  box-shadow: 0 8px 24px rgba(52,127,203,0.25);
+  transform: translateY(-4px) scale(1.02);
+  border-color: #26599a;
+  outline: none;
+}
+
+.experienceCardTitle {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #f3f4f6;
+  margin-bottom: 0.25rem;
+}
+
+.experienceCardCompany {
+  color: #347fcb;
+  margin-bottom: 0.25rem;
+}
+
+.experienceCardDates {
+  color: #a1a1aa;
+  font-size: 0.95rem;
+  margin-bottom: 1rem;
+}
+
+.experienceCardBullets {
+  color: #e5e7eb;
+  padding-left: 1.25rem;
+}
+
+.contactSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  background: #181818;
+  padding: 4rem 1rem;
+}
+
+.contactForm {
+  background: #23272f;
+  border-radius: 1rem;
+  box-shadow: 0 0 32px 8px rgba(52,127,203,0.25); // larger glow
+  padding: 2.5rem 2.5rem;
+  max-width: 480px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+  box-sizing: border-box;
+}
+
+.contactTitle {
+  color: #347fcb;
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  text-align: center;
+}
+
+.contactSubtitle {
+  color: #a1a1aa;
+  font-size: 1.1rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.contactLabel {
+  color: #e5e7eb;
+  font-size: 1.15rem;
+  margin-bottom: 0.2rem; // less margin
+  font-weight: 500;
+}
+
+.contactInput,
+.contactTextarea {
+  width: 100%;
+  padding: 1.1rem 1.25rem;
+  border-radius: 0.5rem;
+  border: 1.5px solid #347fcb;
+  background: #181818;
+  color: #e5e7eb;
+  font-size: 1.15rem;
+  margin-bottom: 0.2rem; // less margin
+  transition: border-color 0.2s;
+  box-sizing: border-box;
+  resize: none; // disables resizing for textarea
+}
+
+.contactTextarea {
+  resize: none; // disables resizing for textarea
+}
+
+.contactInput:focus,
+.contactTextarea:focus {
+  border-color: #26599a;
+  outline: none;
+}
+
+.contactSubmit {
+  background-color: #347fcb;
+  color: #fff;
+  border: none;
+  border-radius: 0.5rem;
+  padding: 1.1rem 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, box-shadow 0.2s, transform 0.2s;
+  box-shadow: 0 2px 8px rgba(52,127,203,0.15);
+  text-decoration: none;
+  display: inline-block;
+  margin-top: 0.5rem;
+}
+.contactSubmit:hover, .contactSubmit:focus {
+  background-color: #26599a;
+  text-decoration: none;
+  transform: translateY(-2px) scale(1.03);
+}
