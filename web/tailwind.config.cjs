@@ -1,5 +1,5 @@
 /** @type {import('tailwindcss').Config} */
-module.exports = {
+export default {
   content: ["./index.html","./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
     container: {
@@ -24,8 +24,23 @@ module.exports = {
           DEFAULT: '#121212', // near-black background
           100: '#1e1e1e',
           200: '#181818'
-        }
-      }
+        },
+      },
+      backgroundImage: {
+        'rainbow': 'linear-gradient(90deg, #f00, #0f0, #00f, #f0f)',
+        },
+        backgroundSize: {
+          '200%': '200% 100%',
+        },
+        keyframes: {
+          'wave': {
+            '0%': { 'background-position': '0% 50%' },
+            '100%': { 'background-position': '200% 50%' },
+          },
+        },
+        animation: {
+          'wave-text': 'wave 4s ease infinite',
+        },
     },
   },
   plugins: [],
