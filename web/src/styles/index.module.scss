@@ -4,9 +4,28 @@
   100% { background-position: 200% 50%; }
 }
 
+@keyframes blueWave {
+  0%   { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+
 .waveText {
-  color: #347fcb; // blue accent for brand
-  background: none; // remove gradient if you want solid blue
+  background: linear-gradient(
+    90deg,
+    #60aaff 0%,
+    #347fcb 25%,
+    #26599a 50%,
+    #347fcb 75%,
+    #60aaff 100%
+  );
+  background-size: 200% 100%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  animation: blueWave 8s linear infinite;
+  font-weight: 700;
+  letter-spacing: 0.03em;
 }
 
 /* Button styles */
@@ -141,7 +160,7 @@
 }
 
 .hero h1 {
-  font-size: 3rem;
+  font-size: 5rem;
   font-weight: 700;
   color: #347fcb; // blue accent for your name
   margin-bottom: 1rem;
