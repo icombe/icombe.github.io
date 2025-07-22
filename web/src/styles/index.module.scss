@@ -56,6 +56,8 @@
   padding: 1rem 2rem;
   background: #181818;
   border-bottom: 2px solid #347fcb;
+  // margin-left: 2rem;  // Match ftr
+  // margin-right: 2rem; // Match ftr
 }
 
 .navbarButtons {
@@ -79,6 +81,7 @@
   font-weight: bold;
   margin-bottom: 2rem;
   color: #347fcb;
+  text-align: center; // Center the title
 }
 
 .sectionParagraph {
@@ -125,8 +128,9 @@
 .projectThumbnailImage {
   width: 100%;
   height: 100%;
-  object-fit: cover;     /* scale & crop to fill */
-  display: block;        /* remove inline-img whitespace */
+  object-fit: cover;
+  display: block;
+  border-radius: 0.5rem; // Rounded corners
 }
 .projectThumbnailText {
   color: #6b7280;
@@ -157,7 +161,7 @@
 .hero {
   background: #181818;
   color: #e5e7eb;
-  padding: 6rem 0 4rem 0;
+  // padding: 6rem 0 4rem 0;
   text-align: center;
 }
 
@@ -176,12 +180,22 @@
 .footer {
   background: #181818;
   color: #e5e7eb;
-  border-top: 2px solid #347fcb;
   text-align: right;
-  padding: 2rem 0;
+  padding: 2rem 2rem; // Add horizontal padding for text
   font-size: 1rem;
-  margin-right: 2rem; // slight left margin
-  margin-left: 2rem; // slight right margin
+  position: relative; // Needed for pseudo-element positioning
+  border-top: none;   // Remove the original border
+}
+
+.footer::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw; // Full viewport width
+  height: 2px;
+  background: #347fcb;
+  transform: translateX(-1rem); // Offset to align with body if needed
 }
 
 .experienceSection {
