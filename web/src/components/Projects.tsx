@@ -6,6 +6,7 @@ type Project = {
   title: string;
   description: string;
   link: string;
+  thumbnail: string;
 };
 
 export default function Projects() {
@@ -15,7 +16,7 @@ export default function Projects() {
   useEffect(() => {
     fetch("http://localhost:8000/api/projects/")
       .then((res) => res.json())
-      .then((data) => {
+      .then((data: Project[]) => {
         setProjects(data);
         setLoading(false);
       })
@@ -41,13 +42,17 @@ export default function Projects() {
           {projects.map((proj) => (
             <a
               key={proj.id}
-              href={proj.link}
-              target="_blank"
-              rel="noopener noreferrer"
+              href={proj.link || undefined}
+              target={proj.link ? "_blank" : undefined}
+              rel={proj.link ? "noopener noreferrer" : undefined}
               className={styles.projectCard}
             >
               <div className={styles.projectThumbnail}>
-                <span className={styles.projectThumbnailText}>Thumbnail</span>
+                <img
+                  src={proj.thumbnail}
+                  alt={`${proj.title} thumbnail`}
+                  className={styles.projectThumbnailImage}
+                />
               </div>
               <h3 className={styles.projectTitle}>{proj.title}</h3>
               <p className={styles.projectDescription}>{proj.description}</p>
