@@ -1,12 +1,18 @@
+import styles from "../styles/index.module.scss";
+
 export default function Testimonials() {
   return (
-    <section style={{ minHeight: "60vh", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
-      <h2 style={{ fontSize: "2.5rem", color: "#347fcb", marginBottom: "2rem" }}>Testimonials</h2>
-      <p style={{ color: "#e5e7eb", fontSize: "1.2rem" }}>
-        {/* Replace with real testimonials */}
-        “Ian is a fantastic developer and teammate!”<br />
-        — Happy Client
-      </p>
+    <section className={styles.testimonialsSectionBg}>
+      <div className={styles.container}>
+        <h2 className={styles.sectionTitle}>Testimonials</h2>
+        <p className={styles.sectionParagraph}>
+          {<p className={styles.sectionParagraph}>
+            Ian was a pleasure to work with. His attention to detail and ability to
+            understand our needs made the project a success. Highly recommend!
+            - Jane Doe, CEO of Tech Solutions
+            </p>}
+        </p>
+      </div>
     </section>
   );
 }
