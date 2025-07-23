@@ -1027,7 +1027,6 @@
   width: 98vw;
   max-width: 1200px;
   height: auto;
-  // margin: 2.5rem auto 2.5rem auto;
   display: block;
   border-radius: 1.2rem;
   box-shadow: 0 4px 32px rgba(52,127,203,0.10);
@@ -1048,49 +1047,37 @@
 .projectBullets {
   display: flex;
   flex-direction: column;
-  gap: 1.2rem; /* decreased vertical margin */
+  gap: 1.2rem;
   width: 100%;
   margin-top: 1.5rem;
+  overflow-x: hidden;   /* hide any overflow, no scrollbars */
+}
+
+.bulletWrapper {
+  /* just a plain container for IntersectionObserver */
 }
 
 .projectBullet {
-  font-size: 1.7rem; /* increased text size */
+  font-size: 1.7rem;
   color: var(--color-text);
-  max-width: 90%;
   line-height: 1.6;
   opacity: 0;
-  transform: translateX(0);
-  transition: opacity 0.7s cubic-bezier(0.6,0.2,0.2,1), transform 0.7s cubic-bezier(0.6,0.2,0.2,1);
-  text-align: center;
-  margin-left: auto;
-  margin-right: auto;
+  /* animate transform & opacity over 0.7s */
+  transition: transform 0.7s ease, opacity 0.7s ease;
+  /* start fully off-screen relative to its _wrapper_ */
+  transform: translateX(var(--start-offset));
 }
 
-.projectBullet.centered {
-  text-align: center;
-}
+/* CSS variables set per side */
+.projectBullet.left  { --start-offset: -100vw; }
+.projectBullet.right { --start-offset:  100vw; }
 
-.projectBullet.slideIn.left {
-  opacity: 1;
+.projectBullet.inView {
   transform: translateX(0);
-  transition-delay: 0s;
-}
-.projectBullet.slideIn.right {
   opacity: 1;
-  transform: translateX(0);
-  transition-delay: 0s;
-}
-.projectBullet.slideOut.left {
-  opacity: 0;
-  transform: translateX(-80px);
-}
-.projectBullet.slideOut.right {
-  opacity: 0;
-  transform: translateX(80px);
 }
 
 .bulletEmphasis {
   color: var(--color-primary-light);
   font-weight: 700;
-  margin-right: 0.5ch;
 }

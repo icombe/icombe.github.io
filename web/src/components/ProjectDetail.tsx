@@ -119,35 +119,38 @@ export default function ProjectDetail() {
         {project.bullets.map((point, idx) => {
           const Bullet = () => {
             const [ref, inView] = useInView(0.2);
+            const [shown, setShown] = useState(false);
 
-            // Split off leading emphasis
+            useEffect(() => {
+              if (inView) setShown(true);
+            }, [inView]);
+
             const colonIdx = point.indexOf(":");
-            let first = "", rest = point;
-            if (colonIdx !== -1) {
-              first = point.slice(0, colonIdx + 1);
-              rest = point.slice(colonIdx + 1);
-            }
+            const first = colonIdx > -1 ? point.slice(0, colonIdx + 1) : "";
+            const rest  = colonIdx > -1 ? point.slice(colonIdx + 1) : point;
+
+            const sideClass = idx % 2 === 0 ? styles.left : styles.right;
+            const innerClasses = [
+              styles.projectBullet,
+              sideClass,
+              shown ? styles.inView : ""
+            ].join(" ");
 
             return (
-              <div
-                ref={ref}
-                className={[
-                  styles.projectBullet,
-                  idx % 2 === 0 ? styles.left : styles.right,
-                  styles.centered,
-                  inView ? styles.slideIn : styles.slideOut,
-                ].join(" ")}
-                style={{
-                  animationDelay: inView ? `${idx * 0.25 + 0.2}s` : "0s",
-                }}
-              >
-                {first && (
-                  <span className={styles.bulletEmphasis}>{first}</span>
-                )}
-                {rest}
+              <div ref={ref} className={styles.bulletWrapper}>
+                <div
+                  className={innerClasses}
+                  style={{ transitionDelay: `${idx * 0.2}s` }}
+                >
+                  {first && (
+                    <span className={styles.bulletEmphasis}>{first}</span>
+                  )}
+                  {rest}
+                </div>
               </div>
             );
           };
+
           return <Bullet key={idx} />;
         })}
       </div>
