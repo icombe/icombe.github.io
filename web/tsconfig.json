@@ -16,6 +16,6 @@
     "jsx": "react-jsx",
     "types": ["jest", "node"]
   },
-  "include": ["src", "jest.setup.ts"],
+  "include": ["src", "jest.setup.ts", "svg.d.ts"],
   "exclude": ["node_modules", "dist"]
 }
