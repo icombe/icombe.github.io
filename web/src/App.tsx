@@ -2,11 +2,10 @@ import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
-import Hero from "./components/Hero";
-
 import Home from "./pages/Home";
 import AboutPage from "./pages/About";
 import ContactPage from "./pages/Contact";
+import ProjectDetail from "./components/ProjectDetail";
 
 export default function App() {
   return (
@@ -18,6 +17,7 @@ export default function App() {
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<AboutPage />} />
             <Route path="/contact" element={<ContactPage />} />
+            <Route path="/projects/:id" element={<ProjectDetail />} />
           </Routes>
         </main>
         <Footer />

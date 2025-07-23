@@ -15,16 +15,6 @@ class ProjectItem(BaseModel):
     link: str
     thumbnail: str # placeholder for image URL
     stack: List[str] = []
-    bullets: List[str] = [] 
-
-# For video heavy projects use a similar model
-class VideoProjectItem(BaseModel):
-    id: int
-    title: str
-    description: str
-    video_embeds: List[str]      # list of iframe snippets or YouTube IDs
-    thumbnail: str               # placeholder image URL
-    stack: List[str] = []
     bullets: List[str] = []
 
 # Real data is typically fetched from a database or an external API

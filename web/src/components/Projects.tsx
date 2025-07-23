@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import styles from "../styles/index.module.scss";
 
 type Project = {
@@ -40,11 +41,9 @@ export default function Projects() {
         <h2 className={styles.sectionTitle}>Projects</h2>
         <div className={styles.projectsGrid}>
           {projects.map((proj) => (
-            <a
+            <Link
               key={proj.id}
-              href={proj.link || undefined}
-              target={proj.link ? "_blank" : undefined}
-              rel={proj.link ? "noopener noreferrer" : undefined}
+              to={`/projects/${proj.id}`}
               className={styles.projectCard}
             >
               <div className={styles.projectThumbnail}>
@@ -56,7 +55,7 @@ export default function Projects() {
               </div>
               <h3 className={styles.projectTitle}>{proj.title}</h3>
               <p className={styles.projectDescription}>{proj.description}</p>
-            </a>
+            </Link>
           ))}
         </div>
       </div>

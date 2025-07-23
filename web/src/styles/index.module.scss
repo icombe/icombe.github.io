@@ -65,9 +65,9 @@
   gap: 1.25rem; // space between buttons
 }
 
-.sectionBg {
+.sectionBg { // About section
   background: #181818;
-  padding: 4rem 0;
+  padding: 1rem 0 0; // Reduced vertical padding
 }
 
 .container {
@@ -77,7 +77,7 @@
 }
 
 .sectionTitle {
-  font-size: 2.25rem;
+  font-size: 3rem; // Larger and matches experienceTitle
   font-weight: bold;
   margin-bottom: 2rem;
   color: #347fcb;
@@ -178,28 +178,16 @@
 }
 
 .footer {
-  background: #181818;
-  color: #e5e7eb;
-  text-align: right;
-  padding: 2rem 2rem; // Add horizontal padding for text
-  font-size: 1rem;
-  position: relative; // Needed for pseudo-element positioning
-  border-top: none;   // Remove the original border
-}
-
-.footer::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100vw; // Full viewport width
-  height: 2px;
-  background: #347fcb;
-  transform: translateX(-1rem); // Offset to align with body if needed
+  margin-top: 2rem;
+  padding: 1rem 0;
+  text-align: center;
+  background: #18181b;
+  color: #fff;
+  bottom: 0;
 }
 
 .experienceSection {
-  padding: 4rem 1rem;
+  padding: 1.5rem 1rem; // Reduced vertical padding
   background: #181818;
   display: flex;
   flex-direction: column;
@@ -213,7 +201,7 @@
 }
 
 .experienceTitle {
-  font-size: 2.5rem;
+  font-size: 3rem; // Match sectionTitle
   font-weight: bold;
   margin-bottom: 2rem;
   color: #347fcb;
@@ -273,41 +261,45 @@
   justify-content: center;
   min-height: 60vh;
   background: #181818;
-  padding: 4rem 1rem;
+  padding: 2.5rem 1rem 0 0;
 }
 
 .contactForm {
   background: #23272f;
+  border: 2px solid #347fcb;
   border-radius: 1rem;
   box-shadow: 0 0 32px 8px rgba(52,127,203,0.25); // larger glow
-  padding: 2.5rem 2.5rem;
+  padding: 0rem 2rem 2rem;
   max-width: 480px;
   width: 100%;
   display: flex;
   flex-direction: column;
   gap: 1.1rem;
   box-sizing: border-box;
+  margin-top: 1rem;
+  margin-bottom: 0;
 }
 
 .contactTitle {
   color: #347fcb;
   font-size: 2.2rem;
   font-weight: 700;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0rem;
   text-align: center;
 }
 
 .contactSubtitle {
   color: #a1a1aa;
   font-size: 1.1rem;
-  margin-bottom: 1.5rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
   text-align: center;
 }
 
 .contactLabel {
   color: #e5e7eb;
   font-size: 1.15rem;
-  margin-bottom: 0.2rem; // less margin
+  margin-bottom: 0rem; // less margin
   font-weight: 500;
 }
 
@@ -320,7 +312,7 @@
   background: #181818;
   color: #e5e7eb;
   font-size: 1.15rem;
-  margin-bottom: 0.2rem; // less margin
+  margin-bottom: 0rem; // less margin
   transition: border-color 0.2s;
   box-sizing: border-box;
   resize: none; // disables resizing for textarea
@@ -355,4 +347,23 @@
   background-color: #26599a;
   text-decoration: none;
   transform: translateY(-2px) scale(1.03);
+}
+
+/* make the page root fill the viewport and enable flex on the App container */
+:global(html, body, #root) {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+:global(#root > div) {
+  /* this targets your <div className="flex flex-col min-h-screen bg-dark-200"> */
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* ensure <main className="flex-grow"> actually grows */
+:global(main) {
+  flex: 1;
 }
