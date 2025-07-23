@@ -2,8 +2,8 @@ import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import styles from "../styles/index.module.scss";
 import { useTheme } from "../context/ThemeContext";
-import darkIcon from "../../public/assets/dark.svg"; 
-import lightIcon from "../../public/assets/light.svg";
+import darkIcon from "../assets/dark.svg"; 
+import lightIcon from "../assets/light.svg";
 
 export default function Navbar() {
   const location = useLocation();

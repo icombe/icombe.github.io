@@ -56,11 +56,11 @@ PROJECT_DATA = [
         ],
         bullets=[
         "Header: “ITE Repair Pipeline Dashboard” top-center for immediate context.",
-            "Pipeline Flow: Seven stage cards (Order Request → Deployment) with counts & avg times.",
-            "Connectors: Dashed lines & split→merge arrow show diverging repair/build paths.",
-            "Filters Panel: Controls for Component Type, Product, Site, plus Apply/View buttons.",
-            "Data Table: “All Components” grid with columns for ID, Product, Type, Commitment, etc.",
-            "Empty-State: Icon + “No data” helps users know when to adjust filters or wait."
+        "Pipeline Flow: Seven stage cards (Order Request → Deployment) with counts & avg times.",
+        "Connectors: Dashed lines & split→merge arrow show diverging repair/build paths.",
+        "Filters Panel: Controls for Component Type, Product, Site, plus Apply/View buttons.",
+        "Data Table: “All Components” grid with columns for ID, Product, Type, Commitment, etc.",
+        "Empty-State: Icon + “No data” helps users know when to adjust filters or wait."
         ]
     ),
     ProjectItem(
