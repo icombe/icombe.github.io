@@ -1,3 +1,4 @@
+import "./setupStaticApi"; // NEW: make /api/* read from /data/*
 import React from "react";
 import { createRoot } from "react-dom/client";
 import App from "./App";
@@ -8,7 +9,7 @@ import { ThemeProvider } from "./context/ThemeContext";
 
 createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <BrowserRouter>
+    <BrowserRouter basename={import.meta.env.BASE_URL}>
       <ThemeProvider>
         <App />
       </ThemeProvider>

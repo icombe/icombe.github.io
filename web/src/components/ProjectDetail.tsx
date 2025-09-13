@@ -6,6 +6,11 @@ import styles from '../styles/components/ProjectDetail.module.scss';
 
 const API_BASE = import.meta.env.VITE_API_BASE ?? "";
 
+function withBase(p: string) {
+  const base = import.meta.env.BASE_URL || "/";
+  return p.startsWith("/") ? base.replace(/\/$/, "") + p : base + p;
+}
+
 type Project = {
   id: number;
   slug: string;
@@ -35,49 +40,43 @@ export default function ProjectDetail(props: { project?: Project | null }) {
   const [error, setError] = useState<string | null>(null);
   const [zoomed, setZoomed] = useState<boolean>(false);
 
-  const slug = (params.slug as string | undefined) ?? undefined;
-  const collection = location.pathname.startsWith("/games/") ? "games" : "projects";
-
   useEffect(() => {
+    if (props.project) return; // already have the project
     let cancelled = false;
 
-    if (props.project) {
-      setLoading(false);
-      return;
-    }
-    if (!slug) {
-      setProject(null);
-      setLoading(false);
-      setError('Not found');
-      return;
-    }
-
-    (async () => {
+    async function loadFromStatic() {
       try {
         setLoading(true);
-        setError(null);
-        const res = await fetch(`${API_BASE}/api/${collection}/slug/${slug}`);
-        if (!res.ok) throw new Error(`fetch-failed:${res.status}`);
-        const data: Project = await res.json();
-        if (cancelled) return;
+        const [projectsRes, gamesRes] = await Promise.allSettled([
+          fetch(withBase("data/projects.json")).then(r => r.json()),
+          fetch(withBase("data/games.json")).then(r => r.json()),
+        ]);
 
-        if (data?.slug && data.slug !== slug) {
-          navigate(`/${collection}/${data.slug}`, { replace: true });
-          return;
-        }
-        setProject(data);
-      } catch {
+        const projects = projectsRes.status === "fulfilled" ? projectsRes.value as Project[] : [];
+        const games = gamesRes.status === "fulfilled" ? gamesRes.value as Project[] : [];
+
+        const all = [...projects, ...games];
+        const slug = params.slug;
+        const found = all.find(p => p.slug === slug) ?? null;
+
         if (!cancelled) {
-          setError('Not found');
-          setProject(null);
+          if (found) {
+            setProject(found);
+            setError(null);
+          } else {
+            setError("Not found");
+          }
         }
+      } catch {
+        if (!cancelled) setError("Failed to load");
       } finally {
         if (!cancelled) setLoading(false);
       }
-    })();
+    }
 
+    loadFromStatic();
     return () => { cancelled = true; };
-  }, [slug, navigate, props.project, collection]);
+  }, [params.slug, props.project]);
 
   // Close zoom on Escape
   useEffect(() => {
