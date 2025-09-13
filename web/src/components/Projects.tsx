@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { withBase } from '../lib/paths';
 import styles from "../styles/components/Projects.module.scss";
 
 const API_BASE = import.meta.env.VITE_API_BASE ?? ""; // e.g. https://api.yourdomain.com
@@ -15,9 +16,9 @@ type ProjectListItem = {
 };
 
 type SectionProps = {
-  title?: string;
-  endpoint?: string; // e.g. "/api/projects" or "/api/games"
-  basePath?: string; // e.g. "/projects" or "/games"
+  title?: string;       // Section title
+  endpoint?: string;    // e.g. "/api/projects" or "/api/games"
+  basePath?: string;    // e.g. "/projects" or "/games"
 };
 
 const Projects: React.FC<SectionProps> = ({
@@ -58,31 +59,29 @@ const Projects: React.FC<SectionProps> = ({
         <h2 className={styles.sectionTitle}>{title}</h2>
 
         <div className={styles.projectsGrid}>
-          {items.map((p) => (
+          {items.map((item) => (
             <Link
-              key={p.id ?? p.slug}
-              to={`${basePath}/${p.slug}`}
+              key={item.id}
+              to={`${basePath}/${item.slug}`}
               className={styles.projectCard}
-              onClick={() => {
-                // Pre-emptively reset scroll before route transition
-                window.scrollTo(0, 0);
-              }}
+              aria-label={`View ${item.title}`}
             >
-              {p.thumbnail && (
+              {item.thumbnail && (
                 <div className={styles.projectThumbnail}>
                   <img
                     className={styles.projectThumbnailImage}
-                    src={p.thumbnail}
+                    src={withBase(item.thumbnail)}
                     alt=""
                     loading="lazy"
                   />
                 </div>
               )}
+
               <div className={styles.projectCardBody}>
-                <h3 className={styles.projectTitle}>{p.title}</h3>
-                {(p.abstract || p.description) && (
+                <h3 className={styles.projectTitle}>{item.title}</h3>
+                {(item.abstract || item.description) && (
                   <p className={styles.projectDescription}>
-                    {p.abstract || p.description}
+                    {item.abstract || item.description}
                   </p>
                 )}
               </div>

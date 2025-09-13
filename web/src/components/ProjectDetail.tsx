@@ -3,13 +3,9 @@ import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import DownloadSection from './DownloadSection';
 import styles from '../styles/components/ProjectDetail.module.scss';
+import { withBase } from '../lib/paths';
 
 const API_BASE = import.meta.env.VITE_API_BASE ?? "";
-
-function withBase(p: string) {
-  const base = import.meta.env.BASE_URL || "/";
-  return p.startsWith("/") ? base.replace(/\/$/, "") + p : base + p;
-}
 
 type Project = {
   id: number;
@@ -98,10 +94,10 @@ export default function ProjectDetail(props: { project?: Project | null }) {
   return (
     <main className={`${styles.projectDetailPage} ${zoomed ? 'zoomedActive' : ''}`}>
       {/* HERO IMAGE */}
-      {project.thumbnail && (
+      {project?.thumbnail && (
         <section className={heroContainerClass}>
           <img
-            src={project.thumbnail}
+            src={withBase(project.thumbnail)}
             alt={project.title}
             className={`${styles.projectDetailImage} ${heroImageClass} ${zoomed ? 'zoomed' : ''}`}
             onClick={() => setZoomed((z) => !z)}

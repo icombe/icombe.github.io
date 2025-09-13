@@ -43,6 +43,7 @@
 }
 
 .projectCard {
+  position: relative; // ensure ::after overlay positions relative to the card
   display: flex;
   flex-direction: column;
   border-radius: 16px;
