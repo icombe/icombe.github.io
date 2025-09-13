@@ -14,8 +14,7 @@ app = FastAPI()
 ALLOWED_ORIGINS = [
     "http://localhost:5173",
     "http://127.0.0.1:5173",
-    "https://icombe.github.io",  # GitHub Pages origin
-    # "https://your-custom-domain.com",   # if you add a custom domain
+    # "https://your-domain.example",  # add your prod origin
 ]
 app.add_middleware(
     CORSMiddleware,

@@ -4,16 +4,6 @@ import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import DownloadSection from './DownloadSection';
 import styles from '../styles/components/ProjectDetail.module.scss';
 
-// Add this type declaration at the top of your file or in a global .d.ts file
-declare global {
-  interface ImportMeta {
-    env: {
-      VITE_API_BASE?: string;
-      [key: string]: any;
-    };
-  }
-}
-
 const API_BASE = import.meta.env.VITE_API_BASE ?? "";
 
 type Project = {
@@ -91,7 +81,7 @@ export default function ProjectDetail(props: { project?: Project | null }) {
 
   // Close zoom on Escape
   useEffect(() => {
-    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') setZoomed(false); };
+    const onKey = (e: globalThis.KeyboardEvent) => { if (e.key === 'Escape') setZoomed(false); };
     if (zoomed) window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
   }, [zoomed]);
@@ -150,7 +140,7 @@ export default function ProjectDetail(props: { project?: Project | null }) {
             {project.bullets.map((b, i) => (
               <div
                 key={i}
-                className={`${styles.projectBullet} inView`}
+                className={[styles.projectBullet, styles.inView].join(' ')}
               >
                 <p className={styles.bulletBody}>
                   <span
