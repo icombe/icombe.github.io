@@ -1,113 +1,129 @@
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
+import styles from "../styles/components/Contact.module.scss";
 
+// Builds "icombe77+portfolio@gmail.com" at click-time without putting it in the HTML
+function decodeEmail(): string {
+  const localRev = "oiloftrop+77ebmoci"; // "icombe77+portfolio" reversed
+  const domainRev = "moc.liamg";         // "gmail.com" reversed
+  const local = localRev.split("").reverse().join("");
+  const domain = domainRev.split("").reverse().join("");
+  return `${local}@${domain}`;
+}
+
+function Placeholder() {
+  return (
+    <section className={styles.contactSection} id="contact">
+      <div
+        className={styles.contactForm}
+        role="status"
+        aria-live="polite"
+        style={{ padding: "2rem", textAlign: "center" }}
+      >
+        <h2 className={styles.contactTitle}>Contact</h2>
+        <p className={styles.contactSubtitle}>
+          Coming soon — a simple contact form will be available here.
+        </p>
+      </div>
+    </section>
+  );
+}
+
+// Default export: always show placeholder
 export default function ContactForm() {
-  const [submitted, setSubmitted] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  return <Placeholder />;
+}
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+// Original implementation preserved (not used). Re-enable later by exporting this as default.
+export function OriginalContactForm() {
+  const [sending, setSending] = useState(false);
+  const [sent, setSent] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const endpoint = import.meta.env.VITE_CONTACT_ENDPOINT as string | undefined;
+  const fallbackEmail = useMemo(decodeEmail, []);
+
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    setError(null); // Reset error state
-    const form = e.currentTarget;
-    const formData = new FormData(form);
-    const object = Object.fromEntries(formData);
-    const json = JSON.stringify(object);
+    setError(null);
+    setSent(false);
+
+    const fd = new FormData(e.currentTarget);
+    const name = String(fd.get("name") || "");
+    const email = String(fd.get("email") || "");
+    const message = String(fd.get("message") || "");
+    const website = ""; // honeypot stays empty
+
+    console.log("CONTACT submit -> endpoint:", endpoint); // TEMP
+
+    if (!endpoint) {
+      const subject = `Portfolio contact from ${name || "Visitor"}`;
+      const body = `Name: ${name}\nEmail: ${email}\n\n${message}\n\n— Sent from portfolio`;
+      window.location.href = `mailto:${fallbackEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      (e.currentTarget as HTMLFormElement).reset();
+      setSent(true);
+      return;
+    }
 
     try {
-      const res = await fetch("https://api.web3forms.com/submit", {
+      setSending(true);
+      const res = await fetch(endpoint, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-        body: json,
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ name, email, message, website }),
       });
-
-      if (res.ok) {
-        setSubmitted(true);
-        form.reset();
-      } else {
-        const data = await res.json();
-        setError(data.message || "Something went wrong. Please try again.");
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok || !data?.ok) {
+        throw new Error(data?.error || `Request failed (${res.status})`);
       }
+      (e.currentTarget as HTMLFormElement).reset();
+      setSent(true);
     } catch (err: any) {
-      setError("Network error. Please try again.");
-      console.error("Web3Forms error:", err);
+      const subject = `Portfolio contact from ${name || "Visitor"}`;
+      const body = `Name: ${name}\nEmail: ${email}\n\n${message}\n\n— Sent from portfolio (fallback)`;
+      try {
+        window.location.href = `mailto:${fallbackEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        setSent(true);
+      } catch {
+        setError(err?.message || "Failed to send");
+      }
+    } finally {
+      setSending(false);
     }
-  };
+  }
 
   return (
-    <div className="max-w-md mx-auto py-16 px-6 bg-dark-100 rounded-lg shadow-lg">
-      <h2 className="text-3xl font-bold mb-4 text-center text-white">Contact Me</h2>
-      <p className="mb-6 text-lg text-center text-gray-300">
-        Fill out the form below and I'll get back to you soon!
-      </p>
-      {submitted ? (
-        <div className="text-green-400 text-center font-semibold">
-          Thank you! Your message has been sent.
-        </div>
-      ) : (
-        <form className="space-y-5" onSubmit={handleSubmit}>
-          <input type="hidden" name="access_key" value="be284fdf-4eed-406f-931b-cbec43af9de6" />
-          <div>
-            <label className="block text-md font-medium mb-1 text-gray-200" htmlFor="name">
-              Name
-            </label>
-            <input
-              className="w-full bg-zinc-900 border border-zinc-700 rounded px-3 py-2 text-gray-100 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
-              type="text"
-              id="name"
-              name="name"
-              required
-              autoComplete="off"
-              placeholder="Your name"
-            />
-          </div>
-          <div>
-            <label className="block text-md font-medium mb-1 text-gray-200" htmlFor="email">
-              Email
-            </label>
-            <input
-              className="w-full bg-zinc-900 border border-zinc-700 rounded px-3 py-2 text-gray-100 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
-              type="email"
-              id="email"
-              name="email"
-              required
-              autoComplete="off"
-              placeholder="you@email.com"
-            />
-          </div>
-          <div>
-            <label className="block text-md font-medium mb-1 text-gray-200" htmlFor="message">
-              Message
-            </label>
-            <textarea
-              className="w-full bg-zinc-900 border border-zinc-700 rounded px-3 py-2 text-gray-100 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
-              id="message"
-              name="message"
-              rows={5}
-              required
-              placeholder="Type your message..."
-            />
-          </div>
-          <input
-            type="checkbox"
-            name="botcheck"
-            className="hidden"
-            style={{ display: "none" }}
-            tabIndex={-1}
-            autoComplete="off"
-          />
-          {error && (
-            <div className="text-red-400 text-center font-semibold">{error}</div>
-          )}
-          <button
-            type="submit"
-            className="w-full bg-blue-600 text-white font-semibold py-2 rounded hover:bg-blue-700 transition"
-          >
-            Send Message
-          </button>
-        </form>
-      )}
-    </div>
+    <section className={styles.contactSection} id="contact">
+      <form className={styles.contactForm} onSubmit={handleSubmit} noValidate>
+        <h2 className={styles.contactTitle}>Contact</h2>
+        <p className={styles.contactSubtitle}>
+          Send a message directly from this site. No external services required.
+        </p>
+
+        {/* Honeypot (hidden field) */}
+        <input
+          type="text"
+          name="website"
+          tabIndex={-1}
+          autoComplete="off"
+          style={{ position: "absolute", left: "-10000px", width: "1px", height: "1px", opacity: 0 }}
+          aria-hidden="true"
+        />
+
+        <label className={styles.contactLabel} htmlFor="name">Name</label>
+        <input className={styles.contactInput} id="name" name="name" type="text" required placeholder="Your name" />
+
+        <label className={styles.contactLabel} htmlFor="email">Email</label>
+        <input className={styles.contactInput} id="email" name="email" type="email" required placeholder="you@example.com" />
+
+        <label className={styles.contactLabel} htmlFor="message">Message</label>
+        <textarea className={styles.contactTextarea} id="message" name="message" rows={6} required placeholder="Type your message…" />
+
+        <button className={styles.contactSubmit} type="submit" disabled={sending}>
+          {sending ? "Sending…" : "Send"}
+        </button>
+
+        {sent && <p style={{ textAlign: "center", color: "#22c55e", marginTop: ".5rem" }}>Message sent. Thank you!</p>}
+        {error && <p style={{ textAlign: "center", color: "#ef4444", marginTop: ".5rem" }}>{error}</p>}
+      </form>
+    </section>
   );
 }

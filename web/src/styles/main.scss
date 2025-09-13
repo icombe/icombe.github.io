@@ -56,3 +56,20 @@ header, nav, .navbar, .siteHeader {
 
 /* Keep any old element-based shapes hidden if present */
 .bgShapes { display: none; }
+
+/* Force-hide any form inside the Contact section and show a placeholder message */
+#contact form,
+#contact .contactForm,
+section#contact form {
+  display: none !important;
+}
+
+#contact::after {
+  content: "Coming soon — a simple contact form will be available here.";
+  display: block;
+  text-align: center;
+  padding: 2rem 1rem 3rem;
+  color: var(--color-text, #e5e7eb);
+  font-size: 1rem;
+  line-height: 1.6;
+}
