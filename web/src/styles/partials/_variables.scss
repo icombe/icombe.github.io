@@ -1,0 +1,27 @@
+// Theme and global variables
+:root {
+  --color-bg: #181818;
+  --color-bg-alt: #23272f;
+  --color-text: #e5e7eb;
+  --color-primary: #347fcb;
+  --color-primary-light: #60aaff;
+  --color-primary-dark: #26599a;
+  --color-card: #18181b;
+  --color-footer-bg: #18181b;
+  --color-footer-text: #fff;
+  --toggle-btn-bg: #23272f;
+}
+
+// Light theme override
+[data-theme="light"] {
+  --color-bg: #f7fafc;
+  --color-bg-alt: #e5e7eb;
+  --color-text: #23272f;
+  --color-primary: #347fcb;
+  --color-primary-light: #60aaff;
+  --color-primary-dark: #26599a;
+  --color-card: #fff;
+  --color-footer-bg: #e5e7eb;
+  --color-footer-text: #23272f;
+  --toggle-btn-bg: #e5e7eb;
+}

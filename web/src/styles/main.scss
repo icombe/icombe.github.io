@@ -1,0 +1,58 @@
+// Global stylesheet that consolidates partials and the existing SCSS
+@use './partials/variables';
+@use './partials/mixins';
+// Legacy global styles have been moved into component-specific modules and partials.
+// You can remove this comment after verifying no styles are missing.
+
+/* Global base */
+:root, html, body, #root {
+	height: 100%;
+}
+
+html, body {
+	margin: 0;
+	padding: 0;
+	background: var(--color-bg);
+	color: var(--color-text);
+	font-family: 'Inter', 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	overflow-x: hidden;
+}
+
+#root > div {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  /* Ensure content sits above the background */
+  position: relative;
+  z-index: 1;
+}
+
+main { flex: 1; }
+
+/* Fixed decorative background shapes layer (blue theme), behind header and all content */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  filter: blur(42px);
+  opacity: 1;
+  background:
+    radial-gradient(1100px 520px at 12% 12%, rgba(52,127,203,0.30), transparent 60%),
+    radial-gradient(900px 480px at 90% 18%, rgba(52,127,203,0.18), transparent 60%),
+    radial-gradient(800px 420px at 20% 88%, rgba(52,127,203,0.16), transparent 60%),
+    radial-gradient(700px 360px at 85% 82%, rgba(52,127,203,0.14), transparent 60%);
+}
+
+/* Make header/nav let the page background show through */
+header, nav, .navbar, .siteHeader {
+  background: transparent !important;
+  /* Optional: subtle blur/saturation so text stays readable over shapes */
+  backdrop-filter: saturate(140%) blur(6px);
+}
+
+/* Keep any old element-based shapes hidden if present */
+.bgShapes { display: none; }

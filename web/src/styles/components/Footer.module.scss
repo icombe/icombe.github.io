@@ -1,0 +1,33 @@
+// Footer.module.scss
+// Styles for Footer component, extracted from index.module.scss
+
+@use "../partials/variables";
+
+.footer {
+  /* Original .footer */
+  margin-top: 2rem;
+  padding: 1rem 0;
+  text-align: center;
+  background: var(--color-footer-bg);
+  color: var(--color-footer-text);
+}
+
+/* Light mode: make footer surface the same as the page background (whiter) */
+:where([data-theme="light"]) .footer,
+:root .footer { /* fallback if no data-theme is set */
+  background: var(--color-bg);     // same as page bg
+  color: var(--color-text);
+  box-shadow: none;
+  border-top: 1px solid var(--color-border, rgba(0,0,0,0.06));
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+:where([data-theme="light"]) .footer::before {
+  content: none; /* disable any decorative/gradient overlay that looks gray */
+}
+
+/* Dark mode keeps any existing overlay/gradient */
+:where([data-theme="dark"]) .footer {
+  /* keep your current dark-mode background if present */
+  background: var(--color-bg, #0b1220);
+}

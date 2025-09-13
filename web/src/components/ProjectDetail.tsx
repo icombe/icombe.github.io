@@ -1,159 +1,173 @@
 // src/components/ProjectDetail.tsx
-import { useParams } from "react-router-dom";
-import { useEffect, useState, useRef } from "react";
-import styles from "../styles/index.module.scss"; // main stylesheet
+import React, { useEffect, useState } from 'react';
+import { useParams, useNavigate, useLocation } from 'react-router-dom';
+import DownloadSection from './DownloadSection';
+import styles from '../styles/components/ProjectDetail.module.scss';
 
-type ProjectItem = {
+const API_BASE = import.meta.env.VITE_API_BASE ?? "";
+
+type Project = {
   id: number;
+  slug: string;
   title: string;
   description: string;
   link: string;
   thumbnail: string;
   stack: string[];
   bullets: string[];
+  jar_url?: string | null;
+  abstract?: string;
+  download?: {
+    primaryHref?: string;
+    primaryLabel?: string;
+    secondaryHref?: string | null;
+    secondaryLabel?: string | null;
+  };
 };
 
-// Custom hook for intersection observer
-function useInView(threshold = 0.2) {
-  const ref = useRef<HTMLDivElement | null>(null);
-  const [inView, setInView] = useState(false);
+export default function ProjectDetail(props: { project?: Project | null }) {
+  const params = useParams();
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const [project, setProject] = useState<Project | null>(props.project ?? null);
+  const [loading, setLoading] = useState<boolean>(!props.project);
+  const [error, setError] = useState<string | null>(null);
+  const [zoomed, setZoomed] = useState<boolean>(false);
+
+  const slug = (params.slug as string | undefined) ?? undefined;
+  const collection = location.pathname.startsWith("/games/") ? "games" : "projects";
 
   useEffect(() => {
-    if (!ref.current) return;
-    const observer = new window.IntersectionObserver(
-      ([entry]) => setInView(entry.isIntersecting),
-      { threshold }
-    );
-    observer.observe(ref.current);
-    return () => observer.disconnect();
-  }, [threshold]);
+    let cancelled = false;
 
-  return [ref, inView] as const;
-}
+    if (props.project) {
+      setLoading(false);
+      return;
+    }
+    if (!slug) {
+      setProject(null);
+      setLoading(false);
+      setError('Not found');
+      return;
+    }
 
-export default function ProjectDetail() {
-  const { id } = useParams<{ id: string }>();
-  const [project, setProject] = useState<ProjectItem | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [imgZoomed, setImgZoomed] = useState(false);
+    (async () => {
+      try {
+        setLoading(true);
+        setError(null);
+        const res = await fetch(`${API_BASE}/api/${collection}/slug/${slug}`);
+        if (!res.ok) throw new Error(`fetch-failed:${res.status}`);
+        const data: Project = await res.json();
+        if (cancelled) return;
 
-  // Prevent body scrolling when image is fullscreen
+        if (data?.slug && data.slug !== slug) {
+          navigate(`/${collection}/${data.slug}`, { replace: true });
+          return;
+        }
+        setProject(data);
+      } catch {
+        if (!cancelled) {
+          setError('Not found');
+          setProject(null);
+        }
+      } finally {
+        if (!cancelled) setLoading(false);
+      }
+    })();
+
+    return () => { cancelled = true; };
+  }, [slug, navigate, props.project, collection]);
+
+  // Close zoom on Escape
   useEffect(() => {
-    document.body.style.overflow = imgZoomed ? "hidden" : "";
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, [imgZoomed]);
+    const onKey = (e: globalThis.KeyboardEvent) => { if (e.key === 'Escape') setZoomed(false); };
+    if (zoomed) window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [zoomed]);
 
-  // Fetch project data
-  useEffect(() => {
-    fetch(`http://localhost:8000/api/projects/${id}`)
-      .then((res) => {
-        if (!res.ok) throw new Error("Project not found");
-        return res.json();
-      })
-      .then((data) => setProject(data))
-      .catch(() => setProject(null))
-      .finally(() => setLoading(false));
-  }, [id]);
+  if (loading) return <div>Loading…</div>;
+  if (error || !project) return <div>Not found.</div>;
 
-  if (loading) {
-    return (
-      <div
-        style={{
-          minHeight: "60vh",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
-        <span style={{ fontSize: "1.5rem" }}>Loading...</span>
-      </div>
-    );
-  }
+  const isClue = project.slug === 'clue';
+  const heroContainerClass = isClue ? styles.heroSmall : styles.hero;
+  const heroImageClass = isClue ? styles.heroImageSmall : styles.heroImage;
 
-  if (!project) {
-    return (
-      <div
-        style={{
-          minHeight: "60vh",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
-        <span style={{ fontSize: "2rem", color: "#e11d48" }}>
-          Project not found.
-        </span>
-      </div>
-    );
-  }
+  const highlightEmojis = ['✨', '🚀', '🧩', '⚙️', '✅', '📈', '🧪', '💡'];
+  const getEmoji = (i: number) => highlightEmojis[i % highlightEmojis.length];
 
   return (
-    <div
-      className={
-        `${styles.projectDetailPage}` +
-        (imgZoomed ? ` ${styles.zoomedActive}` : "")
-      }
-    >
-      <h1 className={styles.projectDetailTitle}>{project.title}</h1>
+    <main className={`${styles.projectDetailPage} ${zoomed ? 'zoomedActive' : ''}`}>
+      {/* HERO IMAGE */}
+      {project.thumbnail && (
+        <section className={heroContainerClass}>
+          <img
+            src={project.thumbnail}
+            alt={project.title}
+            className={`${styles.projectDetailImage} ${heroImageClass} ${zoomed ? 'zoomed' : ''}`}
+            onClick={() => setZoomed((z) => !z)}
+          />
+        </section>
+      )}
 
-      {/* image wrapper to avoid sliding animation */}
-      <div className={styles.imageWrapper}>
-        <img
-          src={project.thumbnail}
-          alt={project.title}
-          className={styles.projectDetailImage}
-          onClick={() => setImgZoomed((z) => !z)}
-          onKeyDown={(e) => {
-            if (e.key === "Enter" || e.key === " ") {
-              setImgZoomed((z) => !z);
-            }
-          }}
-          tabIndex={0}
-          style={{ cursor: imgZoomed ? "zoom-out" : "pointer" }}
-        />
-      </div>
+      {/* TITLE + DESCRIPTION */}
+      <section className={styles.section}>
+        <h1 className={styles.projectDetailTitle}>{project.title}</h1>
+        {project.description && (
+          <p className="sectionParagraph">{project.description}</p>
+        )}
+      </section>
 
-      <div className={styles.projectBullets}>
-        {project.bullets.map((point, idx) => {
-          const Bullet = () => {
-            const [ref, inView] = useInView(0.2);
-            const [shown, setShown] = useState(false);
+      {/* TECH */}
+      {!!project.stack?.length && (
+        <section className={`${styles.section} ${styles.sectionWithHeader}`}>
+          <h2 className={styles.sectionTitle}>Tech</h2>
+          <ul className={styles.stackPills} role="list">
+            {project.stack.map((t, i) => (
+              <li key={i}>
+                <span className={styles.pill}>{t}</span>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
 
-            useEffect(() => {
-              if (inView) setShown(true);
-            }, [inView]);
-
-            const colonIdx = point.indexOf(":");
-            const first = colonIdx > -1 ? point.slice(0, colonIdx + 1) : "";
-            const rest  = colonIdx > -1 ? point.slice(colonIdx + 1) : point;
-
-            const sideClass = idx % 2 === 0 ? styles.left : styles.right;
-            const innerClasses = [
-              styles.projectBullet,
-              sideClass,
-              shown ? styles.inView : ""
-            ].join(" ");
-
-            return (
-              <div ref={ref} className={styles.bulletWrapper}>
-                <div
-                  className={innerClasses}
-                  style={{ transitionDelay: `${idx * 0.2}s` }}
-                >
-                  {first && (
-                    <span className={styles.bulletEmphasis}>{first}</span>
-                  )}
-                  {rest}
-                </div>
+      {/* HIGHLIGHTS */}
+      {!!project.bullets?.length && (
+        <section className={`${styles.section} ${styles.sectionWithHeader}`}>
+          <h2 className={styles.sectionTitle}>Highlights</h2>
+          <div className={styles.projectBullets}>
+            {project.bullets.map((b, i) => (
+              <div
+                key={i}
+                className={[styles.projectBullet, styles.inView].join(' ')}
+              >
+                <p className={styles.bulletBody}>
+                  <span
+                    className={styles.bulletIcon}
+                    aria-hidden="true"
+                    style={{ marginRight: 8 }}
+                  >
+                    {getEmoji(i)}
+                  </span>
+                  {b}
+                </p>
               </div>
-            );
-          };
+            ))}
+          </div>
+        </section>
+      )}
 
-          return <Bullet key={idx} />;
-        })}
-      </div>
-    </div>
+      {/* DOWNLOADS */}
+      {project?.download?.primaryHref && (
+        <DownloadSection
+          id="download"
+          primaryHref={project.download.primaryHref}
+          primaryLabel={project.download.primaryLabel}
+          secondaryHref={project.download.secondaryHref || undefined}
+          secondaryLabel={project.download.secondaryLabel || undefined}
+        />
+      )}
+    </main>
   );
 }

@@ -1,0 +1,22 @@
+// Hero.module.scss - styles scoped to Hero component
+
+@use "../partials/variables";
+
+.hero {
+  background: var(--color-bg);
+  color: var(--color-text);
+  text-align: center;
+  // padding: 6rem 0 4rem 0; // original commented-out padding
+}
+
+.hero h1 {
+  font-size: 5.5rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  margin-bottom: 1rem;
+}
+
+.hero p {
+  font-size: 1.5rem;
+  color: var(--color-text);
+}

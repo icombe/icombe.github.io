@@ -1,33 +1,31 @@
 import React from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { ThemeProvider } from "./context/ThemeContext";
+import { Routes, Route, Navigate } from "react-router-dom"; // + Navigate
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Home from "./pages/Home";
-import AboutPage from "./pages/About";
-import ContactPage from "./pages/Contact";
+import About from "./pages/About";
+import Contact from "./pages/Contact";
+// import Testimonials from "./pages/Testimonials"; // removed
 import ProjectDetail from "./components/ProjectDetail";
-import Testimonials from "./pages/Testimonials";
+import ScrollToTop from "./components/ScrollToTop"; // NEW
 
 export default function App() {
   return (
-    <ThemeProvider>
-      <BrowserRouter>
-        <div className="flex flex-col min-h-screen bg-dark-200">
-          <Navbar />
-          <main className="flex-grow">
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/about" element={<AboutPage />} />
-              <Route path="/contact" element={<ContactPage />} />
-              <Route path="/projects/:id" element={<ProjectDetail />} />
-              <Route path="/testimonials" element={<Testimonials />} />
-            </Routes>
-          </main>
-          <Footer />
-        </div>
-      </BrowserRouter>
-    </ThemeProvider>
+    <>
+      {/* Background now comes from CSS (body::before) */}
+      <Navbar />
+      <ScrollToTop />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/projects/:slug" element={<ProjectDetail />} />
+        <Route path="/games/:slug" element={<ProjectDetail />} />
+        <Route path="/about" element={<About />} />
+        {/* Redirect if someone manually visits /testimonials */}
+        <Route path="/testimonials" element={<Navigate to="/" replace />} />
+        <Route path="/contact" element={<Contact />} />
+      </Routes>
+      <Footer />
+    </>
   );
 }
 

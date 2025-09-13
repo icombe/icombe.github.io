@@ -1,0 +1,127 @@
+// Projects.module.scss
+// Styles for Projects component, extracted from index.module.scss
+
+@use "../partials/variables";
+
+.sectionBg {
+  background: var(--color-bg);
+  padding: 1rem 0 0;
+}
+
+.container {
+  max-width: clamp(1080px, 92vw, 1400px);
+  margin: 0 auto;
+  padding-inline: 1rem;
+}
+
+/* Bigger section headers for both "Projects" and "Games" */
+.sectionTitle {
+  font-size: clamp(2rem, 2.2vw + 1.4rem, 2.6rem); // increase header size
+  font-weight: 900;
+  text-align: center;
+  margin: 0 0 1.25rem;
+}
+
+/* Uniform, wide grid with big cards */
+.projectsGrid {
+  display: grid;
+  gap: 28px;
+  /* fixed-ish card track width so leftover items can center */
+  grid-template-columns: repeat(auto-fit, minmax(320px, 420px));
+  justify-content: center; /* center tracks horizontally */
+  align-items: stretch;
+}
+
+/* Remove link underline/colors on cards */
+.projectCard,
+.projectCard:link,
+.projectCard:visited,
+.projectCard:hover,
+.projectCard:active {
+  text-decoration: none;
+  color: inherit;
+}
+
+.projectCard {
+  display: flex;
+  flex-direction: column;
+  border-radius: 16px;
+  overflow: hidden;
+  background: var(--color-bg-alt);
+  box-shadow: 0 8px 28px rgba(0,0,0,.22);
+  min-height: 460px;
+  transition: transform .22s ease, box-shadow .22s ease;
+}
+.projectCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 36px rgba(0,0,0,.28);
+}
+
+/* Taller media area so cards feel substantial */
+.projectThumbnail {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  min-height: clamp(220px, 28vh, 320px);
+  overflow: hidden;
+  background: #0b1220;
+}
+.projectThumbnailImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1.0);
+  transition: transform .3s ease, filter .3s ease;
+}
+.projectCard:hover .projectThumbnailImage {
+  transform: scale(1.04);
+  filter: saturate(1.05);
+}
+
+.projectCardBody {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 18px 20px 20px;
+  flex: 1 1 auto;
+}
+
+.projectTitle {
+  margin: 0 0 6px;
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--color-primary);
+}
+
+/* Show full abstract */
+.projectDescription {
+  margin: 0;
+  color: var(--color-text);
+  line-height: 1.6;
+  overflow: visible;
+  display: block;
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  .projectsGrid {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 700px) {
+  .projectsGrid {
+    grid-template-columns: minmax(0, 1fr); /* full-width single column on mobile */
+    justify-content: stretch;
+  }
+}
+
+/* Optional: subtle gradient overlay for more pop on hover */
+.projectCard::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(180deg, rgba(0,0,0,0) 60%, rgba(0,0,0,0.12));
+  opacity: 0;
+  transition: opacity .25s ease;
+}
+.projectCard:hover::after { opacity: 1; }

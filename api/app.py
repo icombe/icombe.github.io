@@ -1,28 +1,38 @@
+from pathlib import Path
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from dotenv import load_dotenv
+from fastapi.staticfiles import StaticFiles
 
-from routes.experience import router as exp_router
-from routes.projects import router as proj_router
+from routes.projects import router as projects_router
+from routes.games import router as games_router
+from routes.experience import router as experience_router
 from routes.contact import router as contact_router
-
-load_dotenv()
 
 app = FastAPI()
 
-# Allow React dev server to call our API
+# Minimal CORS: set this to your deployed origin
+ALLOWED_ORIGINS = [
+    "http://localhost:5173",
+    "http://127.0.0.1:5173",
+    # "https://your-domain.example",  # add your prod origin
+]
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173"],
-    allow_methods=["*"],
+    allow_origins=ALLOWED_ORIGINS,
+    allow_credentials=True,
+    allow_methods=["GET", "POST", "OPTIONS"],
     allow_headers=["*"],
 )
 
-@app.get("/api/health")
-async def health():
-    return {"status": "ok"}
-
-# Include our new routers
-app.include_router(exp_router)
-app.include_router(proj_router)
+# API routes
+app.include_router(projects_router)
+app.include_router(games_router)
+app.include_router(experience_router)
 app.include_router(contact_router)
+
+# Serve built SPA
+root = Path(__file__).resolve().parents[1]
+dist_dir = root / "web" / "dist"
+if dist_dir.exists():
+    # html=True returns index.html for unknown paths (SPA fallback)
+    app.mount("/", StaticFiles(directory=str(dist_dir), html=True), name="spa")

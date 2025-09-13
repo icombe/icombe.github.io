@@ -1,0 +1,135 @@
+.section {
+  /* Full width on page background */
+  width: 100%;
+  background: transparent;
+  // padding: 0 1rem;          // align with ProjectDetail page padding
+  // margin: 1rem 0 2rem;      // tighter vertical spacing
+}
+
+.inner {
+  //max-width: 1100px;        // align with ProjectDetail max width
+  margin: 0 auto;           // center with the text above
+  text-align: center;           /* center the section content */
+}
+
+h1 {
+  // margin: 0 0 16px;
+  font-size: 22px;
+  color: #e2e8f0;
+}
+
+h2 {
+  margin: 0 0 1.25rem;          /* more margin beneath header */
+  font-size: 1.8rem;            /* a touch larger */
+  color: var(--color-primary, #1d4ed8); // ensure high-contrast in light mode
+  text-align: center;           /* center header */
+}
+
+p {
+  margin: 0.25rem 0 0.5rem;
+  font-size: 1.1rem;
+  color: var(--color-text, #0f172a); // readable on light background
+}
+
+.actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;      /* center buttons */
+  margin: 0.5rem 0 0;       // tighter spacing above buttons
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  background: #1f2937;         // works on both themes
+  color: #e5e7eb;               // keeps strong contrast
+  border: 1px solid #374151;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+
+  &:hover {
+    background: #2a3648;
+    border-color: #42526b;
+  }
+}
+
+.btnSecondary {
+  composes: btn;
+  background: #111827;
+
+  &:hover {
+    background: #1a2333;
+  }
+}
+
+.note {
+  color: #94a3b8;
+  font-size: 12px;
+
+  code {
+    background: #0b1220;
+    border: 1px solid #263247;
+    border-radius: 6px;
+    padding: 2px 6px;
+  }
+}
+
+/* Ensure buttons/anchors share the same styled look */
+.downloadSection .primaryBtn,
+.downloadSection .secondaryBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 0.8rem 1.2rem;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 1rem;
+  line-height: 1;
+  text-decoration: none;
+  cursor: pointer;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform .15s ease, box-shadow .2s ease, background-color .2s ease, border-color .2s ease, color .2s ease;
+  box-shadow: 0 6px 18px rgba(0,0,0,.18);
+}
+
+/* Primary: filled brand button */
+.downloadSection .primaryBtn {
+  background: var(--color-primary);
+  color: #fff;
+  border: 2px solid var(--color-primary);
+}
+.downloadSection .primaryBtn:hover,
+.downloadSection .primaryBtn:focus-visible {
+  background: var(--color-primary-dark);
+  border-color: var(--color-primary-dark);
+  transform: translateY(-1px);
+  box-shadow: 0 10px 26px rgba(0,0,0,.26);
+}
+
+/* Secondary: outline brand button */
+.downloadSection .secondaryBtn {
+  background: transparent;
+  color: var(--color-primary);
+  border: 2px solid var(--color-primary);
+}
+.downloadSection .secondaryBtn:hover,
+.downloadSection .secondaryBtn:focus-visible {
+  background: rgba(52,127,203,0.12); /* subtle brand-tint; adjust if your brand changes */
+  border-color: var(--color-primary-dark);
+  color: var(--color-primary-dark);
+  transform: translateY(-1px);
+  box-shadow: 0 10px 26px rgba(0,0,0,.18);
+}
+
+/* Container layout (in case buttons shifted) */
+.downloadSection .actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}

@@ -121,29 +121,26 @@
   margin-bottom: 1.5rem;
 }
 
-.projectsGrid {
-  display: grid;
-  gap: 1.5rem;
-  grid-template-columns: 1fr;
-}
-
-@media (min-width: 640px) {
-  .projectsGrid {
-    grid-template-columns: 1fr 1fr;
-  }
-}
-
-.projectCard {
+// Bullet animation: slide in from off-screen, then expand horizontally
+// Bullet animation: slide in from off-screen, then expand horizontally
+.projectBullet {
+  font-size: 1.7rem;
+  color: var(--color-text);
+  line-height: 1.6;
+  opacity: 0;
+  transition: transform 0.7s cubic-bezier(0.4,0.2,0.2,1), opacity 0.7s cubic-bezier(0.4,0.2,0.2,1), max-width 0.7s cubic-bezier(0.4,0.2,0.2,1), margin 0.7s cubic-bezier(0.4,0.2,0.2,1);
+  transform: translateX(var(--start-offset));
+  max-width: 80%;
+  margin: 0 auto;
   display: block;
-  padding: 1.5rem;
-  background: #1e1e1e;
-  border-radius: 0.5rem;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-  border-left: 4px solid #347fcb;
-  transition: box-shadow 0.3s, transform 0.3s;
-  min-height: 300px;
-  color: inherit;
-  text-decoration: none;
+}
+.projectBullet.left  { --start-offset: -100vw; }
+.projectBullet.right { --start-offset:  100vw; }
+.projectBullet.inView {
+  transform: translateX(0);
+  opacity: 1;
+  max-width: 100%;
+  margin: 0;
 }
 .projectCard:hover {
   box-shadow: 0 8px 24px rgba(0,0,0,0.25);
@@ -470,34 +467,7 @@
   transform: translateY(-2px) scale(1.03);
 }
 
-/* =========================
-   THEME VARIABLES
-   ========================= */
-:root {
-  --color-bg: #181818;
-  --color-bg-alt: #23272f;
-  --color-text: #e5e7eb;
-  --color-primary: #347fcb;
-  --color-primary-light: #60aaff;
-  --color-primary-dark: #26599a;
-  --color-card: #18181b;
-  --color-footer-bg: #18181b;
-  --color-footer-text: #fff;
-  --toggle-btn-bg: #23272f;
-}
-
-[data-theme="light"] {
-  --color-bg: #f7fafc;
-  --color-bg-alt: #e5e7eb;
-  --color-text: #23272f;
-  --color-primary: #347fcb;
-  --color-primary-light: #60aaff;
-  --color-primary-dark: #26599a;
-  --color-card: #fff;
-  --color-footer-bg: #e5e7eb;
-  --color-footer-text: #23272f;
-  --toggle-btn-bg: #e5e7eb;
-}
+/* Theme variables moved to styles/partials/_variables.scss */
 
 /* =========================
    GLOBAL & LAYOUT
@@ -976,9 +946,7 @@
 /* =========================
    PROJECT DETAIL PAGE
    ========================= */
-.imageWrapper {
-  /* no transition on wrapper itself */
-}
+/* wrapper presentational container intentionally has no styles */
 
 .projectDetailPage {
   max-width: 900px;
@@ -1053,9 +1021,7 @@
   overflow-x: hidden;   /* hide any overflow, no scrollbars */
 }
 
-.bulletWrapper {
-  /* just a plain container for IntersectionObserver */
-}
+/* bullet wrapper intentionally empty; kept for structure */
 
 .projectBullet {
   font-size: 1.7rem;

@@ -1,0 +1,31 @@
+// About.module.scss
+// Styles for About page section extracted from index.module.scss and shared partials
+
+@use "../partials/variables";
+
+.aboutSectionBg {
+  /* Let global background shapes show through */
+  background: transparent;
+  padding: 1rem 0 0;
+}
+
+.container {
+  max-width: 64rem;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.sectionTitle {
+  font-size: 3rem;
+  font-weight: bold;
+  margin-bottom: 2rem;
+  color: var(--color-primary);
+  text-align: center;
+}
+
+.sectionParagraph {
+  font-size: 1.125rem;
+  color: var(--color-text);
+  text-indent: 2rem;
+  margin-bottom: 1.5rem;
+}

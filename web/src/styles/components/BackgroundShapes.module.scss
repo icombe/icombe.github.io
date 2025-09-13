@@ -1,0 +1,99 @@
+@use "../partials/variables";
+
+.bgShapes {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.blob {
+  position: absolute;
+  width: 48vw;
+  height: 48vw;
+  max-width: 780px;
+  max-height: 780px;
+  border-radius: 50%;
+  filter: blur(32px);
+  opacity: 0.30; /* increased a bit for visibility */
+  mix-blend-mode: screen;
+}
+
+/* Dark theme default */
+.blobLeft {
+  left: -10vw;
+  top: 18vh;
+  background: radial-gradient(circle at 40% 40%, rgba(96,170,255,0.72), rgba(52,127,203,0.52), rgba(38,89,154,0) 68%);
+}
+.blobRight {
+  right: -10vw;
+  top: 52vh;
+  background: radial-gradient(circle at 60% 60%, rgba(96,170,255,0.72), rgba(52,127,203,0.52), rgba(38,89,154,0) 68%);
+}
+
+/* Light theme tweaks for visibility */
+:global([data-theme="light"]) .blob {
+  opacity: 0.34;   /* a touch stronger in light mode */
+  filter: blur(28px);
+}
+:global([data-theme="light"]) .blobLeft {
+  background: radial-gradient(circle at 40% 40%, rgba(77,147,229,0.55), rgba(52,127,203,0.45), rgba(52,127,203,0) 70%);
+}
+:global([data-theme="light"]) .blobRight {
+  background: radial-gradient(circle at 60% 60%, rgba(77,147,229,0.55), rgba(52,127,203,0.45), rgba(52,127,203,0) 70%);
+}
+
+/* New: small lighter-blue “sparks” */
+.spark {
+  position: absolute;
+  left: 0; top: 0;
+  width: var(--size);
+  height: var(--size);
+  border-radius: 50%;
+  transform: translate(var(--x), var(--y));
+  background: radial-gradient(circle at 35% 35%, rgba(140,190,255,0.95), rgba(140,190,255,0.3) 60%, rgba(140,190,255,0) 70%);
+  mix-blend-mode: screen;
+  opacity: 0.6;
+  filter: blur(0.6px);
+  animation:
+    float 22s ease-in-out infinite alternate,
+    twinkle 6s ease-in-out infinite;
+  animation-delay: var(--delay);
+  will-change: transform, opacity;
+}
+
+/* Light-mode variant: a bit brighter, normal blend for clarity */
+:global([data-theme="light"]) .spark {
+  mix-blend-mode: normal;
+  opacity: 0.75;
+  background: radial-gradient(circle at 35% 35%, rgba(120,170,255,0.9), rgba(120,170,255,0.28) 60%, rgba(120,170,255,0) 70%);
+}
+
+/* Motion safety */
+@media (prefers-reduced-motion: reduce) {
+  .spark { animation: none; }
+}
+
+/* Subtle movement and shimmer */
+@keyframes float {
+  from { transform: translate(calc(var(--x) - 1.2vw), calc(var(--y) - 1.2vh)); }
+  to   { transform: translate(calc(var(--x) + 1.2vw), calc(var(--y) + 1.2vh)); }
+}
+@keyframes twinkle {
+  0%, 100% { opacity: 0.55; }
+  50%      { opacity: 0.85; }
+}
+
+@media (max-width: 900px) {
+  .blob { width: 70vw; height: 70vw; opacity: 0.24; filter: blur(26px); }
+  .blobLeft { left: -24vw; top: 24vh; }
+  .blobRight { right: -24vw; top: 60vh; }
+}
+
+.bgRoot {
+  position: fixed;
+  inset: 0;
+  z-index: 0;          // keep it behind everything
+  pointer-events: none;
+}

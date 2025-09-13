@@ -1,0 +1,213 @@
+// Navbar.module.scss
+// Extracted & consolidated from index.module.scss
+@use "../partials/variables";
+
+.navbar {
+  display: grid;                          /* center block is truly centered */
+  grid-template-columns: 1fr max-content 1fr; /* brand | center | right */
+  align-items: center;
+  gap: 12px;
+  padding-inline: clamp(10px, 3vw, 24px);
+  min-height: 56px;
+  min-width: 0;
+  background: var(--color-bg);
+}
+
+.brand { justify-self: start; }           /* left */
+.centerNav { justify-self: center; }      /* center */
+.rightNav { justify-self: end; }          /* right */
+
+/* Reset link styles (avoid purple underlines) */
+.navbar a,
+.navbar a:link,
+.navbar a:visited,
+.navbar a:hover,
+.navbar a:active {
+  text-decoration: none;
+  color: var(--color-text);
+}
+
+/* Brand */
+.brand {
+  font-size: clamp(1.35rem, 4.5vw, 2.6rem);
+  font-weight: 900;               /* thicker text */
+  line-height: 1;
+  white-space: nowrap;
+  flex: 0 1 auto;
+  min-width: 0;
+  max-width: 50vw;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  justify-self: start; /* keep brand left */
+}
+
+/* Animated gradient wave text for brand (seamless loop, slower) */
+.waveText {
+  background: linear-gradient(
+    90deg,
+    #6ea8ff 0%,
+    #7dd3fc 25%,
+    #60a5fa 50%,
+    #7dd3fc 75%,
+    #6ea8ff 100%
+  );
+  background-size: 200% 100%;     /* symmetrical palette + 200% = perfect loop */
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  animation: waveGradient 18s linear infinite; /* slower */
+  will-change: background-position;
+}
+@keyframes waveGradient {
+  0%   { background-position: 0% 50%; }
+  100% { background-position: -100% 50%; } /* seamless with 200% size + mirrored colors */
+}
+
+/* Centered links */
+.centerNav {
+  display: flex;
+  align-items: center;
+  justify-content: center;  // center the two links
+  gap: 10px 14px;
+  flex-wrap: wrap;
+  min-width: 0;
+  justify-self: center;     // fixed center regardless of right side width
+}
+.centerNavLink {
+  white-space: nowrap;
+  font-size: clamp(0.92rem, 1.2vw + 0.5rem, 1.05rem);
+  padding: 6px 10px;
+  border-radius: 8px;
+  color: var(--color-text);
+  transition: background-color .2s ease, color .2s ease, transform .15s ease;
+}
+.centerNavLink:hover,
+.centerNavLink:focus-visible {
+  background: color-mix(in oklab, var(--color-primary) 16%, transparent);
+  color: var(--color-text);
+  transform: translateY(-1px);
+}
+.activeNav {
+  background: color-mix(in oklab, var(--color-primary) 22%, transparent);
+  color: var(--color-text);
+  box-shadow: 0 2px 10px rgba(0,0,0,.18);
+}
+
+/* Right side */
+.rightNav {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 0 1 auto;
+  min-width: 0;
+  justify-self: end;        /* stay flush right */
+}
+
+/* Contact button (primary) */
+.contactBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+  padding: 8px 14px;
+  border-radius: 10px;
+  background: var(--color-primary);
+  color: #fff !important;
+  border: 2px solid var(--color-primary);
+  font-weight: 750;
+  box-shadow: 0 6px 18px rgba(0,0,0,.18);
+  transition: transform .15s ease, box-shadow .2s ease, background-color .2s ease, border-color .2s ease;
+}
+.contactBtn:hover,
+.contactBtn:focus-visible {
+  background: var(--color-primary-dark, color-mix(in oklab, var(--color-primary) 88%, #000 12%));
+  border-color: var(--color-primary-dark, color-mix(in oklab, var(--color-primary) 88%, #000 12%));
+  transform: translateY(-1px);
+  box-shadow: 0 10px 26px rgba(0,0,0,.26);
+}
+
+/* Toggle-style dark mode button (icon-only) */
+.themeToggle {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px 6px 6px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in oklab, var(--color-primary) 35%, transparent);
+  background:
+    linear-gradient(180deg, color-mix(in oklab, var(--color-primary) 8%, transparent), transparent),
+    color-mix(in oklab, var(--card-bg, rgba(15,23,42,.55)) 100%, transparent);
+  color: var(--color-text);
+  font-weight: 700;
+  cursor: pointer;
+  transition: box-shadow .2s ease, transform .15s ease, background-color .2s ease, border-color .2s ease;
+  outline: none;                      /* remove default square outline */
+  -webkit-tap-highlight-color: transparent; /* remove mobile tap highlight */
+  user-select: none;
+}
+.themeToggle:hover,
+.themeToggle:focus-visible {
+  transform: translateY(-1px);
+  /* custom focus ring + shadow */
+  box-shadow:
+    0 0 0 3px color-mix(in oklab, var(--color-primary) 40%, transparent),
+    0 6px 18px rgba(0,0,0,.22);
+}                                         /* <-- FIX: close this block */
+
+/* Icons */
+.toggleIcon {
+  width: 18px;
+  height: 18px;
+  display: block;
+  object-fit: contain;
+  pointer-events: none;
+  filter: none;
+}
+
+/* Make the moon icon white in dark mode (aria-pressed="true") */
+.themeToggle[aria-pressed="true"] .toggleIcon {
+  filter: brightness(0) invert(1) drop-shadow(0 0 2px rgba(255,255,255,.35));
+}
+
+/* Keep the sun icon unchanged in light mode */
+.themeToggle[aria-pressed="false"] .toggleIcon {
+  filter: none;
+}
+
+/* (Optional) keep thumb animation as-is */
+.toggleThumb {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  box-shadow: 0 2px 8px rgba(0,0,0,.25);
+  transition: transform .2s ease, background-color .2s ease;
+}
+.themeToggle[aria-pressed="false"] .toggleThumb { background: #fff; transform: translateX(0); }
+.themeToggle[aria-pressed="true"]  .toggleThumb { background: var(--color-primary); transform: translateX(2px); }
+
+/* Light mode tweaks for toggle surface */
+:where([data-theme="light"]) .themeToggle {
+  background: color-mix(in oklab, var(--color-primary) 8%, #ffffff 92%);
+  border-color: color-mix(in oklab, var(--color-primary) 45%, #ffffff 55%);
+}
+
+/* Small screens: stack the center row below */
+@media (max-width: 420px) {
+  .navbar {
+    grid-template-columns: 1fr auto;
+    grid-template-areas:
+      "brand right"
+      "center center";
+    row-gap: 6px;
+  }
+  .brand { grid-area: brand; }
+  .rightNav { grid-area: right; }
+  .centerNav { grid-area: center; width: 100%; }
+}
+@media (max-width: 360px) {
+  .centerNavLink { padding: 4px 8px; }
+  .contactBtn { padding: 6px 10px; }
+}

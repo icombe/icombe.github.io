@@ -1,6 +1,6 @@
-// src/components/Experience.jsx
+// src/components/Experience.tsx
 import React, { useEffect, useState } from "react";
-import styles from "../styles/index.module.scss";
+import styles from "../styles/components/Experience.module.scss";
 
 type ExperienceItem = {
   id: number;
@@ -15,38 +15,29 @@ export default function Experience() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("http://localhost:8000/api/experience/")
+    fetch("/api/experience/")
       .then((res) => res.json())
       .then((data) => {
         setItems(data);
         setLoading(false);
       })
-      .catch((err) => console.error(err));
+      .catch(() => setLoading(false));
   }, []);
 
-  if (loading) {
-    return (
-      <section id="experience" className={styles.experienceSection}>
-        <div className={styles.experienceContainer}>
-          <h2 className={styles.experienceTitle}>Work Experience</h2>
-          <p>Loading experience…</p>
-        </div>
-      </section>
-    );
-  }
+  if (loading || !items.length) return null;
 
   return (
     <section id="experience" className={styles.experienceSection}>
       <div className={styles.experienceContainer}>
         <h2 className={styles.experienceTitle}>Work Experience</h2>
-        <div className={styles.experienceList}>
+        <div className={styles.experienceGrid}>
           {items.map((item) => (
             <div
               key={item.id}
               className={styles.experienceCard}
               tabIndex={0}
-              role="button"
-              aria-pressed="false"
+              role="group"
+              aria-label={`${item.title} at ${item.company}`}
             >
               <h3 className={styles.experienceCardTitle}>{item.title}</h3>
               <p className={styles.experienceCardCompany}>{item.company}</p>

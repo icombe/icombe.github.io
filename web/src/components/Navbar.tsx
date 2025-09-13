@@ -1,26 +1,29 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
-import styles from "../styles/index.module.scss";
+import styles from "../styles/components/Navbar.module.scss";
 import { useTheme } from "../context/ThemeContext";
-import darkIcon from "../assets/dark.svg"; 
-import lightIcon from "../assets/light.svg";
+import DarkIcon from "../assets/dark.svg";
+import LightIcon from "../assets/light.svg";
+
+const SHOW_TESTIMONIALS = false; // keep hidden
 
 export default function Navbar() {
   const location = useLocation();
   const { theme, toggleTheme } = useTheme();
+  const isDark = theme === "dark";
 
   return (
     <nav className={styles.navbar}>
-      {/* Brand (left), larger, waveText, links to home */}
+      {/* Brand (left) with animated gradient wave */}
       <Link
         to="/"
-        className={styles.brand + " " + styles.waveText}
-        style={{ fontSize: "2.5rem", textDecoration: "none" }}
+        className={`${styles.brand} ${styles.waveText}`}
+        aria-label="Go to home"
       >
         Ian Combe
       </Link>
 
-      {/* Centered nav links */}
+      {/* Center links */}
       <div className={styles.centerNav}>
         <Link
           to="/"
@@ -33,50 +36,45 @@ export default function Navbar() {
         <Link
           to="/about"
           className={`${styles.centerNavLink} ${
-            location.pathname === "/about" ? styles.activeNav : ""
+            location.pathname.startsWith("/about") ? styles.activeNav : ""
           }`}
         >
           About
         </Link>
-        <Link
-          to="/testimonials"
-          className={`${styles.centerNavLink} ${
-            location.pathname === "/testimonials" ? styles.activeNav : ""
-          }`}
-        >
-          Testimonials
-        </Link>
+        {SHOW_TESTIMONIALS && (
+          <Link
+            to="/testimonials"
+            className={`${styles.centerNavLink} ${
+              location.pathname.startsWith("/testimonials") ? styles.activeNav : ""
+            }`}
+          >
+            Testimonials
+          </Link>
+        )}
       </div>
 
-      {/* Right side: dark mode toggle + contact */}
+      {/* Right side: theme toggle + contact */}
       <div className={styles.rightNav}>
         <button
-          className={styles.circleBtn}
-          aria-label="Toggle dark mode"
-          onClick={(e) => {
-            e.currentTarget.blur(); // Remove highlight after click
-            toggleTheme();
-          }}
-          tabIndex={0}
-          style={{ outline: "none", boxShadow: "none" }}
+          type="button"
+          className={styles.themeToggle}
+          aria-pressed={isDark}
+          onClick={toggleTheme}
+          aria-label="Toggle color theme"
+          title={isDark ? "Switch to light mode" : "Switch to dark mode"}
         >
+          <span className={styles.toggleThumb} aria-hidden="true" />
+          {/* Only render the current icon */}
           <img
-            src={theme === "dark" ? lightIcon : darkIcon}
-            alt={
-              theme === "dark"
-                ? "Switch to light mode"
-                : "Switch to dark mode"
-            }
-            style={{
-              width: 24,
-              height: 24,
-              filter: theme === "dark" ? "invert(1)" : "invert(0)",
-              transition: "filter 0.4s",
-            }}
+            src={isDark ? DarkIcon : LightIcon}
+            className={styles.toggleIcon}
+            alt=""
+            aria-hidden="true"
             draggable={false}
           />
         </button>
-        <Link to="/contact" className={styles.contactNavBtn}>
+
+        <Link to="/contact" className={styles.contactBtn}>
           Contact
         </Link>
       </div>

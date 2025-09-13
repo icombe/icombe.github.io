@@ -6,10 +6,9 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "lint": "eslint .",
     "preview": "vite preview",
-    "test": "jest",
-    "test:coverage": "jest --coverage"
+    "predeploy": "npm run build && powershell -Command \"Copy-Item -Path dist/index.html -Destination dist/404.html -Force\"",
+    "deploy": "gh-pages -d dist -b gh-pages"
   },
   "dependencies": {
     "normalize.css": "^8.0.1",
@@ -37,6 +36,7 @@
     "ts-jest": "^29.4.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.8.3",
-    "vite": "^6.3.5"
+    "vite": "^6.3.5",
+    "gh-pages": "^6.1.1"
   }
 }
