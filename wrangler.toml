@@ -1,0 +1,5 @@
+name = "portfolio-contact"
+main = "worker/src/index.js"
+compatibility_date = "2025-09-13"
+
+# No routes: deploys to your workers.dev subdomain

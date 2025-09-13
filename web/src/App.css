@@ -1,8 +1,8 @@
 body {
   margin: 0;
   font-family: system-ui, sans-serif;
-  background: #121212;
-  color: #fff;
+  background: var(--color-bg);   /* was hard-coded #121212 */
+  color: var(--color-text);      /* was hard-coded #fff */
 }
 
 #root {
