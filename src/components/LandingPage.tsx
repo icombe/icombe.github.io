@@ -25,7 +25,7 @@ export default function LandingPage() {
         >
           <h1 className="text-7xl md:text-[10rem] font-bold tracking-tighter mb-6 font-display leading-none flex justify-center items-baseline">
             <motion.span 
-              className="text-palette-green block"
+              className="bg-clip-text text-transparent bg-gradient-to-r from-palette-blue via-palette-green to-palette-orange block pb-2"
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, delay: 0.3 }}
@@ -51,7 +51,7 @@ export default function LandingPage() {
                 times: [0, 0.5, 0.5, 1],
                 ease: "linear" 
               }}
-              className="inline-block w-4 h-16 md:h-32 bg-palette-green ml-2 md:ml-4 align-middle"
+              className="inline-block w-4 h-16 md:h-32 bg-gradient-to-b from-palette-blue via-palette-green to-palette-orange ml-2 md:ml-4 align-middle"
             />
           </h1>
         </motion.div>
