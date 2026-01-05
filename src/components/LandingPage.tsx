@@ -25,7 +25,7 @@ export default function LandingPage() {
         >
           <h1 className="text-7xl md:text-[10rem] font-bold tracking-tighter mb-6 font-display leading-none flex justify-center items-baseline">
             <motion.span 
-              className="bg-clip-text text-transparent bg-gradient-to-r from-palette-blue via-palette-green to-palette-orange block pb-2"
+              className="bg-clip-text text-transparent bg-gradient-to-r from-palette-blue via-palette-green to-palette-orange inline-block py-4"
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, delay: 0.3 }}
@@ -33,7 +33,7 @@ export default function LandingPage() {
               {"Ian Combe".split('').map((letter, index) => (
                 <motion.span
                   key={index}
-                  className="inline-block"
+                  className="inline-block relative"
                   whileHover={{ 
                     y: -10,
                     transition: { duration: 0.2 }
