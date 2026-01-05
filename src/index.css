@@ -1,0 +1,192 @@
+﻿@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    background-color: #050505;
+    background-image: radial-gradient(circle at 50% 0%, #111111 0%, #050505 70%);
+    color: theme('colors.foreground');
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  @keyframes border-flow {
+    0% {
+      background-position: 0% 50%;
+    }
+    100% {
+      background-position: 200% 50%;
+    }
+  }
+
+  /* Custom Scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #050505;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #0689e4, #71ab23, #fbb905, #d55e0f, #0032db);
+    background-size: 100% 500%;
+    animation: scrollbar-gradient 15s ease infinite;
+    border-radius: 10px;
+    opacity: 0.6;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    opacity: 0.8;
+  }
+
+  @keyframes scrollbar-gradient {
+    0%, 100% { background-position: 0% 0%; }
+    20% { background-position: 0% 25%; }
+    40% { background-position: 0% 50%; }
+    60% { background-position: 0% 75%; }
+    80% { background-position: 0% 100%; }
+  }
+
+  /* Spotlight text effect */
+  .spotlight-text {
+    position: relative;
+    background: linear-gradient(to right, #9ca3af 0%, #ffffff 50%, #9ca3af 100%);
+    background-size: 200% 100%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-position: 100% 0;
+    transition: background-position 0.3s ease;
+  }
+
+  .spotlight-text:hover {
+    background-position: 0% 0;
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    @apply bg-gradient-to-r from-accent-primary via-accent-secondary to-accent-tertiary bg-clip-text text-transparent;
+  }
+  
+  .text-glow {
+    text-shadow: 0 0 30px rgba(6, 137, 228, 0.6), 0 0 60px rgba(6, 137, 228, 0.3);
+  }
+  
+  .glass {
+    @apply bg-white/5 backdrop-blur-lg border border-white/10 shadow-2xl;
+  }
+  
+  .animate-gradient-x {
+    background-size: 200% 200%;
+    animation: gradient-x 4s ease infinite;
+  }
+
+  @keyframes gradient-x {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+  }
+
+  /* Smooth fade in animation */
+  .animate-fade-in {
+    animation: fadeIn 0.6s ease-in-out forwards;
+  }
+
+  @keyframes fadeIn {
+    from { 
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to { 
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Subtle hover lift effect */
+  .hover-lift {
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .hover-lift:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply relative px-8 py-4 rounded-full bg-gradient-to-r from-palette-blue to-palette-deep text-white font-semibold shadow-lg transition-all duration-300 overflow-hidden;
+  }
+
+  .btn-primary::before {
+    content: '';
+    @apply absolute inset-0 bg-gradient-to-r from-palette-deep to-palette-blue opacity-0 transition-opacity duration-300;
+  }
+
+  .btn-primary:hover::before {
+    opacity: 1;
+  }
+
+  .btn-primary:hover {
+    @apply shadow-[0_0_30px_rgba(6,137,228,0.5)] scale-105;
+  }
+
+  .btn-outline {
+    @apply relative px-8 py-4 rounded-full border-2 border-white/20 text-white font-semibold backdrop-blur-sm transition-all duration-300 overflow-hidden;
+  }
+
+  .btn-outline::before {
+    content: '';
+    @apply absolute inset-0 bg-gradient-to-r from-palette-blue/10 via-palette-green/10 to-palette-yellow/10 opacity-0 transition-opacity duration-300;
+  }
+
+  .btn-outline:hover::before {
+    opacity: 1;
+  }
+
+  .btn-outline:hover {
+    @apply border-white/40 bg-white/5 scale-105;
+  }
+
+  /* Card with gradient border effect */
+  .card-gradient-border {
+    @apply relative bg-gradient-to-br from-white/5 to-white/[0.02] backdrop-blur-xl rounded-3xl p-8;
+  }
+
+  .card-gradient-border::before {
+    content: '';
+    @apply absolute inset-0 rounded-3xl p-[1px] bg-gradient-to-br from-palette-blue via-palette-green to-palette-yellow;
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .card-gradient-border:hover::before {
+    opacity: 0.5;
+  }
+
+  /* Rainbow animation for Konami code easter egg */
+  @keyframes rainbow {
+    0% { filter: hue-rotate(0deg); }
+    100% { filter: hue-rotate(360deg); }
+  }
+
+  /* Gradient sweep animation for footer name */
+  @keyframes gradientSweep {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+  }
+}
