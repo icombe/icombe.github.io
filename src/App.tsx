@@ -6,7 +6,6 @@ import ProjectDashboard from '@/pages/ProjectDashboard';
 import { 
   useKonamiCode, 
   useScrollEasterEgg, 
-  useDevToolsDetection, 
   useKeyboardNavigation,
   useScrollGrandmaster,
   useIdleTimer,
@@ -72,15 +71,6 @@ function AppContent() {
     }
   }, [achievementQueue, isProcessingQueue]);
 
-  // 404 Explorer detection
-  useEffect(() => {
-    if (location.pathname !== '/' && location.pathname !== '/achievements') {
-      if (unlockAchievement('404_explorer')) {
-        showAchievementPopup('404_explorer');
-      }
-    }
-  }, [location]);
-
   // View Source detection
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -104,11 +94,6 @@ function AppContent() {
   // Scroll Distance Easter Egg
   useScrollEasterEgg(() => {
     showAchievementPopup('scroll_master');
-  });
-
-  // DevTools Detection
-  useDevToolsDetection(() => {
-    showAchievementPopup('dev_detective');
   });
 
   // Keyboard Navigation

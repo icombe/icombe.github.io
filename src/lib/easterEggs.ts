@@ -96,26 +96,6 @@ export const useScrollGrandmaster = (callback: () => void) => {
   useScrollTracker(callback, 500000, 'scroll_grandmaster');
 };
 
-// Dev Tools Detection
-export const useDevToolsDetection = (callback: () => void) => {
-  useEffect(() => {
-    const detectDevTools = () => {
-      const threshold = 160;
-      if (window.outerWidth - window.innerWidth > threshold || 
-          window.outerHeight - window.innerHeight > threshold) {
-        if (unlockAchievement('dev_detective')) {
-          callback();
-        }
-      }
-    };
-
-    window.addEventListener('resize', detectDevTools);
-    detectDevTools(); // Check immediately
-    
-    return () => window.removeEventListener('resize', detectDevTools);
-  }, [callback]);
-};
-
 // Keyboard Navigation Detection (Tab + Enter)
 export const useKeyboardNavigation = (callback: () => void) => {
   useEffect(() => {

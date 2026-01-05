@@ -63,24 +63,10 @@ export const ACHIEVEMENTS: Achievement[] = [
     category: 'secret',
   },
   {
-    id: 'dev_detective',
-    title: 'Dev Detective',
-    description: 'Opened the browser DevTools. A fellow developer, I see!',
-    icon: '🔧',
-    category: 'secret',
-  },
-  {
     id: 'code_inspector',
     title: 'Code Inspector',
     description: 'Viewed the page source. Digging into the details!',
     icon: '👀',
-    category: 'secret',
-  },
-  {
-    id: '404_explorer',
-    title: '404 Explorer',
-    description: 'Found the void. Not all who wander are lost... or are they?',
-    icon: '🗺️',
     category: 'secret',
   },
   
