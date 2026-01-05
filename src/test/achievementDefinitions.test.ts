@@ -2,8 +2,8 @@ import { describe, it, expect } from 'vitest';
 import { ACHIEVEMENTS, getAchievementById } from '../lib/achievements';
 
 describe('Achievement Definitions', () => {
-  it('has exactly 15 achievements', () => {
-    expect(ACHIEVEMENTS).toHaveLength(15);
+  it('has exactly 13 achievements', () => {
+    expect(ACHIEVEMENTS).toHaveLength(13);
   });
 
   it('has curious_explorer as the first achievement', () => {
