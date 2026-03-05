@@ -65,11 +65,11 @@ export default function ProjectDashboard() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            <div className="rounded-2xl overflow-hidden border border-white/10 shadow-2xl bg-black/50 backdrop-blur-sm h-full">
+            <div className="rounded-2xl overflow-hidden border border-white/10 shadow-2xl bg-black/50 backdrop-blur-sm h-full min-h-[260px] md:min-h-[360px]">
               <img 
                 src="/assets/images/dashboard-thumbnail.jpg" 
                 alt="Dashboard Interface" 
-                className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
+                className="w-full h-full object-contain bg-black/40 p-2 md:p-4"
               />
             </div>
           </motion.div>
