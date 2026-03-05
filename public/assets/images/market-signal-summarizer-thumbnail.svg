@@ -1,0 +1,29 @@
+<svg width="1280" height="720" viewBox="0 0 1280 720" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg2" x1="0" y1="0" x2="1280" y2="720" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#050A1A"/>
+      <stop offset="1" stop-color="#0D1328"/>
+    </linearGradient>
+    <linearGradient id="panel" x1="120" y1="90" x2="1160" y2="620" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#111827"/>
+      <stop offset="1" stop-color="#0F172A"/>
+    </linearGradient>
+    <linearGradient id="line" x1="190" y1="560" x2="1060" y2="330" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#71AB23"/>
+      <stop offset="0.5" stop-color="#0689E4"/>
+      <stop offset="1" stop-color="#0032DB"/>
+    </linearGradient>
+  </defs>
+  <rect width="1280" height="720" fill="url(#bg2)"/>
+  <rect x="120" y="90" width="1040" height="540" rx="26" fill="url(#panel)" stroke="#1F2937"/>
+  <text x="190" y="160" fill="#E5E7EB" font-family="Inter, Arial, sans-serif" font-size="34" font-weight="700">Market Signal Summarizer</text>
+  <rect x="190" y="190" width="360" height="24" rx="12" fill="#374151"/>
+  <rect x="190" y="250" width="240" height="180" rx="14" fill="#111827" stroke="#334155"/>
+  <rect x="460" y="250" width="640" height="180" rx="14" fill="#111827" stroke="#334155"/>
+  <path d="M190 560C320 520 410 590 530 500C640 420 760 470 860 390C920 340 980 350 1060 330" stroke="url(#line)" stroke-width="8" stroke-linecap="round"/>
+  <circle cx="530" cy="500" r="10" fill="#71AB23"/>
+  <circle cx="860" cy="390" r="10" fill="#0689E4"/>
+  <circle cx="1060" cy="330" r="10" fill="#0032DB"/>
+  <rect x="190" y="470" width="180" height="16" rx="8" fill="#4B5563"/>
+  <rect x="190" y="500" width="250" height="16" rx="8" fill="#4B5563"/>
+</svg>

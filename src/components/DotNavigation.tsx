@@ -16,29 +16,54 @@ export default function DotNavigation() {
   const { showAchievementPopup } = useAchievement();
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActiveSection(entry.target.id);
-          }
-        });
-      },
-      { threshold: 0.5, rootMargin: "-10% 0px -10% 0px" }
-    );
+    const updateActiveSection = () => {
+      const viewportMidpoint = window.scrollY + window.innerHeight * 0.35;
 
-    sections.forEach(({ id }) => {
-      const element = document.getElementById(id);
-      if (element) observer.observe(element);
-    });
+      let closestSection = sections[0].id;
+      let smallestDistance = Number.POSITIVE_INFINITY;
 
-    return () => observer.disconnect();
+      for (const { id } of sections) {
+        const element = document.getElementById(id);
+        if (!element) continue;
+
+        const sectionTop = element.offsetTop;
+        const sectionBottom = sectionTop + element.offsetHeight;
+
+        if (viewportMidpoint >= sectionTop && viewportMidpoint <= sectionBottom) {
+          closestSection = id;
+          smallestDistance = 0;
+          break;
+        }
+
+        const distance = Math.min(
+          Math.abs(viewportMidpoint - sectionTop),
+          Math.abs(viewportMidpoint - sectionBottom)
+        );
+
+        if (distance < smallestDistance) {
+          smallestDistance = distance;
+          closestSection = id;
+        }
+      }
+
+      setActiveSection(closestSection);
+    };
+
+    updateActiveSection();
+    window.addEventListener('scroll', updateActiveSection, { passive: true });
+    window.addEventListener('resize', updateActiveSection);
+
+    return () => {
+      window.removeEventListener('scroll', updateActiveSection);
+      window.removeEventListener('resize', updateActiveSection);
+    };
   }, []);
 
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
+      setActiveSection(id);
       // Track navigation click (exclude 'landing')
       if (id !== 'landing') {
         trackNavigationClick(id, showAchievementPopup);

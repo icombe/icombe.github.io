@@ -1,6 +1,5 @@
 import { motion } from 'framer-motion';
 import { ArrowDown } from 'lucide-react';
-import CircuitBackground from './CircuitBackground';
 
 export default function LandingPage() {
   const scrollToSection = (id: string) => {
@@ -11,11 +10,28 @@ export default function LandingPage() {
   };
 
   return (
-    <div className="h-screen w-full relative overflow-hidden flex items-center justify-center bg-[#050505]">
-      <CircuitBackground opacity={0.15} density={40} speed={2} />
+    <div className="min-h-screen w-full relative overflow-hidden flex items-center justify-center bg-[#050505]">
+      <div className="absolute inset-0">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_15%,rgba(6,137,228,0.22),transparent_46%),radial-gradient(circle_at_80%_20%,rgba(113,171,35,0.16),transparent_44%),radial-gradient(circle_at_50%_78%,rgba(251,185,5,0.14),transparent_50%)]" />
+        <motion.div
+          className="absolute -top-20 -left-24 w-[460px] h-[460px] rounded-full bg-palette-blue/15 blur-3xl"
+          animate={{ x: [0, 24, 0], y: [0, 18, 0] }}
+          transition={{ duration: 18, repeat: Infinity, ease: 'easeInOut' }}
+        />
+        <motion.div
+          className="absolute top-1/4 -right-24 w-[420px] h-[420px] rounded-full bg-palette-green/12 blur-3xl"
+          animate={{ x: [0, -20, 0], y: [0, 20, 0] }}
+          transition={{ duration: 20, repeat: Infinity, ease: 'easeInOut' }}
+        />
+        <motion.div
+          className="absolute -bottom-24 left-1/3 w-[400px] h-[400px] rounded-full bg-palette-yellow/10 blur-3xl"
+          animate={{ x: [0, 18, 0], y: [0, -18, 0] }}
+          transition={{ duration: 22, repeat: Infinity, ease: 'easeInOut' }}
+        />
+      </div>
       
       {/* Gradient overlay for smooth transition to next section */}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#050505] pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-b from-[#050505]/20 via-transparent to-[#050505] pointer-events-none" />
       
       <div className="relative z-10 text-center px-4 max-w-6xl mx-auto">
         <motion.div
@@ -23,7 +39,7 @@ export default function LandingPage() {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
         >
-          <h1 className="text-7xl md:text-[10rem] font-bold tracking-tighter mb-6 font-display leading-tight flex justify-center items-baseline">
+          <h1 className="text-5xl sm:text-6xl md:text-[10rem] font-bold tracking-tighter mb-6 font-display leading-tight flex justify-center items-baseline">
             <motion.span 
               className="text-palette-blue inline-block"
               initial={{ opacity: 0, x: -20 }}
@@ -113,7 +129,8 @@ export default function LandingPage() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.5, duration: 1 }}
-        className="absolute bottom-12 left-1/2 -translate-x-1/2 text-white/40 hover:text-white/80 transition-colors cursor-pointer"
+        aria-label="Scroll to About section"
+        className="absolute bottom-5 sm:bottom-8 md:bottom-12 left-1/2 -translate-x-1/2 text-white/50 hover:text-white/90 transition-colors cursor-pointer p-2 rounded-full bg-black/20 backdrop-blur-sm"
       >
         <motion.div
           animate={{ y: [0, 10, 0] }}

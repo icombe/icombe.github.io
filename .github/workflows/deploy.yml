@@ -30,12 +30,18 @@ jobs:
           
       - name: Install dependencies
         run: npm ci
+
+      - name: Sync loan analyzer web demo
+        run: npm run sync:loan-analyzer
         
       - name: Run tests
         run: npm run test
         
       - name: Build
-        run: npm run build
+        run: npm run build:with-demo
+
+      - name: Verify demo artifact exists
+        run: test -f dist/loan-analyzer/index.html
         
       - name: Setup Pages
         uses: actions/configure-pages@v4

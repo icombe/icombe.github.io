@@ -1,0 +1,29 @@
+<svg width="1280" height="720" viewBox="0 0 1280 720" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1280" y2="720" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0B1220"/>
+      <stop offset="1" stop-color="#111827"/>
+    </linearGradient>
+    <linearGradient id="card" x1="160" y1="100" x2="1120" y2="620" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#1E293B" stop-opacity="0.9"/>
+      <stop offset="1" stop-color="#0F172A" stop-opacity="0.95"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="240" y1="180" x2="980" y2="180" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0689E4"/>
+      <stop offset="0.5" stop-color="#71AB23"/>
+      <stop offset="1" stop-color="#FBB905"/>
+    </linearGradient>
+  </defs>
+  <rect width="1280" height="720" fill="url(#bg)"/>
+  <rect x="160" y="100" width="960" height="520" rx="24" fill="url(#card)" stroke="#334155"/>
+  <rect x="240" y="170" width="740" height="14" rx="7" fill="url(#accent)"/>
+  <rect x="240" y="220" width="390" height="36" rx="10" fill="#334155"/>
+  <rect x="240" y="280" width="300" height="18" rx="9" fill="#475569"/>
+  <rect x="240" y="320" width="420" height="18" rx="9" fill="#475569"/>
+  <rect x="240" y="380" width="320" height="180" rx="14" fill="#0B1220" stroke="#334155"/>
+  <rect x="590" y="380" width="390" height="180" rx="14" fill="#0B1220" stroke="#334155"/>
+  <rect x="620" y="420" width="140" height="22" rx="11" fill="#1E40AF"/>
+  <rect x="620" y="460" width="290" height="22" rx="11" fill="#065F46"/>
+  <rect x="620" y="500" width="250" height="22" rx="11" fill="#92400E"/>
+  <text x="240" y="150" fill="#F8FAFC" font-family="Inter, Arial, sans-serif" font-size="34" font-weight="700">Student Loan Tracker (Beta)</text>
+</svg>

@@ -3,13 +3,14 @@ import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-route
 import Home from '@/pages/Home';
 import Achievements from '@/pages/Achievements';
 import ProjectDashboard from '@/pages/ProjectDashboard';
+import StudentLoanAnalyzerProject from '@/pages/StudentLoanAnalyzerProject';
+import MarketSignalSummarizerProject from '@/pages/MarketSignalSummarizerProject';
 import { 
   useKonamiCode, 
   useScrollEasterEgg, 
   useKeyboardNavigation,
   useScrollGrandmaster,
   useIdleTimer,
-  useSpeedScroller,
   useHoverTracking,
   unlockAchievement
 } from '@/lib/easterEggs';
@@ -111,11 +112,6 @@ function AppContent() {
     showAchievementPopup('patient_programmer');
   });
 
-  // Speed Scroller
-  useSpeedScroller(() => {
-    showAchievementPopup('speed_scroller');
-  });
-
   // Hover Master
   useHoverTracking(() => {
     showAchievementPopup('hover_master');
@@ -131,6 +127,8 @@ function AppContent() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/achievements" element={<Achievements />} />
+            <Route path="/projects/student-loan-tracker" element={<StudentLoanAnalyzerProject />} />
+            <Route path="/projects/market-signal-summarizer" element={<MarketSignalSummarizerProject />} />
             <Route path="/projects/testing-equipment-repair-pipeline-dashboard" element={<ProjectDashboard />} />
             <Route path="*" element={<Achievements />} />
           </Routes>

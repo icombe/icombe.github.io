@@ -142,32 +142,6 @@ export const useIdleTimer = (callback: () => void, idleTime: number = 300000) =>
   }, [callback, idleTime]);
 };
 
-// Speed Scroller - Fast scrolling detection
-export const useSpeedScroller = (callback: () => void) => {
-  useEffect(() => {
-    let lastScrollY = window.scrollY;
-    let lastScrollTime = Date.now();
-
-    const handleScroll = () => {
-      const currentScrollY = window.scrollY;
-      const currentTime = Date.now();
-      const distance = Math.abs(currentScrollY - lastScrollY);
-      const timeDiff = currentTime - lastScrollTime;
-      const velocity = distance / timeDiff; // pixels per ms
-
-      if (velocity > 10 && unlockAchievement('speed_scroller')) { // Very fast scrolling
-        callback();
-      }
-
-      lastScrollY = currentScrollY;
-      lastScrollTime = currentTime;
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [callback]);
-};
-
 // Hover Master - Track hovers
 export const useHoverTracking = (callback: () => void) => {
   useEffect(() => {

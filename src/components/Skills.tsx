@@ -17,7 +17,7 @@ const skillCategories = [
     color: categoryColors.frontend.gradient,
     iconColor: categoryColors.frontend.iconColor,
     categoryKey: 'frontend' as const,
-    skills: ["React", "TypeScript", "Next.js", "Tailwind CSS", "Framer Motion", "Three.js", "Vite"]
+    skills: ["React", "TypeScript", "Next.js", "Tailwind CSS", "Figma", "Three.js", "Vite"]
   },
   {
     title: "Backend",
@@ -41,7 +41,7 @@ const skillCategories = [
     color: categoryColors.learning.gradient,
     iconColor: categoryColors.learning.iconColor,
     categoryKey: 'learning' as const,
-    skills: ["Go", "Terraform", "Kubernetes", "Apache Kafka", "System Design"]
+    skills: ["Design Systems", "Accessibility Audits", "Storybook", "React Aria", "Hotjar", "Maze"]
   }
 ];
 

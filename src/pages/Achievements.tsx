@@ -287,7 +287,7 @@ export default function Achievements() {
                   Interaction
                 </motion.span>
               </div>
-              <p>Hover over elements, use keyboard navigation, scroll at different speeds, and stay engaged. Active users unlock more!</p>
+              <p>Hover over elements, use keyboard navigation, and stay engaged. Active users unlock more!</p>
             </div>
           </div>
         </motion.div>

@@ -6,6 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
+    "sync:loan-analyzer": "node scripts/sync-loan-analyzer.mjs",
+    "build:with-demo": "npm run sync:loan-analyzer && npm run build",
     "lint": "eslint .",
     "preview": "vite preview",
     "test": "vitest",

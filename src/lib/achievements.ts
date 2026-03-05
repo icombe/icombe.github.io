@@ -86,13 +86,6 @@ export const ACHIEVEMENTS: Achievement[] = [
     category: 'interaction',
   },
   {
-    id: 'speed_scroller',
-    title: 'Speed Scroller',
-    description: 'Scrolled at lightning speed. Slow down, enjoy the view!',
-    icon: '⚡',
-    category: 'interaction',
-  },
-  {
     id: 'hover_master',
     title: 'Hover Master',
     description: 'Hovered over 100+ interactive elements. What a thorough explorer!',

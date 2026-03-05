@@ -3,16 +3,40 @@ import { Github, ArrowRight, Play, X } from 'lucide-react';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
+interface ProjectItem {
+  title: string;
+  description: string;
+  tags: string[];
+  color: string;
+  accentText: string;
+  thumbnail: string;
+  video?: string;
+  github?: string;
+  internalLink?: string;
+  link?: string;
+}
+
 const projects = [
+  {
+    title: 'Student Loan Tracker (Beta)',
+    description:
+      'A student loan planning app that helps users understand monthly payments, compare payoff timelines, and make clearer repayment decisions with less guesswork.',
+    tags: ['React', 'TypeScript', 'Vite', 'Tauri (Desktop)', 'UX/UI'],
+    color: 'from-palette-yellow to-palette-orange',
+    accentText: 'text-palette-yellow hover:text-palette-orange',
+    thumbnail: '/assets/images/student-loan-tracker-thumbnail.svg',
+    internalLink: '/projects/student-loan-tracker',
+    github: '',
+  },
   {
     title: "Market Signal Summarizer",
     description: "A financial analysis tool that aggregates market signals using multiple APIs. Features real-time data processing and AI-driven summaries to provide actionable insights to investors at any level.",
     tags: ["Python", "FastAPI", "React", "TypeScript", "AI"],
     color: "from-palette-blue to-palette-deep",
-    hoverColor: "hover:bg-gradient-to-r hover:from-palette-blue hover:to-palette-deep hover:bg-clip-text hover:text-transparent",
-    accent: "palette-blue",
-    link: "#", 
+    accentText: 'text-palette-blue hover:text-palette-deep',
+    thumbnail: '/assets/images/market-signal-summarizer-thumbnail.svg',
     video: "/videos/MarketSignalSummarizerVideo.mp4",
+    internalLink: '/projects/market-signal-summarizer',
     github: "https://github.com/icombe/market-signal-summarizer"
   },
   {
@@ -20,13 +44,12 @@ const projects = [
     description: "A full‑stack dashboard aggregating multi‑DB repair data across seven stages. Delivered in five weeks, it normalizes disparate schemas, exposes a FastAPI service layer, and integrates with a React/TypeScript UI for fast, paginated filtering and lookups.",
     tags: ["FastAPI", "React", "TypeScript", "MySQL", "Ant Design"],
     color: "from-palette-green to-palette-blue",
-    hoverColor: "hover:bg-gradient-to-r hover:from-palette-green hover:to-palette-blue hover:bg-clip-text hover:text-transparent",
-    accent: "palette-green",
-    link: "#",
+    accentText: 'text-palette-green hover:text-palette-blue',
+    thumbnail: '/assets/images/pipeline-dashboard-thumbnail.svg',
     internalLink: "/projects/testing-equipment-repair-pipeline-dashboard",
     github: ""
   }
-];
+] as ProjectItem[];
 
 export default function Projects() {
   const [selectedVideo, setSelectedVideo] = useState<string | null>(null);
@@ -90,9 +113,12 @@ export default function Projects() {
               <div className="relative flex flex-col md:flex-row gap-8 md:items-start justify-between">
                 <div className="flex-1">
                   <div className="flex items-start justify-between mb-4">
-                    <h3 className={`text-3xl md:text-4xl font-bold text-white transition-all duration-700 ease-out group-hover:bg-gradient-to-r ${project.color} group-hover:bg-clip-text group-hover:text-transparent`}>
+                    <Link
+                      to={project.internalLink || '#'}
+                      className={`text-3xl md:text-4xl font-bold text-white transition-all duration-700 ease-out group-hover:bg-gradient-to-r ${project.color} group-hover:bg-clip-text group-hover:text-transparent`}
+                    >
                       {project.title}
-                    </h3>
+                    </Link>
                     
                     {/* Index number */}
                     <motion.span 
@@ -108,6 +134,20 @@ export default function Projects() {
                   <p className="text-base md:text-lg text-gray-300 mb-8 max-w-2xl leading-relaxed">
                     {project.description}
                   </p>
+
+                  <Link to={project.internalLink || '#'} className="block mb-8 group/image">
+                    <div className="relative rounded-2xl overflow-hidden border border-white/10 bg-black/40">
+                      <img
+                        src={project.thumbnail}
+                        alt={`${project.title} project preview`}
+                        className="w-full h-56 md:h-64 object-cover transition-transform duration-700 group-hover/image:scale-105"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
+                      <div className="absolute bottom-3 left-3 text-xs uppercase tracking-wider text-white/80">
+                        View project details
+                      </div>
+                    </div>
+                  </Link>
                   
                   <div className="flex flex-wrap gap-2 mb-8">
                     {project.tags.map((tag, i) => (
@@ -123,9 +163,22 @@ export default function Projects() {
                   </div>
 
                   <div className="flex items-center gap-6">
-                    {project.video ? (
+                    {project.internalLink ? (
+                      <Link 
+                        to={project.internalLink}
+                        className={`group/link flex items-center gap-2 font-semibold transition-colors ${project.accentText}`}
+                      >
+                        <span>View Details</span>
+                        <motion.div
+                          animate={{ x: [0, 4, 0] }}
+                          transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+                        >
+                          <ArrowRight size={20} />
+                        </motion.div>
+                      </Link>
+                    ) : project.video ? (
                       <button 
-                        onClick={() => setSelectedVideo(project.video)}
+                        onClick={() => setSelectedVideo(project.video || null)}
                         className="group/link flex items-center gap-2 text-white font-semibold hover:text-palette-blue transition-colors"
                       >
                         <span>Watch Demo</span>
@@ -136,22 +189,9 @@ export default function Projects() {
                           <Play size={20} />
                         </motion.div>
                       </button>
-                    ) : (project as any).internalLink ? (
-                      <Link 
-                        to={(project as any).internalLink}
-                        className="group/link flex items-center gap-2 text-white font-semibold hover:text-palette-blue transition-colors"
-                      >
-                        <span>View Details</span>
-                        <motion.div
-                          animate={{ x: [0, 4, 0] }}
-                          transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-                        >
-                          <ArrowRight size={20} />
-                        </motion.div>
-                      </Link>
                     ) : (
                       <motion.a 
-                        href={project.link} 
+                        href={project.link || '#'} 
                         target="_blank"
                         rel="noopener noreferrer"
                         className="group/link flex items-center gap-2 text-white font-semibold hover:text-palette-blue transition-colors"
