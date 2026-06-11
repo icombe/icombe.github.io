@@ -11,7 +11,6 @@ describe('LandingPage', () => {
       </BrowserRouter>
     );
     
-    // The name is in an h1 element, check for the heading
     const heading = screen.getByRole('heading', { level: 1 });
     expect(heading.textContent).toContain('Ian');
     expect(heading.textContent).toContain('Combe');
@@ -24,17 +23,20 @@ describe('LandingPage', () => {
       </BrowserRouter>
     );
     
-    expect(screen.getByText(/Computer Science Student/i)).toBeInTheDocument();
+    expect(screen.getByText(/Full-Stack Developer/i)).toBeInTheDocument();
+    expect(screen.getByText(/Frontend Engineer/i)).toBeInTheDocument();
+    expect(screen.getByText(/Software Developer/i)).toBeInTheDocument();
   });
 
-  it('renders the tagline', () => {
+  it('renders the two-sentence summary', () => {
     render(
       <BrowserRouter>
         <LandingPage />
       </BrowserRouter>
     );
     
-    expect(screen.getByText(/Crafting digital experiences/i)).toBeInTheDocument();
+    expect(screen.getByText(/recently graduated with a computer science degree/i)).toBeInTheDocument();
+    expect(screen.getByText(/clean interfaces, smooth user flows, and efficient workflows/i)).toBeInTheDocument();
   });
 
   it('renders call-to-action buttons', () => {
@@ -44,7 +46,9 @@ describe('LandingPage', () => {
       </BrowserRouter>
     );
     
-    expect(screen.getByText(/View Projects/i)).toBeInTheDocument();
-    expect(screen.getByText(/Get in Touch/i)).toBeInTheDocument();
+    expect(screen.getByText(/Resume/i)).toBeInTheDocument();
+    expect(screen.getByText(/Projects/i)).toBeInTheDocument();
+    expect(screen.getByText(/GitHub/i)).toBeInTheDocument();
+    expect(screen.getByText(/LinkedIn/i)).toBeInTheDocument();
   });
 });

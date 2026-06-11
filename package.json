@@ -6,8 +6,6 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
-    "sync:loan-analyzer": "node scripts/sync-loan-analyzer.mjs",
-    "build:with-demo": "npm run sync:loan-analyzer && npm run build",
     "lint": "eslint .",
     "preview": "vite preview",
     "test": "vitest",
@@ -15,18 +13,12 @@
     "test:coverage": "vitest --coverage"
   },
   "dependencies": {
-    "@react-three/drei": "^10.7.7",
-    "@react-three/fiber": "^9.4.0",
-    "@types/three": "^0.181.0",
     "autoprefixer": "^10.4.22",
-    "clsx": "^2.1.1",
-    "framer-motion": "^12.23.24",
     "lucide-react": "^0.554.0",
     "postcss": "^8.5.6",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
-    "react-router-dom": "^7.9.6",
-    "three": "^0.181.2"
+    "react-router-dom": "^7.9.6"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.1",

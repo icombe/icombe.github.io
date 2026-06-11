@@ -22,16 +22,23 @@ Object.defineProperty(window, 'matchMedia', {
   })),
 });
 
-// Mock IntersectionObserver
-(globalThis as any).IntersectionObserver = class IntersectionObserver {
-  constructor() {}
+class MockIntersectionObserver implements IntersectionObserver {
+  readonly root = null;
+  readonly rootMargin = '';
+  readonly thresholds = [];
+
   disconnect() {}
   observe() {}
   takeRecords() {
     return [];
   }
   unobserve() {}
-};
+}
+
+Object.defineProperty(globalThis, 'IntersectionObserver', {
+  writable: true,
+  value: MockIntersectionObserver,
+});
 
 // Mock scrollTo
 window.scrollTo = vi.fn();
