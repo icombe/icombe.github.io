@@ -11,9 +11,11 @@ describe('LandingPage', () => {
       </BrowserRouter>
     );
     
-    const heading = screen.getByRole('heading', { level: 1 });
-    expect(heading.textContent).toContain('Ian');
-    expect(heading.textContent).toContain('Combe');
+    expect(screen.getByText(/Ian/i)).toBeInTheDocument();
+    expect(screen.getByText(/Combe/i)).toBeInTheDocument();
+    expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent(
+      /Passionate about solving tough problems across the whole stack/i
+    );
   });
 
   it('renders the role title', () => {
@@ -46,9 +48,9 @@ describe('LandingPage', () => {
       </BrowserRouter>
     );
     
-    expect(screen.getByText(/Resume/i)).toBeInTheDocument();
-    expect(screen.getByText(/Projects/i)).toBeInTheDocument();
-    expect(screen.getByText(/GitHub/i)).toBeInTheDocument();
-    expect(screen.getByText(/LinkedIn/i)).toBeInTheDocument();
+    expect(screen.getAllByText(/Resume/i).length).toBeGreaterThan(0);
+    expect(screen.getByText(/View projects/i)).toBeInTheDocument();
+    expect(screen.getAllByText(/GitHub/i).length).toBeGreaterThan(0);
+    expect(screen.getAllByText(/LinkedIn/i).length).toBeGreaterThan(0);
   });
 });

@@ -4,7 +4,7 @@ import SiteHeader from '@/components/SiteHeader';
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-gray-50 text-gray-950">
+    <div className="min-h-screen bg-[#030303] text-white">
       <SiteHeader />
       <main>
         <LandingPage />

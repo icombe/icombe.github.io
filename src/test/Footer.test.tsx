@@ -20,7 +20,7 @@ describe('Footer', () => {
   it('renders the project and social links', () => {
     renderFooter();
 
-    expect(screen.getByText(/Projects/i)).toBeInTheDocument();
+    expect(screen.getByText(/Work/i)).toBeInTheDocument();
     expect(screen.getByLabelText(/GitHub/i)).toBeInTheDocument();
     expect(screen.getByLabelText(/LinkedIn/i)).toBeInTheDocument();
   });

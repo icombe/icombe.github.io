@@ -19,12 +19,12 @@ export default function ProjectDetailPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 text-gray-950">
+    <div className="min-h-screen bg-[#030303] text-white">
       <SiteHeader />
-      <main className="mx-auto max-w-6xl px-5 py-12 sm:py-16">
+      <main className="mx-auto max-w-7xl px-4 py-10 sm:px-6 sm:py-14">
         <Link
           to="/projects"
-          className="mb-8 inline-flex items-center gap-2 text-sm font-medium text-gray-600 transition-colors hover:text-[#3f8f10]"
+          className="mb-8 inline-flex items-center gap-2 border border-white/10 bg-black/40 px-3 py-2 text-sm font-semibold text-zinc-300 transition hover:border-[#7CFE2D] hover:text-white focus:outline-none focus:ring-2 focus:ring-[#7CFE2D]"
         >
           <ArrowLeft size={16} />
           Back to projects

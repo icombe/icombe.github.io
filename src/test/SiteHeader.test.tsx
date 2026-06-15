@@ -16,7 +16,7 @@ describe('SiteHeader', () => {
 
     expect(screen.getByRole('link', { name: /ian combe/i })).toBeInTheDocument();
     expect(screen.getByRole('link', { name: /home/i })).toBeInTheDocument();
-    expect(screen.getByRole('link', { name: /projects/i })).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: /work/i })).toBeInTheDocument();
     expect(screen.queryByRole('button', { name: /mode/i })).not.toBeInTheDocument();
   });
 });
