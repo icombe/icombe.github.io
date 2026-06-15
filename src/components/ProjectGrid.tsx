@@ -12,13 +12,15 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
   return (
     <article className="group grid overflow-hidden border border-white/10 bg-white/[0.055] shadow-[0_24px_80px_rgba(0,0,0,0.28)] backdrop-blur-xl transition duration-300 hover:-translate-y-1 hover:border-[#7CFE2D]/70 hover:bg-white/[0.08]">
       {preview ? (
-        <Link to={`/projects/${project.slug}`} className="block overflow-hidden border-b border-white/10">
-          <img
-            src={preview}
-            alt={`${project.title} interface preview`}
-            loading="lazy"
-            className="aspect-video w-full object-cover opacity-[0.88] transition duration-500 group-hover:scale-[1.035] group-hover:opacity-100"
-          />
+        <Link to={`/projects/${project.slug}`} className="block border-b border-white/10 bg-black/35 p-2">
+          <div className="overflow-hidden border border-[#7CFE2D]/55 shadow-[0_0_18px_rgba(124,254,45,0.16),inset_0_0_0_1px_rgba(255,47,146,0.18)]">
+            <img
+              src={preview}
+              alt={`${project.title} interface preview`}
+              loading="lazy"
+              className="aspect-video w-full object-cover opacity-[0.88] transition duration-500 group-hover:scale-[1.035] group-hover:opacity-100"
+            />
+          </div>
         </Link>
       ) : null}
 

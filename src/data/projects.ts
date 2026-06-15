@@ -28,6 +28,7 @@ export type Project = {
 export const profile = {
   name: 'Ian Combe',
   roles: ['Full-Stack Developer', 'Frontend Engineer', 'Software Developer'],
+  image: '/assets/images/ian-combe-headshot.png',
   summary:
     'I am a computer science graduate looking for a software role where I can build useful, well-made tools. I like clean interfaces, smooth user flows, and efficient workflows that make software feel easier to use than the process it replaces.',
   links: {

@@ -14,6 +14,7 @@ describe('LandingPage', () => {
     expect(screen.getByText(/Ian/i)).toBeInTheDocument();
     expect(screen.getByText(/Combe/i)).toBeInTheDocument();
     expect(screen.getByText(/2026 edition/i)).toBeInTheDocument();
+    expect(screen.getByRole('img', { name: /Ian Combe profile/i })).toBeInTheDocument();
     expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent(
       /Passionate about solving tough problems across the whole stack/i
     );

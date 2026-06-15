@@ -21,7 +21,8 @@ function MediaItem({ item }: { item: ProjectMedia }) {
 
     return (
       <figure className={frameClass}>
-        <div className="relative aspect-video bg-black">
+        <div className="relative bg-black p-3">
+          <div className="relative aspect-video overflow-hidden border border-[#7CFE2D]/55 shadow-[0_0_18px_rgba(124,254,45,0.18),inset_0_0_0_1px_rgba(255,47,146,0.18)]">
           <video
             ref={videoRef}
             src={item.src}
@@ -56,6 +57,7 @@ function MediaItem({ item }: { item: ProjectMedia }) {
               </span>
             </button>
           ) : null}
+          </div>
         </div>
       </figure>
     );
@@ -63,7 +65,11 @@ function MediaItem({ item }: { item: ProjectMedia }) {
 
   return (
     <figure className={frameClass}>
-      <img src={item.src} alt={item.alt} loading="lazy" className="aspect-video w-full object-contain" />
+      <div className="bg-black p-3">
+        <div className="relative overflow-hidden border border-[#7CFE2D]/55 shadow-[0_0_18px_rgba(124,254,45,0.18),inset_0_0_0_1px_rgba(255,47,146,0.18)]">
+        <img src={item.src} alt={item.alt} loading="lazy" className="aspect-video w-full object-contain" />
+        </div>
+      </div>
     </figure>
   );
 }
