@@ -31,7 +31,7 @@ export default function LandingPage() {
               <div className="mb-6 flex items-center gap-3">
                 <GeometricIcon tone="pink" title="Hero icon" />
                 <span className="border border-[#FF2F92] bg-[#FF2F92]/12 px-3 py-1.5 text-sm font-semibold text-[#FFD2E8]">
-                  Raw interface work / usable systems
+                  Project portfolio
                 </span>
               </div>
 
@@ -69,7 +69,7 @@ export default function LandingPage() {
               </div>
             </div>
 
-            <div className="relative h-[360px] min-w-0 sm:h-[460px] lg:h-[620px]">
+            <div className="relative h-[430px] min-w-0 sm:h-[460px] lg:h-[620px]">
               <Suspense
                 fallback={
                   <div className="grid h-full place-items-center border border-white/10 bg-black/60 text-sm text-zinc-500">

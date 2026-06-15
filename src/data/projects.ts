@@ -29,7 +29,7 @@ export const profile = {
   name: 'Ian Combe',
   roles: ['Full-Stack Developer', 'Frontend Engineer', 'Software Developer'],
   summary:
-    'I recently graduated with a computer science degree and am looking for a software role where I can build useful, well-made tools. I like clean interfaces, smooth user flows, and efficient workflows that make software feel easier to use than the process it replaces.',
+    'I am a computer science graduate looking for a software role where I can build useful, well-made tools. I like clean interfaces, smooth user flows, and efficient workflows that make software feel easier to use than the process it replaces.',
   links: {
     resume: '/assets/images/resume.pdf',
     github: 'https://github.com/icombe',

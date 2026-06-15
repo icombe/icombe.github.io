@@ -15,7 +15,7 @@ export default function EditorialSidebar() {
         <section className="border-b border-zinc-800 pb-6">
           <div className="mb-5 flex items-center justify-between gap-4">
             <GeometricIcon tone="green" title="Profile mark" />
-            <p className="text-right text-xs text-zinc-500">Portfolio edition 2026</p>
+            <p className="text-right text-xs text-zinc-500">2026 edition</p>
           </div>
           <p className="font-serif text-4xl leading-none text-white sm:text-5xl lg:text-4xl">
             Ian
@@ -40,7 +40,7 @@ export default function EditorialSidebar() {
         </section>
 
         <section className="grid gap-3">
-          <h2 className="text-sm font-semibold text-[#FF2F92]">Contact wire</h2>
+          <h2 className="text-sm font-semibold text-[#FF2F92]">Contact</h2>
           <div className="grid gap-2 sm:grid-cols-3 lg:grid-cols-1">
             {contactLinks.map((link) => {
               const Icon = link.icon;

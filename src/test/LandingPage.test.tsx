@@ -13,6 +13,7 @@ describe('LandingPage', () => {
     
     expect(screen.getByText(/Ian/i)).toBeInTheDocument();
     expect(screen.getByText(/Combe/i)).toBeInTheDocument();
+    expect(screen.getByText(/2026 edition/i)).toBeInTheDocument();
     expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent(
       /Passionate about solving tough problems across the whole stack/i
     );
@@ -37,7 +38,7 @@ describe('LandingPage', () => {
       </BrowserRouter>
     );
     
-    expect(screen.getByText(/recently graduated with a computer science degree/i)).toBeInTheDocument();
+    expect(screen.getByText(/computer science graduate looking for a software role/i)).toBeInTheDocument();
     expect(screen.getByText(/clean interfaces, smooth user flows, and efficient workflows/i)).toBeInTheDocument();
   });
 
@@ -49,6 +50,8 @@ describe('LandingPage', () => {
     );
     
     expect(screen.getAllByText(/Resume/i).length).toBeGreaterThan(0);
+    expect(screen.getByText(/Contact/i)).toBeInTheDocument();
+    expect(screen.getByText(/Project portfolio/i)).toBeInTheDocument();
     expect(screen.getByText(/View projects/i)).toBeInTheDocument();
     expect(screen.getAllByText(/GitHub/i).length).toBeGreaterThan(0);
     expect(screen.getAllByText(/LinkedIn/i).length).toBeGreaterThan(0);
