@@ -69,7 +69,7 @@ export default function LandingPage() {
               </div>
             </div>
 
-            <div className="relative h-[430px] min-w-0 sm:h-[460px] lg:h-[620px]">
+            <div className="relative mx-auto h-[360px] w-full max-w-[430px] min-w-0 sm:h-[460px] sm:max-w-none lg:h-[620px]">
               <Suspense
                 fallback={
                   <div className="grid h-full place-items-center border border-white/10 bg-black/60 text-sm text-zinc-500">

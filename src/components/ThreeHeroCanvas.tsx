@@ -278,10 +278,11 @@ export default function ThreeHeroCanvas() {
       const height = mount.clientHeight;
       camera.aspect = width / Math.max(height, 1);
       const isMobileFrame = width < 520;
-      camera.position.z = isMobileFrame ? 10.4 : 8.4;
-      camera.position.y = isMobileFrame ? 0.58 : 0.32;
-      monitor.position.y = isMobileFrame ? 0.45 : 0.1;
-      monitor.scale.setScalar(isMobileFrame ? 0.82 : 1);
+      const isCompactFrame = width < 380;
+      camera.position.z = isMobileFrame ? 10.8 : 8.4;
+      camera.position.y = isMobileFrame ? 0.34 : 0.32;
+      monitor.position.y = isMobileFrame ? 0.12 : 0.1;
+      monitor.scale.setScalar(isCompactFrame ? 0.66 : isMobileFrame ? 0.74 : 1);
       camera.updateProjectionMatrix();
       renderer.setSize(width, height, false);
     };
