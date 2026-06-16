@@ -29,6 +29,24 @@ export const profile = {
   name: 'Ian Combe',
   roles: ['Full-Stack Developer', 'Frontend Engineer', 'Software Developer'],
   image: '/assets/images/ian-combe-headshot.png',
+  skills: [
+    {
+      label: 'Languages',
+      items: ['Python', 'TypeScript', 'Java', 'SQL', 'C++', 'HTML/CSS'],
+    },
+    {
+      label: 'Web/API',
+      items: ['React', 'FastAPI', 'REST APIs', 'Pydantic', 'Tauri'],
+    },
+    {
+      label: 'Data & tools',
+      items: ['PostgreSQL', 'Pandas', 'Git/GitHub', 'Linux', 'Godot'],
+    },
+    {
+      label: 'Practices',
+      items: ['Agile/Scrum', 'Debugging', 'Code reviews', 'OOP/SOLID', 'Documentation'],
+    },
+  ],
   summary:
     'I am a computer science graduate looking for a software role where I can build useful, well-made tools. I like clean interfaces, smooth user flows, and efficient workflows that make software feel easier to use than the process it replaces.',
   links: {

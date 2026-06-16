@@ -32,6 +32,21 @@ describe('LandingPage', () => {
     expect(screen.getByText(/Software Developer/i)).toBeInTheDocument();
   });
 
+  it('renders concrete skill groups', () => {
+    render(
+      <BrowserRouter>
+        <LandingPage />
+      </BrowserRouter>
+    );
+
+    expect(screen.getByText(/Skills/i)).toBeInTheDocument();
+    expect(screen.getByText(/Languages/i)).toBeInTheDocument();
+    expect(screen.getAllByText(/TypeScript/i).length).toBeGreaterThan(0);
+    expect(screen.getAllByText(/React/i).length).toBeGreaterThan(0);
+    expect(screen.getByText(/PostgreSQL/i)).toBeInTheDocument();
+    expect(screen.getByText(/Agile\/Scrum/i)).toBeInTheDocument();
+  });
+
   it('renders the two-sentence summary', () => {
     render(
       <BrowserRouter>

@@ -10,7 +10,7 @@ const contactLinks = [
 
 export default function EditorialSidebar() {
   return (
-    <aside className="border-b border-zinc-800 bg-[#050505] p-5 lg:sticky lg:top-0 lg:h-screen lg:border-b-0 lg:border-r lg:p-6">
+    <aside className="border-b border-zinc-800 bg-[#050505] p-5 lg:border-b-0 lg:border-r lg:p-6">
       <div className="grid h-full content-start gap-8">
         <section className="border-b border-zinc-800 pb-6">
           <div className="mb-5 flex items-center justify-between gap-4">
@@ -49,6 +49,24 @@ export default function EditorialSidebar() {
               >
                 {role}
               </span>
+            ))}
+          </div>
+        </section>
+
+        <section className="grid gap-3 border-b border-zinc-800 pb-6">
+          <h2 className="text-sm font-semibold text-[#F4FF3A]">Skills</h2>
+          <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-1">
+            {profile.skills.map((group) => (
+              <div key={group.label} className="border border-zinc-800 bg-zinc-950 p-3">
+                <h3 className="mb-2 text-xs font-semibold uppercase text-zinc-500">{group.label}</h3>
+                <div className="flex flex-wrap gap-1.5">
+                  {group.items.map((skill) => (
+                    <span key={skill} className="border border-white/10 bg-black/45 px-2 py-1 text-xs text-zinc-300">
+                      {skill}
+                    </span>
+                  ))}
+                </div>
+              </div>
             ))}
           </div>
         </section>
