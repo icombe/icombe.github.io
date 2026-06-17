@@ -14,6 +14,7 @@ export type ProjectMedia = {
 export type Project = {
   slug: string;
   title: string;
+  dateRange: string;
   summary: string;
   problem: string;
   techStack: string[];
@@ -60,6 +61,7 @@ export const projects: Project[] = [
   {
     slug: 'tipsy-taxi',
     title: 'Tipsy Taxi',
+    dateRange: 'Feb 2026 - May 2026',
     summary:
       'A Godot arcade driving game built on a four-person team with two-week sprints during my final semester.',
     problem:
@@ -93,6 +95,7 @@ export const projects: Project[] = [
   {
     slug: 'student-loan-analyzer',
     title: 'Student Loan Analyzer',
+    dateRange: 'Dec 2025 - Jan 2026',
     summary:
       'A desktop-first loan planning app for comparing payoff strategies, logging payments, and seeing repayment progress in one place.',
     problem:
@@ -124,6 +127,7 @@ export const projects: Project[] = [
   {
     slug: 'market-signal-summarizer',
     title: 'Market Signal Summarizer',
+    dateRange: 'Oct 2025 - Nov 2025',
     summary:
       'A market research tool that gathers signal data and turns it into concise summaries a user can scan quickly.',
     problem:

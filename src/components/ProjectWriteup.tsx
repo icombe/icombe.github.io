@@ -97,6 +97,9 @@ export default function ProjectWriteup({ project }: ProjectWriteupProps) {
             <p className="text-sm font-semibold text-[#7CFE2D]">Case study</p>
           </div>
           <h1 className="font-serif text-4xl leading-tight text-white sm:text-5xl">{project.title}</h1>
+          <p className="mt-3 text-xs font-semibold uppercase tracking-[0.16em] text-[#7CFE2D]">
+            {project.dateRange}
+          </p>
           <p className="mt-4 max-w-3xl text-base leading-7 text-zinc-300">{project.summary}</p>
         </div>
         <div className="flex flex-wrap gap-2 lg:justify-end">

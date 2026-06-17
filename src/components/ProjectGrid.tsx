@@ -29,6 +29,9 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
           <div>
             <p className="mb-2 text-xs text-zinc-500">Case study 0{index + 1}</p>
             <h3 className="text-2xl font-semibold text-white">{project.title}</h3>
+            <p className="mt-2 text-xs font-semibold uppercase tracking-[0.16em] text-[#7CFE2D]">
+              {project.dateRange}
+            </p>
           </div>
           <GeometricIcon tone={tone} title={`${project.title} icon`} />
         </div>
