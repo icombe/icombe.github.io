@@ -24,7 +24,7 @@ Live site: https://icombe.github.io/
 ## Featured project coverage
 
 - Tipsy Taxi
-- Student Loan Analyzer
+- Campus Service Desk
 - Market Signal Summarizer
 
 ## Local development

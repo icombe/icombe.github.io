@@ -1,6 +1,7 @@
 import { ExternalLink, Github, Play } from 'lucide-react';
 import { useRef, useState } from 'react';
 import GeometricIcon from '@/components/GeometricIcon';
+import { TerminalPreview } from '@/components/ProjectGrid';
 import type { Project, ProjectMedia } from '@/data/projects';
 
 type ProjectWriteupProps = {
@@ -12,6 +13,16 @@ function MediaItem({ item }: { item: ProjectMedia }) {
   const [hasStarted, setHasStarted] = useState(false);
   const frameClass =
     'mx-auto w-full max-w-5xl overflow-hidden border border-white/10 bg-white/[0.055] shadow-[0_24px_80px_rgba(0,0,0,0.32)] backdrop-blur-xl';
+
+  if (item.type === 'terminal') {
+    return (
+      <figure className={frameClass} aria-label={item.alt}>
+        <div className="bg-black p-3">
+          <TerminalPreview />
+        </div>
+      </figure>
+    );
+  }
 
   if (item.type === 'video') {
     const startVideo = () => {
@@ -147,8 +158,8 @@ export default function ProjectWriteup({ project }: ProjectWriteupProps) {
         <section className="mt-8">
           <h2 className="mb-4 text-center text-sm font-semibold text-[#7CFE2D]">Project media</h2>
           <div className="space-y-5">
-            {project.screenshots.map((item) => (
-              <MediaItem key={`${project.slug}-${item.src}`} item={item} />
+            {project.screenshots.map((item, index) => (
+              <MediaItem key={`${project.slug}-${item.src ?? item.type}-${index}`} item={item} />
             ))}
           </div>
         </section>
@@ -165,7 +176,7 @@ export default function ProjectWriteup({ project }: ProjectWriteupProps) {
         </section>
       </div>
 
-      <section className="mt-8 border-t border-white/10 pt-5">
+      {project.links.length > 0 ? <section className="mt-8 border-t border-white/10 pt-5">
         <h2 className="mb-3 text-sm font-semibold text-zinc-400">Links</h2>
         <div className="flex flex-wrap gap-3">
           {project.links.map((link) => (
@@ -181,7 +192,7 @@ export default function ProjectWriteup({ project }: ProjectWriteupProps) {
             </a>
           ))}
         </div>
-      </section>
+      </section> : null}
     </article>
   );
 }

@@ -6,12 +6,17 @@ import GeometricIcon from '@/components/GeometricIcon';
 const tones: Array<'green' | 'pink' | 'yellow' | 'cyan'> = ['green', 'pink', 'yellow', 'cyan'];
 
 function ProjectCard({ project, index }: { project: Project; index: number }) {
+  const terminalPreview = project.screenshots.some((item) => item.type === 'terminal');
   const preview = project.screenshots.find((item) => item.poster)?.poster ?? project.screenshots[0]?.src;
   const tone = tones[index % tones.length];
 
   return (
     <article className="group grid overflow-hidden border border-white/10 bg-white/[0.055] shadow-[0_24px_80px_rgba(0,0,0,0.28)] backdrop-blur-xl transition duration-300 hover:-translate-y-1 hover:border-[#7CFE2D]/70 hover:bg-white/[0.08]">
-      {preview ? (
+      {terminalPreview ? (
+        <Link to={`/projects/${project.slug}`} className="block border-b border-white/10 bg-black/35 p-2">
+          <TerminalPreview compact />
+        </Link>
+      ) : preview ? (
         <Link to={`/projects/${project.slug}`} className="block border-b border-white/10 bg-black/35 p-2">
           <div className="overflow-hidden border border-[#7CFE2D]/55 shadow-[0_0_18px_rgba(124,254,45,0.16),inset_0_0_0_1px_rgba(255,47,146,0.18)]">
             <img
@@ -70,6 +75,35 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
     </article>
   );
 }
+
+function TerminalPreview({ compact = false }: { compact?: boolean }) {
+  return (
+    <div
+      className={`overflow-hidden border border-[#7CFE2D]/55 bg-[#050805] font-mono shadow-[0_0_18px_rgba(124,254,45,0.16),inset_0_0_0_1px_rgba(255,47,146,0.18)] ${compact ? 'aspect-video' : ''}`}
+      role="img"
+      aria-label="Campus Service Desk terminal session"
+    >
+      <div className="flex items-center gap-1.5 border-b border-white/10 bg-zinc-950 px-3 py-2">
+        <span className="h-2.5 w-2.5 rounded-full bg-[#FF2F92]" />
+        <span className="h-2.5 w-2.5 rounded-full bg-[#F4FF3A]" />
+        <span className="h-2.5 w-2.5 rounded-full bg-[#7CFE2D]" />
+        <span className="ml-2 text-[10px] text-zinc-500">campus-service-desk — java</span>
+      </div>
+      <div className={`text-xs leading-5 text-zinc-300 ${compact ? 'p-3 sm:p-4' : 'p-5 sm:p-7 sm:text-sm sm:leading-6'}`}>
+        <p className="font-semibold text-[#7CFE2D]">Campus Service Desk</p>
+        <p><span className="text-[#2DE2FF]">$</span> Create service request</p>
+        <p className="text-zinc-500">Title: Wi-Fi outage — Library</p>
+        <p className="text-zinc-500">Priority: URGENT</p>
+        <p className="mt-2 text-white">Created request #1.</p>
+        <p><span className="text-[#2DE2FF]">$</span> Update status: NEW → ASSIGNED</p>
+        {!compact ? <p><span className="text-[#2DE2FF]">$</span> Filter open requests <span className="text-[#F4FF3A]">1 result</span></p> : null}
+        <p className="mt-2"><span className="text-[#FF2F92]">›</span> <span className="animate-pulse text-[#7CFE2D]">_</span></p>
+      </div>
+    </div>
+  );
+}
+
+export { TerminalPreview };
 
 export default function ProjectGrid({ limit }: { limit?: number }) {
   const visibleProjects = limit ? projects.slice(0, limit) : projects;

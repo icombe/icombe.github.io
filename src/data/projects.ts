@@ -5,9 +5,9 @@ export type ProjectLink = {
 };
 
 export type ProjectMedia = {
-  src: string;
+  src?: string;
   alt: string;
-  type: 'image' | 'video';
+  type: 'image' | 'video' | 'terminal';
   poster?: string;
 };
 
@@ -93,36 +93,32 @@ export const projects: Project[] = [
     ],
   },
   {
-    slug: 'student-loan-analyzer',
-    title: 'Student Loan Analyzer',
-    dateRange: 'Dec 2025 - Jan 2026',
+    slug: 'campus-service-desk',
+    title: 'Campus Service Desk',
+    dateRange: '2026',
     summary:
-      'A desktop-first loan planning app for comparing payoff strategies, logging payments, and seeing repayment progress in one place.',
+      'A Java 17 terminal application built to practice object-oriented design, layered architecture, validation, and automated testing.',
     problem:
-      'Student loan payoff decisions are hard to compare when balances, interest rates, extra payments, and repayment strategies live in separate spreadsheets or calculators.',
-    techStack: ['React', 'TypeScript', 'Vite', 'Tauri', 'Local persistence', 'Tailwind CSS'],
+      'I wanted a project that went beyond Java syntax and forced me to model real business rules: service requests need valid data, predictable status transitions, flexible storage, useful filtering, and clear failures.',
+    techStack: ['Java 17', 'Maven', 'JUnit 5', 'OOP', 'Repository pattern', 'Streams'],
     screenshots: [
       {
-        type: 'video',
-        src: '/videos/LoanTrackerDemo.mp4',
-        alt: 'Student Loan Analyzer walkthrough video',
-        poster: '/assets/images/student-loan-analyzer-screenshot.png',
+        type: 'terminal',
+        alt: 'Campus Service Desk terminal showing a created urgent network request',
       },
     ],
     whatBuilt: [
-      'Dashboard views for balances, payoff progress, and monthly payment context.',
-      'Loan management flows for adding, editing, deleting, and tracking individual loans.',
-      'Planner controls for avalanche, snowball, minimum payment, extra payment, and payment frequency scenarios.',
-      'Payment logging, settings, and a desktop-focused flow built around practical repayment decisions.',
+      'A menu-driven command-line workflow for creating, finding, updating, filtering, and sorting campus service requests.',
+      'A domain model with validated request data and an explicit NEW → ASSIGNED → IN_PROGRESS → RESOLVED → CLOSED lifecycle.',
+      'Service and repository layers connected through dependency injection, with both List- and Map-backed repository implementations.',
+      'JUnit tests covering domain rules, invalid input, status transitions, ID generation, filtering, and repository behavior.',
     ],
     whatWasHard: [
-      'Keeping repayment calculations understandable instead of burying the user in finance jargon.',
-      'Designing dense screens so balances, rates, and timeline details stay readable on smaller viewports.',
-      'Keeping the desktop app direction intact while trimming the portfolio presentation down to the strongest product work.',
+      'Deciding which rules belonged in the domain model, service layer, repository, or terminal interface.',
+      'Preventing invalid state changes while still exposing the valid next statuses to the user.',
+      'Keeping two repository implementations consistent and returning immutable copies so callers cannot mutate stored collections accidentally.',
     ],
-    links: [
-      { label: 'Demo video', href: '/videos/LoanTrackerDemo.mp4' },
-    ],
+    links: [],
   },
   {
     slug: 'market-signal-summarizer',
