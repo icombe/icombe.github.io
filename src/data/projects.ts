@@ -118,7 +118,14 @@ export const projects: Project[] = [
       'Preventing invalid state changes while still exposing the valid next statuses to the user.',
       'Keeping two repository implementations consistent and returning immutable copies so callers cannot mutate stored collections accidentally.',
     ],
-    links: [],
+    githubUrl: 'https://github.com/icombe/campus-service-desk',
+    links: [
+      {
+        label: 'GitHub',
+        href: 'https://github.com/icombe/campus-service-desk',
+        isExternal: true,
+      },
+    ],
   },
   {
     slug: 'market-signal-summarizer',
