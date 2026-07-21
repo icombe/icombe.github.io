@@ -87,7 +87,7 @@ export default function ThreeHeroCanvas() {
     }
 
     renderer.setClearColor(0x000000, 0);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
+    renderer.outputColorSpace = THREE.SRGBColorSpace;
     mount.appendChild(renderer.domElement);
 
     const screenCanvas = document.createElement('canvas');
@@ -103,10 +103,10 @@ export default function ThreeHeroCanvas() {
 
     const screenTexture = new THREE.CanvasTexture(screenCanvas);
     screenTexture.colorSpace = THREE.SRGBColorSpace;
-    screenTexture.generateMipmaps = false;
-    screenTexture.minFilter = THREE.LinearFilter;
-    screenTexture.magFilter = THREE.NearestFilter;
-    screenTexture.anisotropy = 4;
+    screenTexture.generateMipmaps = true;
+    screenTexture.minFilter = THREE.LinearMipmapLinearFilter;
+    screenTexture.magFilter = THREE.LinearFilter;
+    screenTexture.anisotropy = renderer.capabilities.getMaxAnisotropy();
     textures.add(screenTexture);
 
     const drawTerminal = (time: number) => {
@@ -190,11 +190,11 @@ export default function ThreeHeroCanvas() {
     ].forEach((material) => materials.add(material));
 
     const monitor = new THREE.Group();
-    monitor.position.y = 0.1;
-    monitor.rotation.set(-0.05, -0.16, 0);
+    const monitorModel = new THREE.Group();
+    monitor.add(monitorModel);
     scene.add(monitor);
 
-    const addMesh = (mesh: THREE.Mesh, parent: THREE.Object3D = monitor) => {
+    const addMesh = (mesh: THREE.Mesh, parent: THREE.Object3D = monitorModel) => {
       parent.add(mesh);
       geometries.add(mesh.geometry);
       trackMaterial(materials, mesh.material);
@@ -230,7 +230,7 @@ export default function ThreeHeroCanvas() {
       edges.position.copy(mesh.position);
       edges.rotation.copy(mesh.rotation);
       edges.scale.copy(mesh.scale);
-      monitor.add(edges);
+      monitorModel.add(edges);
       geometries.add(edges.geometry);
       trackMaterial(materials, edges.material);
     };
@@ -258,6 +258,14 @@ export default function ThreeHeroCanvas() {
     addEdges(base);
     addPlane(1.7, 0.04, [0, -1.9, 0.68], cyanMaterial);
 
+    // Center the complete model around its actual geometry. Rotations now keep the
+    // monitor visually anchored instead of orbiting around an arbitrary origin.
+    const monitorBounds = new THREE.Box3().setFromObject(monitorModel);
+    const monitorSize = monitorBounds.getSize(new THREE.Vector3());
+    const monitorCenter = monitorBounds.getCenter(new THREE.Vector3());
+    monitorModel.position.sub(monitorCenter);
+    monitor.rotation.set(-0.05, -0.16, 0);
+
     scene.add(new THREE.AmbientLight(0xffffff, 0.42));
     const keyLight = new THREE.PointLight(0x7cfe2d, 4.2, 12);
     keyLight.position.set(-2.8, 2.8, 4.8);
@@ -276,15 +284,23 @@ export default function ThreeHeroCanvas() {
 
       const width = mount.clientWidth;
       const height = mount.clientHeight;
+      if (width === 0 || height === 0) {
+        return;
+      }
+
       camera.aspect = width / Math.max(height, 1);
-      const isMobileFrame = width < 520;
-      const isCompactFrame = width < 380;
-      camera.position.z = isMobileFrame ? 10.8 : 8.4;
-      camera.position.y = isMobileFrame ? 0.34 : 0.32;
-      monitor.position.y = isMobileFrame ? 0.12 : 0.1;
-      monitor.scale.setScalar(isCompactFrame ? 0.66 : isMobileFrame ? 0.74 : 1);
+
+      // Fit against whichever axis is most constrained. This keeps a consistent
+      // amount of breathing room at every aspect ratio without breakpoint jumps.
+      const verticalFov = THREE.MathUtils.degToRad(camera.fov);
+      const fitHeightDistance = monitorSize.y / (2 * Math.tan(verticalFov / 2));
+      const fitWidthDistance = monitorSize.x / (2 * Math.tan(verticalFov / 2) * camera.aspect);
+      const fitDistance = Math.max(fitHeightDistance, fitWidthDistance);
+      camera.position.set(0, 0, fitDistance * 1.18 + monitorSize.z / 2);
+
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
       camera.updateProjectionMatrix();
-      renderer.setSize(width, height, false);
+      renderer.setSize(width, height);
     };
 
     const pointerEnter = () => {
@@ -323,7 +339,7 @@ export default function ThreeHeroCanvas() {
         lastTextureUpdate = time;
       }
 
-      camera.lookAt(0, 0.05, 0);
+      camera.lookAt(0, 0, 0);
       renderer.render(scene, camera);
       if (!readyRef.current) {
         readyRef.current = true;
@@ -338,6 +354,8 @@ export default function ThreeHeroCanvas() {
     mount.addEventListener('pointerenter', pointerEnter);
     mount.addEventListener('pointermove', pointerMove);
     mount.addEventListener('pointerleave', pointerLeave);
+    const resizeObserver = new ResizeObserver(resize);
+    resizeObserver.observe(mount);
     window.addEventListener('resize', resize);
 
     return () => {
@@ -346,6 +364,7 @@ export default function ThreeHeroCanvas() {
       mount.removeEventListener('pointerenter', pointerEnter);
       mount.removeEventListener('pointermove', pointerMove);
       mount.removeEventListener('pointerleave', pointerLeave);
+      resizeObserver.disconnect();
       window.removeEventListener('resize', resize);
       geometries.forEach((geometry) => geometry.dispose());
       materials.forEach((material) => material.dispose());
