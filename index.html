@@ -79,19 +79,53 @@
 
   <main>
 
-    <!-- SECTION: Now (the lede; keep it to the current role) -->
+    <!-- SECTION: Now (one sentence on current work; update the stamp when it changes) -->
     <section class="section" aria-labelledby="now">
       <h2 class="section__title" id="now">Now</h2>
       <div class="section__body">
-        <p class="lede">Integration Engineer at Sedna Inc, since August 2026. I build Python collectors that run on scheduled GitLab CI/CD pipelines and sync infrastructure inventory from Proxmox and NetBox into iTop for CMDB and ticketing, replacing manual tracking.</p>
-        <p>I maintain the pipeline jobs, CI variables and secrets they run on, and extend iTop in PHP and its XML datamodel, including an extension that attaches SLAs to tickets automatically, a step that used to be manual.</p>
+        <p class="lede">At Sedna Inc I connect infrastructure systems to iTop: Python collectors, custom iTop extensions, and the GitLab CI/CD pipelines that run and deploy them.</p>
         <p>Preparing for the HashiCorp Terraform Associate.</p>
+        <p class="stamp">Updated <time datetime="2026-11">November 2026</time></p>
       </div>
     </section>
 
-    <!-- SECTION: Selected work. One <article class="entry"> per item. -->
-    <section class="section" aria-labelledby="work">
-      <h2 class="section__title" id="work">Selected work</h2>
+    <!-- SECTION: Experience. One <article class="entry"> per role, newest first. -->
+    <section class="section" aria-labelledby="experience">
+      <h2 class="section__title" id="experience">Experience</h2>
+      <div class="section__body">
+
+        <article class="entry">
+          <div class="entry__head">
+            <h3 class="entry__title">Integration Engineer, Sedna Inc</h3>
+            <span class="entry__date">Aug 2026 – present</span>
+          </div>
+          <p class="entry__stack">Python, PHP, iTop, GitLab CI/CD, Proxmox, NetBox</p>
+          <ul class="points">
+            <li>Python collectors on scheduled pipelines sync Proxmox and NetBox inventory into iTop for CMDB and ticketing, replacing manual tracking.</li>
+            <li>A custom iTop extension, deployed through the pipeline, that adds custom fields to tickets.</li>
+            <li>An iTop extension in PHP and the XML datamodel that attaches SLAs to tickets automatically, a step that used to be manual.</li>
+            <li>The pipeline jobs, schedules, CI variables and secrets behind all of it.</li>
+          </ul>
+        </article>
+
+        <article class="entry">
+          <div class="entry__head">
+            <h3 class="entry__title">Qualcomm field session</h3>
+            <span class="entry__date">Summer 2025</span>
+          </div>
+          <p class="entry__stack">FastAPI, Pydantic, MySQL, SQL Server, React</p>
+          <ul class="points">
+            <li>A FastAPI backend with 5 REST endpoints and Pydantic validation over MySQL and SQL Server, connected to a React frontend.</li>
+            <li>Scrum Lead for a 3&#8209;person team.</li>
+          </ul>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- SECTION: Projects. One <article class="entry"> per project, newest first. -->
+    <section class="section" aria-labelledby="projects">
+      <h2 class="section__title" id="projects">Projects</h2>
       <div class="section__body">
 
         <article class="entry">
@@ -101,7 +135,24 @@
             <span class="entry__date">Summer 2026</span>
           </div>
           <p class="entry__stack">Java 17, Maven, JUnit 5</p>
-          <p>A command-line service desk with separate model, repository and service layers, dependency injection, two repository backends and status-transition rules, covered by 51 JUnit 5 tests.</p>
+          <ul class="points">
+            <li>A command-line service desk with separate model, repository and service layers, dependency injection and two repository backends.</li>
+            <li>Status-transition rules covered by 51 JUnit 5 tests.</li>
+            <li>Written entirely by hand, for a deeper understanding of every layer.</li>
+          </ul>
+        </article>
+
+        <article class="entry">
+          <div class="entry__head">
+            <h3 class="entry__title">Tipsy Taxi</h3>
+            <a class="entry__link" href="https://github.com/icombe/tipsy-taxi" target="_blank" rel="noopener noreferrer">Source on GitHub</a>
+            <span class="entry__date">Spring 2026</span>
+          </div>
+          <p class="entry__stack">Team project. Godot, GDScript</p>
+          <ul class="points">
+            <li>An arcade driving game: controls, collisions, scoring, UI feedback and restart states, tuned through playtesting.</li>
+            <li>Four-person team working in two-week sprints during my final semester.</li>
+          </ul>
         </article>
 
         <article class="entry">
@@ -111,26 +162,20 @@
             <span class="entry__date">2025</span>
           </div>
           <p class="entry__stack">Team project. React, TypeScript, REST APIs, OpenAI</p>
-          <p>I built the frontend: React and TypeScript components that display AI-generated market summaries and signal data, and integrated them with the backend APIs, working with backend teammates on the API contracts.</p>
-        </article>
-
-        <article class="entry">
-          <div class="entry__head">
-            <h3 class="entry__title">Qualcomm field session</h3>
-            <span class="entry__date">Summer 2025</span>
-          </div>
-          <p class="entry__stack">FastAPI, Pydantic, MySQL, SQL Server, React</p>
-          <p>A FastAPI backend with 5 REST endpoints and Pydantic validation over MySQL and SQL Server, connected to a React frontend. I was Scrum Lead for a 3&#8209;person team.</p>
+          <ul class="points">
+            <li>Built the frontend: React and TypeScript components that display AI-generated market summaries and signal data.</li>
+            <li>Integrated them with the backend APIs, working with backend teammates on the API contracts.</li>
+          </ul>
         </article>
 
       </div>
     </section>
 
-    <!-- SECTION: Skills (one paragraph; groups separated by semicolons) -->
+    <!-- SECTION: Skills (groups separated by semicolons; learning on its own line) -->
     <section class="section" aria-labelledby="skills">
       <h2 class="section__title" id="skills">Skills</h2>
       <div class="section__body">
-        <p>Python, Bash, SQL, Java, TypeScript; REST APIs, FastAPI; GitLab CI/CD, Linux, Proxmox, NetBox, Git; PostgreSQL, MySQL.</p>
+        <p>Python, Bash, SQL, Java, TypeScript, PHP; REST APIs, FastAPI; GitLab CI/CD, Linux, Proxmox, NetBox, iTop, Git; PostgreSQL, MySQL.</p>
         <p>Learning OpenTofu/Terraform and AWS.</p>
       </div>
     </section>

@@ -18,6 +18,7 @@ Preview: `python3 -m http.server 8000`, then open http://localhost:8000.
 - Every `<a>` has `target="_blank" rel="noopener noreferrer"`, except the 404 home link.
 - Four type sizes only (`--step-0` to `--step-3`). System fonts. No JavaScript, no trackers.
 - Text contrast stays at or above 4.5:1 in light and dark.
+- Update the Now stamp (`<p class="stamp">`) when Now changes.
 - Update the footer's "Last updated" date (`<time datetime>` and its visible text) and the sitemap `<lastmod>` whenever content changes.
 - Total page weight stays under 300 KB.
 
@@ -26,8 +27,8 @@ Each can be given to Claude as one prompt. Claude should read this file first.
 
 | Change | Example prompt |
 | --- | --- |
-| Add a project | "Add a project to Selected work: name, stack, 2 lines of description, optional link." Copy one `<article class="entry">`. |
-| Edit the current role | "Update the Now section to say ..." Edit the `.lede` block. |
+| Add a project | "Add a project to Projects: name, date, stack, 2-3 bullets, optional link." Copy one `<article class="entry">`. |
+| Edit the current role | "Update the Now section to say ..." Edit the `.lede` block and the `.stamp` month. Keep the Experience entry in step. |
 | Add or reorder a section | "Add a section called X after Skills." Copy a `<section class="section">`; keep the `aria-labelledby` and heading `id` matched. |
 | Change a color | "Make the accent green." Edit `--accent` (light) and its dark value, then recheck contrast. |
 | Change the font | Edit `--font`. System stacks only (currently a serif stack). |
@@ -36,6 +37,8 @@ Each can be given to Claude as one prompt. Claude should read this file first.
 | Add a link | Copy an existing `<a>` so the new-tab attributes come along. |
 
 ## Section pattern
+Sections, top to bottom: Now, Experience, Projects, Skills, Education.
+
 ```html
 <section class="section" aria-labelledby="ID">
   <h2 class="section__title" id="ID">Heading</h2>
@@ -52,7 +55,9 @@ Each can be given to Claude as one prompt. Claude should read this file first.
     <span class="entry__date">2025</span>  <!-- year or season, right-aligned -->
   </div>
   <p class="entry__stack">Tech, tech, tech</p>
-  <p>Two or three lines.</p>
+  <ul class="points">
+    <li>One short line per point; two to four points.</li>
+  </ul>
 </article>
 ```
 
