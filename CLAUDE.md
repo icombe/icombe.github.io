@@ -21,6 +21,6 @@ Read `docs/editing.md` before any content or style change. All links open in new
 
 ## Roadmap
 - [x] 0–2. Design brief, static rebuild, SEO (done; see docs/design.md).
-- [ ] 3. Quality gate. GitHub Actions workflow with every action pinned to a full SHA. Runs html-validate, a lychee link check, and Lighthouse CI asserting at least 0.95 for performance, accessibility, best practices and SEO. Deploys to Pages only after those pass. Done when: CI is green on `redesign`.
+- [x] 3. Quality gate. GitHub Actions workflow with every action pinned to a full SHA. Runs html-validate, a lychee link check, and Lighthouse CI asserting at least 0.95 for performance, accessibility, best practices and SEO. Deploys to Pages only after those pass. Done when: CI is green on `redesign`.
 - [ ] 4. Repo hygiene. README: one-line purpose, screenshot, structure, run locally (`python3 -m http.server`), deploy, quality checks. Add MIT `LICENSE`, `.editorconfig`, Prettier config and format pass, minimal `.gitignore`. Conventional commits. Done when: the repo root has 12 entries or fewer.
 - [ ] 5. Review. Run the reviewer agent on the full diff. Produce a checklist of manual tasks for Ian: Search Console verification and sitemap submission; add the site URL to LinkedIn (contact info and Featured) and the GitHub profile; optional cleanup of old video history, which needs a force-push that must not be run by Claude. Done when: Ian merges.
