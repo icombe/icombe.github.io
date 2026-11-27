@@ -8,61 +8,89 @@
   <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="/styles.css">
 </head>
+<!--
+  HOW THIS PAGE IS BUILT (full guide: docs/editing.md)
+  - Content lives here. Look and feel lives in styles.css (tokens at the top).
+  - Each block below is a .section: a heading in the left margin, content on the right.
+  - To add a project, copy one <article class="entry"> block. To add a section, copy a <section>.
+  - Every link uses target="_blank" rel="noopener noreferrer".
+-->
 <body>
-  <header>
+
+  <!-- HEADER: portrait, name, role line, links -->
+  <header class="site-header">
     <img src="/assets/ian-combe.webp" width="96" height="96" alt="Portrait of Ian Combe">
     <div>
       <h1>Ian Combe</h1>
       <p class="role">Integration Engineer<span>Python, CI/CD, APIs · Denver, CO</span></p>
       <nav aria-label="Profiles and contact">
-        <a href="https://github.com/icombe">GitHub</a>
-        <a href="https://www.linkedin.com/in/iancombe">LinkedIn</a>
+        <a href="https://github.com/icombe" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <a href="https://www.linkedin.com/in/iancombe" target="_blank" rel="noopener noreferrer">LinkedIn</a>
         <a href="mailto:ian.combe.percent053@slmail.me" target="_blank" rel="noopener noreferrer">Email</a>
       </nav>
     </div>
   </header>
 
   <main>
-    <section aria-labelledby="now">
-      <h2 id="now">Now</h2>
-      <div class="lede">
+
+    <!-- SECTION: Now (the lede; keep it to the current role) -->
+    <section class="section" aria-labelledby="now">
+      <h2 class="section__title" id="now">Now</h2>
+      <div class="section__body lede">
         <p>Integration Engineer at Sedna Inc, since August 2026. I build Python collectors and integrations that run in GitLab CI/CD, bringing infrastructure data from Proxmox and NetBox into iTop for CMDB and ticketing.</p>
         <p>Preparing for the HashiCorp Terraform Associate.</p>
       </div>
     </section>
 
-    <section aria-labelledby="work">
-      <h2 id="work">Selected work</h2>
-      <article>
-        <h3>Market Signal Summarizer</h3>
-        <p class="stack">Team project · React, TypeScript, REST APIs, OpenAI</p>
-        <p>I built the React and TypeScript components that display AI-generated market summaries and signal data from backend endpoints, and worked with backend teammates on the API contracts.</p>
-      </article>
-      <article>
-        <h3><a href="https://github.com/icombe/campus-service-desk">Campus Service Desk</a></h3>
-        <p class="stack">Java 17, Maven, JUnit 5</p>
-        <p>A command-line service desk with separate model, repository and service layers, dependency injection, two repository backends and status-transition rules, covered by 51 JUnit 5 tests.</p>
-      </article>
-      <article>
-        <h3>Qualcomm field session</h3>
-        <p class="stack">FastAPI, Pydantic, MySQL, SQL Server, React</p>
-        <p>A FastAPI backend with 5 REST endpoints and Pydantic validation over MySQL and SQL Server, connected to a React frontend. I was Scrum Lead for a 3-person team.</p>
-      </article>
+    <!-- SECTION: Selected work. One <article class="entry"> per item. -->
+    <section class="section" aria-labelledby="work">
+      <h2 class="section__title" id="work">Selected work</h2>
+      <div class="section__body">
+
+        <article class="entry">
+          <h3 class="entry__title">Market Signal Summarizer</h3>
+          <p class="entry__stack">Team project · React, TypeScript, REST APIs, OpenAI</p>
+          <p>I built the React and TypeScript components that display AI-generated market summaries and signal data from backend endpoints, and worked with backend teammates on the API contracts.</p>
+        </article>
+
+        <article class="entry">
+          <h3 class="entry__title"><a href="https://github.com/icombe/campus-service-desk" target="_blank" rel="noopener noreferrer">Campus Service Desk</a></h3>
+          <p class="entry__stack">Java 17, Maven, JUnit 5</p>
+          <p>A command-line service desk with separate model, repository and service layers, dependency injection, two repository backends and status-transition rules, covered by 51 JUnit 5 tests.</p>
+        </article>
+
+        <article class="entry">
+          <h3 class="entry__title">Qualcomm field session</h3>
+          <p class="entry__stack">FastAPI, Pydantic, MySQL, SQL Server, React</p>
+          <p>A FastAPI backend with 5 REST endpoints and Pydantic validation over MySQL and SQL Server, connected to a React frontend. I was Scrum Lead for a 3-person team.</p>
+        </article>
+
+      </div>
     </section>
 
-    <section aria-labelledby="skills">
-      <h2 id="skills">Skills</h2>
-      <p>Python, Bash, SQL, Java, TypeScript · REST APIs, FastAPI · GitLab CI/CD, Linux, Proxmox, NetBox, Git · PostgreSQL, MySQL · learning OpenTofu/Terraform and AWS</p>
+    <!-- SECTION: Skills (one paragraph; groups separated by " · ") -->
+    <section class="section" aria-labelledby="skills">
+      <h2 class="section__title" id="skills">Skills</h2>
+      <div class="section__body">
+        <p>Python, Bash, SQL, Java, TypeScript · REST APIs, FastAPI · GitLab CI/CD, Linux, Proxmox, NetBox, Git · PostgreSQL, MySQL · learning OpenTofu/Terraform and AWS</p>
+      </div>
     </section>
 
-    <section aria-labelledby="education">
-      <h2 id="education">Education</h2>
-      <p>B.S. Computer Science, Colorado School of Mines, 2026</p>
+    <!-- SECTION: Education -->
+    <section class="section" aria-labelledby="education">
+      <h2 class="section__title" id="education">Education</h2>
+      <div class="section__body">
+        <p>B.S. Computer Science, Colorado School of Mines, 2026</p>
+      </div>
     </section>
+
   </main>
 
-  <footer>
-    <p>© Ian Combe</p>
+  <!-- FOOTER: update the date whenever content changes -->
+  <footer class="site-footer">
+    <p>© Ian Combe · Last updated <time datetime="2026-11-26">26 November 2026</time> · <a href="https://github.com/icombe/icombe.github.io" target="_blank" rel="noopener noreferrer">Source on GitHub</a></p>
+    <p>Plain HTML and one CSS file. No framework, no build step, no trackers.</p>
   </footer>
+
 </body>
 </html>

@@ -1,88 +1,122 @@
+/* ==========================================================================
+   styles.css: the whole site's look. Edit tokens first; change rules second.
+   Guide: docs/editing.md. Constraints: 4 type sizes, AA contrast, no web fonts.
+   ========================================================================== */
+
+/* 1. TOKENS ---------------------------------------------------------------
+   Colors, type and layout values. Change a value here and it changes everywhere. */
 :root {
   color-scheme: light dark;
+
+  /* Color (light). Dark overrides are in section 2. */
   --bg: #f7f8fa;
   --text: #16181d;
   --muted: #555b66;
   --accent: #1d5a9e;
-  --step-0: 0.875rem;
-  --step-1: 1rem;
-  --step-2: 1.25rem;
-  --step-3: 2.25rem;
-  --serif: Charter, "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+  --rule: #d6dae1;          /* decorative dividers only, never text */
+
+  /* Type: four sizes, no more */
+  --step-0: 0.875rem;       /* mono stack lines, footer */
+  --step-1: 1rem;           /* body, links, entry titles */
+  --step-2: 1.25rem;        /* section headings, lede */
+  --step-3: 2.25rem;        /* the name (h1) only */
+  --font: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --weight-body: 400;
+  --weight-heading: 700;
+
+  /* Layout */
+  --measure: 35rem;         /* reading column width, about 70 characters */
+  --margin-col: 11rem;      /* left column that holds section headings */
+  --gap: 2rem;
+  --section-space: 3rem;    /* space around each divider */
+  --page-width: 52rem;
 }
 
+/* 2. DARK MODE ------------------------------------------------------------
+   Follows the visitor's system setting. Keep contrast at or above 4.5:1 for text. */
 @media (prefers-color-scheme: dark) {
   :root {
     --bg: #13151a;
     --text: #e6e8ec;
     --muted: #a0a6b2;
     --accent: #86b6ee;
+    --rule: #2d323c;
   }
 }
 
+/* 3. BASE -------------------------------------------------------------- */
 * { box-sizing: border-box; }
 
 body {
   margin: 0 auto;
-  max-width: 54rem;
+  max-width: var(--page-width);
   padding: 3.5rem 1.25rem 4rem;
   background: var(--bg);
   color: var(--text);
-  font: 400 var(--step-1) / 1.65 var(--serif);
+  font: var(--weight-body) var(--step-1) / 1.6 var(--font);
 }
 
+p { margin: 0 0 1rem; }
 ::selection { background: var(--accent); color: var(--bg); }
 
-header { display: flex; gap: 1.5rem; align-items: flex-start; margin-bottom: 4.5rem; }
-header img { border-radius: 50%; flex: none; object-fit: cover; margin-top: 0.25rem; }
+/* Headings: bold, same family, sizes from the scale */
+h1, h2, h3 { margin: 0; font-weight: var(--weight-heading); color: var(--text); }
+h1 { font-size: var(--step-3); line-height: 1.1; letter-spacing: -0.03em; }
+h2 { font-size: var(--step-2); line-height: 1.3; letter-spacing: -0.01em; }
+h3 { font-size: var(--step-1); line-height: 1.4; }
 
-h1 { margin: 0; font-size: var(--step-3); font-weight: 600; line-height: 1.1; letter-spacing: -0.03em; }
-h2 { margin: 0 0 1rem; font-size: var(--step-2); font-weight: 600; line-height: 1.3; }
-h3 { margin: 0; font-size: var(--step-1); font-weight: 600; }
-p { margin: 0 0 1rem; }
-
-section { margin-bottom: 4rem; }
-section > p, .lede { max-width: 38rem; }
-
-.role { margin: 0.5rem 0 1rem; font-weight: 600; }
-.role span { display: block; color: var(--muted); font-weight: 400; }
-
-.lede { padding-left: 1rem; border-left: 2px solid var(--accent); font-size: var(--step-2); line-height: 1.5; max-width: 40rem; }
-.lede p:last-child { margin-bottom: 0; }
-
-article { display: grid; row-gap: 0.25rem; margin-bottom: 2rem; max-width: 38rem; }
-.stack { margin: 0; color: var(--muted); font: var(--step-0) / 1.5 var(--mono); }
-article p:last-child { margin-bottom: 0; }
-
-nav { display: flex; flex-wrap: wrap; gap: 0.25rem 1.25rem; }
-
-a { color: var(--accent); text-decoration: underline; text-underline-offset: 0.2em; text-decoration-thickness: 1px; }
+/* Links: underlined at rest, thicker on hover, visible focus ring */
+a { color: var(--accent); text-underline-offset: 0.2em; text-decoration-thickness: 1px; }
 a:hover { text-decoration-thickness: 2px; }
 a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 
-footer { color: var(--muted); font-size: var(--step-0); }
-footer p { margin: 0; }
+/* 4. HEADER ------------------------------------------------------------ */
+.site-header { display: flex; gap: 1.5rem; align-items: flex-start; margin-bottom: 3.5rem; }
+.site-header img { flex: none; margin-top: 0.25rem; border-radius: 50%; object-fit: cover; }
+.role { margin: 0.5rem 0 1rem; font-weight: var(--weight-heading); }
+.role span { display: block; color: var(--muted); font-weight: var(--weight-body); }
+.site-header nav { display: flex; flex-wrap: wrap; gap: 0.25rem 1.25rem; }
 
-@media (min-width: 50rem) {
-  article {
-    max-width: none;
-    grid-template-columns: 12rem minmax(0, 38rem);
-    grid-template-areas: "stack title" "stack text";
-    column-gap: 1.5rem;
-  }
-  article h3 { grid-area: title; }
-  article .stack { grid-area: stack; padding-top: 0.2rem; }
-  article p:last-child { grid-area: text; }
+/* 5. SECTIONS -----------------------------------------------------------
+   Each section: a divider line on top, heading in the left column, content on the right. */
+.section {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  row-gap: 0.75rem;
+  padding: var(--section-space) 0;
+  border-top: 1px solid var(--rule);
 }
+.section__body { max-width: var(--measure); }
+.section__body > :last-child { margin-bottom: 0; }
 
+/* Lede: the "Now" text, set larger so it leads the page */
+.lede { font-size: var(--step-2); line-height: 1.5; }
+
+/* 6. ENTRIES (projects) ------------------------------------------------- */
+.entry + .entry { margin-top: 1.75rem; padding-top: 1.75rem; border-top: 1px solid var(--rule); }
+.entry__title { margin-bottom: 0.25rem; }
+.entry__stack { margin: 0 0 0.5rem; color: var(--muted); font: var(--step-0) / 1.5 var(--mono); }
+.entry > :last-child { margin-bottom: 0; }
+
+/* 7. FOOTER ------------------------------------------------------------ */
+.site-footer { padding-top: 1.5rem; border-top: 1px solid var(--rule); color: var(--muted); font-size: var(--step-0); }
+.site-footer p { margin: 0 0 0.25rem; }
+
+/* 8. RESPONSIVE ---------------------------------------------------------
+   Wide screens: two columns. Narrow: headings stack above content. */
+@media (min-width: 50rem) {
+  .section { grid-template-columns: var(--margin-col) minmax(0, var(--measure)); column-gap: var(--gap); }
+  .section__title { padding-top: 0.1rem; }
+}
 @media (max-width: 30rem) {
   body { padding-top: 2rem; }
-  header { flex-direction: column; gap: 1rem; margin-bottom: 3rem; }
-  nav a { overflow-wrap: anywhere; }
+  .site-header { flex-direction: column; gap: 1rem; margin-bottom: 2.5rem; }
+  .site-header nav a { overflow-wrap: anywhere; }
 }
 
+/* 9. PRINT -------------------------------------------------------------- */
 @media print {
-  :root { --bg: #fff; --text: #000; --muted: #333; --accent: #000; }
+  :root { --bg: #fff; --text: #000; --muted: #333; --accent: #000; --rule: #999; }
   body { padding: 0; }
 }
