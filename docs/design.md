@@ -27,13 +27,13 @@ System font stacks only. Four sizes. Editing details: `docs/editing.md`.
 | Token | Size | Use |
 | --- | --- | --- |
 | `--step-0` | 0.875rem (14px) | Italic stack lines, source links, footer |
-| `--step-1` | 1.0625rem (17px) | Body, italic section headings, bold project titles |
-| `--step-2` | 1.3125rem (21px) | Italic role line, the "Now" lede |
+| `--step-1` | 1.0625rem (17px) | Body, bold project titles |
+| `--step-2` | 1.3125rem (21px) | Italic role line, the "Now" lede, italic section headings (baseline-aligned with the body) |
 | `--step-3` | 2.75rem (44px; 36px on phones) | `<h1>` name only, regular weight |
 
 - One system serif stack for everything: `"Iowan Old Style", "Palatino Linotype", Palatino, "URW Palladio L", P052, Charter, "Bitstream Charter", Cambria, Georgia, serif` (Mac, Windows, Linux, then fallback). Ian chose serif in November 2026, reversing the step-1 sans; no web fonts.
 - Body line-height 1.7 (serif needs more than sans). Old-style numerals.
-- Hierarchy: name large at 400; section headings italic at body size; project titles bold. No monospace.
+- Hierarchy: name large at 400; section headings italic at the lede size; project titles bold. Selected work runs newest first. No monospace.
 - Measure: `66ch`, about 66 characters. The page width is margin column + gap + measure, so dividers end where the text ends.
 - Patterns borrowed from reference sites: Paco Coursey's italic tagline under the name and plain title-plus-line entries; Tania Rascia's small source link beside a project title; Tufte-style headings in the left margin.
 

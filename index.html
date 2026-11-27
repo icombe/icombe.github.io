@@ -82,8 +82,9 @@
     <!-- SECTION: Now (the lede; keep it to the current role) -->
     <section class="section" aria-labelledby="now">
       <h2 class="section__title" id="now">Now</h2>
-      <div class="section__body lede">
-        <p>Integration Engineer at Sedna Inc, since August 2026. I build Python collectors and integrations that run in GitLab CI/CD, bringing infrastructure data from Proxmox and NetBox into iTop for CMDB and ticketing.</p>
+      <div class="section__body">
+        <p class="lede">Integration Engineer at Sedna Inc, since August 2026. I build Python collectors that run on scheduled GitLab CI/CD pipelines and sync infrastructure inventory from Proxmox and NetBox into iTop for CMDB and ticketing, replacing manual tracking.</p>
+        <p>I maintain the pipeline jobs, CI variables and secrets they run on, and extend iTop in PHP and its XML datamodel, including an extension that attaches SLAs to tickets automatically, a step that used to be manual.</p>
         <p>Preparing for the HashiCorp Terraform Associate.</p>
       </div>
     </section>
@@ -95,22 +96,22 @@
 
         <article class="entry">
           <div class="entry__head">
-            <h3 class="entry__title">Market Signal Summarizer</h3>
-            <a class="entry__link" href="https://github.com/icombe/market-signal-summarizer" target="_blank" rel="noopener noreferrer">Source on GitHub</a>
-            <span class="entry__date">2025</span>
-          </div>
-          <p class="entry__stack">Team project. React, TypeScript, REST APIs, OpenAI</p>
-          <p>I built the frontend: React and TypeScript components that display AI-generated market summaries and signal data, and integrated them with the backend APIs, working with backend teammates on the API contracts.</p>
-        </article>
-
-        <article class="entry">
-          <div class="entry__head">
             <h3 class="entry__title">Campus Service Desk</h3>
             <a class="entry__link" href="https://github.com/icombe/campus-service-desk" target="_blank" rel="noopener noreferrer">Source on GitHub</a>
             <span class="entry__date">Summer 2026</span>
           </div>
           <p class="entry__stack">Java 17, Maven, JUnit 5</p>
           <p>A command-line service desk with separate model, repository and service layers, dependency injection, two repository backends and status-transition rules, covered by 51 JUnit 5 tests.</p>
+        </article>
+
+        <article class="entry">
+          <div class="entry__head">
+            <h3 class="entry__title">Market Signal Summarizer</h3>
+            <a class="entry__link" href="https://github.com/icombe/market-signal-summarizer" target="_blank" rel="noopener noreferrer">Source on GitHub</a>
+            <span class="entry__date">2025</span>
+          </div>
+          <p class="entry__stack">Team project. React, TypeScript, REST APIs, OpenAI</p>
+          <p>I built the frontend: React and TypeScript components that display AI-generated market summaries and signal data, and integrated them with the backend APIs, working with backend teammates on the API contracts.</p>
         </article>
 
         <article class="entry">
@@ -129,7 +130,8 @@
     <section class="section" aria-labelledby="skills">
       <h2 class="section__title" id="skills">Skills</h2>
       <div class="section__body">
-        <p>Python, Bash, SQL, Java, TypeScript; REST APIs, FastAPI; GitLab CI/CD, Linux, Proxmox, NetBox, Git; PostgreSQL, MySQL. Learning OpenTofu/Terraform and AWS.</p>
+        <p>Python, Bash, SQL, Java, TypeScript; REST APIs, FastAPI; GitLab CI/CD, Linux, Proxmox, NetBox, Git; PostgreSQL, MySQL.</p>
+        <p>Learning OpenTofu/Terraform and AWS.</p>
       </div>
     </section>
 

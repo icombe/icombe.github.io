@@ -18,7 +18,7 @@
   /* Type: four sizes, no more */
   --step-0: 0.875rem;       /* stack lines, links row, footer */
   --step-1: 1.0625rem;      /* body, section and entry headings */
-  --step-2: 1.3125rem;      /* role line, "Now" lede */
+  --step-2: 1.3125rem;      /* role line, "Now" lede, section headings */
   --step-3: 2.75rem;        /* the name (h1) only */
   /* System serif stack (no web fonts): Mac, Windows, Linux, then anything. */
   --font: "Iowan Old Style", "Palatino Linotype", Palatino, "URW Palladio L", P052,
@@ -67,7 +67,7 @@ p { margin: 0 0 1rem; text-wrap: pretty; }
 
 h1, h2, h3 { margin: 0; color: var(--text); text-wrap: balance; }
 h1 { font-size: var(--step-3); font-weight: 400; line-height: 1.05; letter-spacing: -0.02em; }
-h2 { font-size: var(--step-1); font-weight: 400; font-style: italic; line-height: var(--leading); }
+h2 { font-size: var(--step-2); font-weight: 400; font-style: italic; line-height: 1.3; }
 h3 { font-size: var(--step-1); font-weight: 700; line-height: 1.4; }
 
 /* Links: soft underline at rest, full-strength on hover, visible focus ring */
@@ -123,6 +123,7 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-
   body { padding-top: 6rem; }
   .site-header,
   .section { grid-template-columns: var(--margin-col) minmax(0, var(--measure)); column-gap: var(--gap); }
+  .section { align-items: baseline; }   /* heading sits on the body's first line */
   .site-header { align-items: start; margin-bottom: 4rem; }
   .site-header img { margin-top: 0.4rem; }
   .site-footer { padding-left: calc(var(--margin-col) + var(--gap)); }
@@ -148,6 +149,7 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-
   html { font-size: 10pt; }
   body { max-width: none; padding: 0; }
   .site-header, .section { grid-template-columns: var(--margin-col) minmax(0, 1fr); column-gap: var(--gap); }
+  .section { align-items: baseline; }
   .site-header { margin-bottom: 1rem; }
   .site-header img { visibility: hidden; height: 0; }
   .lede { font-size: var(--step-1); }
