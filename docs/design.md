@@ -53,7 +53,7 @@ Neutral paper and blue-black ink; an indigo fountain-pen accent (periwinkle in d
 
 ## Layout
 
-A two-column grid from 52rem up. The portrait and the italic section headings sit in the left margin column; the name, every section body and the footer share one left edge in the right column. Each section opens with a 1px divider whose first 2.5rem is a 2px indigo segment (the accent mark); entries are separated by space only. Below 52rem everything stacks in one column.
+A two-column grid from 52rem up. The portrait and the italic section headings sit in the left margin column; the name, every section body and the footer share one left edge in the right column. Each section opens with a 1px divider whose first 2.5rem is a 2px indigo segment (the accent mark); entries are separated by space only. The portrait fills the margin column (9.5rem) and is centered vertically on the name block. From 30rem to 52rem the portrait (7rem) sits beside the name and sections stack; below 30rem everything stacks in one column.
 
 ```
   [portrait]      Ian Combe                               <- h1, step-3, regular
@@ -94,7 +94,7 @@ Semantic structure: `<header>`, `<main>` with one `<section>` per block, `<foote
 - Experience (Sedna, Qualcomm field session) is separate from Projects. Sedna is described with public technology names only.
 - Tipsy Taxi is back (Spring 2026): a fun project that sparks conversation. Its wording comes from the old site copy.
 - Campus Service Desk notes it was written entirely by hand.
-- Now carries an "Updated <month>" stamp. Favicon: italic serif "IC" on indigo. `og.png` matches the page: paper ground, serif name, italic role, indigo accent segment.
+- Now carries an "Updated <month>" stamp. Favicon: a circle in the page background color with an italic serif "IC" in the accent, following light/dark like the site. `theme-color` meta tags match the background so phone browser bars blend in. `og.png` matches the page: paper ground, serif name, italic role, indigo accent segment.
 
 ## SEO (roadmap step 2)
 - Title, meta description naming Ian, canonical URL, Open Graph and Twitter card tags, `og.png` at 1200x630.

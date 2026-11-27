@@ -29,6 +29,7 @@
   /* Layout */
   --measure: 66ch;          /* reading column, about 66 characters */
   --margin-col: 9.5rem;     /* left column: portrait and section headings */
+  --portrait: 9.5rem;       /* headshot size on wide screens; at most --margin-col */
   --gap: 2.5rem;
   --section-space: 2.75rem; /* space around each divider */
   /* Page = margin column + gap + measure, so dividers end where the text does */
@@ -149,31 +150,40 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-
 
 /* Save as PDF: hidden until the script at the end of index.html reveals it,
    so visitors without JavaScript never see a dead button. */
+/* Styled as a footer link, not a boxed button, so it sits quietly beside "Site source". */
 .print-button {
-  padding: 0.3rem 0.9rem;
-  border: 1px solid color-mix(in srgb, var(--accent) 45%, transparent);
-  border-radius: 999px;
-  background: transparent;
+  padding: 0;
+  border: 0;
+  background: none;
   color: var(--accent);
   font: inherit;
   cursor: pointer;
-  transition: background-color 0.15s, border-color 0.15s;
+  text-decoration-line: underline;
+  text-decoration-thickness: 1px;
+  text-decoration-color: color-mix(in srgb, var(--accent) 35%, transparent);
+  text-underline-offset: 0.22em;
+  transition: text-decoration-color 0.15s;
 }
 .print-button[hidden] { display: none; }
-.print-button:hover { border-color: var(--accent); background: color-mix(in srgb, var(--accent) 8%, transparent); }
-.print-button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.print-button:hover { text-decoration-color: currentColor; }
+.print-button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
 
 /* 8. RESPONSIVE ---------------------------------------------------------
    Wide screens: portrait and headings in the left column, everything else on one axis.
    Narrow: one column, headings stack above content. */
+/* Tablet and up: portrait beside the name block, centered on it */
+@media (min-width: 30rem) {
+  .site-header { grid-template-columns: auto minmax(0, 1fr); align-items: center; }
+  .site-header img { width: 7rem; height: 7rem; }
+}
 @media (min-width: 52rem) {
   body { padding-top: 6rem; }
   .site-header,
   .section,
   .site-footer { grid-template-columns: var(--margin-col) minmax(0, var(--measure)); column-gap: var(--gap); }
   .section { align-items: baseline; }   /* heading sits on the body's first line */
-  .site-header { align-items: start; margin-bottom: 4rem; }
-  .site-header img { margin-top: 0.4rem; }
+  .site-header { align-items: center; margin-bottom: 4rem; }  /* portrait centered on the name block */
+  .site-header img { width: var(--portrait); height: var(--portrait); }
   .site-footer__body { grid-column: 2; }  /* footer text shares the content edge */
 }
 @media (max-width: 30rem) {
@@ -183,7 +193,7 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-
   .site-header img { width: 80px; height: 80px; }
 }
 
-/* Motion: link underline and button hover fades are the only transitions */
+/* Motion: the link underline fade is the only transition */
 @media (prefers-reduced-motion: reduce) {
   a, .print-button { transition: none; }
 }
