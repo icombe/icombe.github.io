@@ -1,17 +1,66 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Ian Combe portfolio with selected software projects, implementation details, and project links." />
-    <title>Ian Combe</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ian Combe | Integration Engineer in Denver</title>
+  <meta name="color-scheme" content="light dark">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <header>
+    <img src="/assets/ian-combe.webp" width="96" height="96" alt="Portrait of Ian Combe">
+    <div>
+      <h1>Ian Combe</h1>
+      <p class="role">Integration Engineer · Python, CI/CD, APIs · Denver, CO</p>
+      <nav aria-label="Profiles and contact">
+        <a href="https://github.com/icombe">GitHub</a>
+        <a href="https://www.linkedin.com/in/iancombe">LinkedIn</a>
+        <a href="mailto:ian.combe.percent053@slmail.me">ian.combe.percent053@slmail.me</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section aria-labelledby="now">
+      <h2 id="now">Now</h2>
+      <p>Integration Engineer at Sedna Inc, since August 2026. I build Python collectors and integrations that run in GitLab CI/CD, bringing infrastructure data from Proxmox and NetBox into iTop for CMDB and ticketing.</p>
+      <p>Preparing for the HashiCorp Terraform Associate.</p>
+    </section>
+
+    <section aria-labelledby="work">
+      <h2 id="work">Selected work</h2>
+      <article>
+        <h3>Market Signal Summarizer</h3>
+        <p class="stack">Team project · React, TypeScript, REST APIs, OpenAI</p>
+        <p>I built the React and TypeScript components that display AI-generated market summaries and signal data from backend endpoints, and worked with backend teammates on the API contracts.</p>
+      </article>
+      <article>
+        <h3><a href="https://github.com/icombe/campus-service-desk">Campus Service Desk</a></h3>
+        <p class="stack">Java 17, Maven, JUnit 5</p>
+        <p>A command-line service desk with separate model, repository and service layers, dependency injection, two repository backends and status-transition rules, covered by 51 JUnit 5 tests.</p>
+      </article>
+      <article>
+        <h3>Qualcomm field session</h3>
+        <p class="stack">FastAPI, Pydantic, MySQL, SQL Server, React</p>
+        <p>A FastAPI backend with 5 REST endpoints and Pydantic validation over MySQL and SQL Server, connected to a React frontend. I was Scrum Lead for a 3-person team.</p>
+      </article>
+    </section>
+
+    <section aria-labelledby="skills">
+      <h2 id="skills">Skills</h2>
+      <p>Python, Bash, SQL, Java, TypeScript · REST APIs, FastAPI · GitLab CI/CD, Linux, Proxmox, NetBox, Git · PostgreSQL, MySQL · learning OpenTofu/Terraform and AWS</p>
+    </section>
+
+    <section aria-labelledby="education">
+      <h2 id="education">Education</h2>
+      <p>B.S. Computer Science, Colorado School of Mines, 2026</p>
+    </section>
+  </main>
+
+  <footer>
+    <p>© Ian Combe</p>
+  </footer>
+</body>
 </html>

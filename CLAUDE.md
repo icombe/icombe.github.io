@@ -12,12 +12,12 @@ Goal: a one-page, minimal, editorial site for Ian Combe. Recruiters read it in 3
 - Dropped content: the résumé PDF and personal email address (spam); Tipsy Taxi, Student Loan Analyzer, the 3D hero, the "2026 edition" label, all videos.
 - Conventional commits. One roadmap step per session.
 
-## Legacy (until step 1 removes it)
-React 19, Vite, Tailwind, vitest. Verify: `npm run lint && npx vitest run && npm run build`. Deploy via `.github/workflows/deploy.yml`; never edit `dist/`. `src/test/CLAUDE.md` holds test rules for the legacy code.
+## Verify
+Serve with `python3 -m http.server 8000` and check in a browser with JavaScript disabled. Lint and CI arrive in step 3.
 
 ## Roadmap
 - [x] 0. Design brief. Write `docs/design.md` (audience, point of view, type scale, color tokens, ASCII layout) and this file. Stop and wait for approval.
-- [ ] 1. Static rebuild. Create `index.html`, `styles.css`, `assets/` (headshot as optimized webp under 60 KB, og image 1200x630), `404.html`. Remove the React/Vite/Tailwind/Three.js sources, configs, tests and `public/videos/` (list them and ask first). Done when: it renders fully with JavaScript disabled and total page weight is under 300 KB, excluding the PDF.
+- [x] 1. Static rebuild. Create `index.html`, `styles.css`, `assets/` (headshot as optimized webp under 60 KB, og image 1200x630), `404.html`. Remove the React/Vite/Tailwind/Three.js sources, configs, tests and `public/videos/` (list them and ask first). Done when: it renders fully with JavaScript disabled and total page weight is under 300 KB, excluding the PDF.
 - [ ] 2. SEO. `<title>Ian Combe | Integration Engineer in Denver</title>`; meta description naming Ian; `<link rel="canonical" href="https://icombe.github.io/">`. Open Graph and Twitter tags. JSON-LD Person: name, jobTitle, url, image, sameAs [LinkedIn, GitHub], alumniOf Colorado School of Mines, address Denver, CO. `robots.txt` and `sitemap.xml`; `lang="en"`; descriptive alt text; single `<h1>` holding the name. Commented placeholder for google-site-verification. Done when: Lighthouse SEO is 100 and the JSON-LD parses without errors.
 - [ ] 3. Quality gate. GitHub Actions workflow with every action pinned to a full SHA. Runs html-validate, a lychee link check, and Lighthouse CI asserting at least 0.95 for performance, accessibility, best practices and SEO. Deploys to Pages only after those pass. Done when: CI is green on `redesign`.
 - [ ] 4. Repo hygiene. README: one-line purpose, screenshot, structure, run locally (`python3 -m http.server`), deploy, quality checks. Add MIT `LICENSE`, `.editorconfig`, Prettier config and format pass, minimal `.gitignore`. Conventional commits. Done when: the repo root has 12 entries or fewer.
