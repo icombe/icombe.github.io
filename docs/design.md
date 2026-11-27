@@ -22,23 +22,23 @@ Avoided on purpose: gradient blobs, glassmorphism, emoji headings, centered hero
 
 ## Type scale
 
-System font stacks only. Four sizes.
+System font stacks only. Four sizes. Editing details: `docs/editing.md`.
 
 | Token | Size | Use |
 | --- | --- | --- |
-| `--step-0` | 0.875rem (14px) | Mono stack lines, dates, footer |
-| `--step-1` | 1rem (16px) | Body, links, list items |
-| `--step-2` | 1.25rem (20px) | Section headings, project titles |
+| `--step-0` | 0.875rem (14px) | Mono stack lines, footer |
+| `--step-1` | 1rem (16px) | Body, links, project titles |
+| `--step-2` | 1.25rem (20px) | Section headings, the "Now" lede |
 | `--step-3` | 2.25rem (36px) | `<h1>` name only |
 
-- Body and headings: system serif, `Charter, "Iowan Old Style", "Palatino Linotype", Georgia, serif`, line-height 1.65 (serif gets extra leading). Chosen over the usual system sans so the page has a voice of its own without a web font.
-- Mono: `ui-monospace, "SF Mono", Menlo, Consolas, monospace`, only for stack lines under each project and dates. Not for section labels.
-- Measure: `max-width: 38rem` on the column, about 65 characters at 16px.
-- Weights: 400 and 600 only.
+- One sans family for everything: `system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif`. It replaced the first draft's serif, which read as bookish rather than professional.
+- Headings are bold (700) against 400 body. Headings use `--text`, so the weight and size do the work.
+- Mono, for stack lines only: `ui-monospace, "SF Mono", Menlo, Consolas, monospace`.
+- Measure: 35rem column, about 70 characters at 16px.
 
 ## Color tokens
 
-One accent, used for links and the focus ring. All pairs meet WCAG AA for normal text (4.5:1); ratios computed against the page background.
+One accent for links and the focus ring. Text pairs meet WCAG AA (4.5:1).
 
 | Token | Light | Dark | Contrast (L / D) |
 | --- | --- | --- | --- |
@@ -46,62 +46,39 @@ One accent, used for links and the focus ring. All pairs meet WCAG AA for normal
 | `--text` | `#16181d` | `#e6e8ec` | 16.7 / 14.9 |
 | `--muted` | `#555b66` | `#a0a6b2` | 6.4 / 7.5 |
 | `--accent` | `#1d5a9e` | `#86b6ee` | 6.6 / 8.6 |
+| `--rule` | `#d6dae1` | `#2d323c` | decorative dividers only |
 
-Cool neutral grays rather than cream, to avoid the common warm-paper look. No hairline rules: sections are separated by space alone.
-
-Switching: `:root` holds the light values and `@media (prefers-color-scheme: dark)` overrides them. Set `color-scheme: light dark`.
-
-States: links are underlined at rest; hover thickens the underline; `:focus-visible` shows a 2px accent outline with 2px offset.
+Cool neutral grays rather than cream. Dark mode follows `prefers-color-scheme`.
 
 ## Layout
 
-One column, left-aligned, 38rem max, 1.25rem side padding on phones, 4rem top padding on desktop. Sections separated by space, not by cards, boxes or rules. Section headings are plain sentence-case serif, with no eyebrow labels.
+One page-width column with a two-column grid inside it. Each section opens with a 1px divider. The heading sits in the left margin column and the content in the right column, so the eye moves down the left edge from heading to heading. Projects are separated by lighter dividers. On phones the heading stacks above its content.
 
 ```
-┌────────────────────────────────────────────────────────┐
-│                                                        │
-│   Ian Combe                          <- h1, step-3     │
-│   Integration Engineer · Python,     <- step-1, muted  │
-│   CI/CD, APIs · Denver, CO                             │
-│                                                        │
-│   GitHub  LinkedIn  contact           <- inline links   │
-│   [headshot, small, right of name on ≥40rem,           │
-│    stacked above on phones]                            │
-│                                                        │
-│   ────────────────────────────────                     │
-│   now                                <- h2, step-0 mono│
-│   Integration Engineer at Sedna Inc  (Aug 2026–present)│
-│   I build Python collectors ... Proxmox and NetBox     │
-│   into iTop ... Preparing for the HashiCorp Terraform  │
-│   Associate.                                           │
-│                                                        │
-│   ────────────────────────────────                     │
-│   selected work                                        │
-│   Market Signal Summarizer           <- h3, step-2     │
-│   team project · React, TypeScript, REST APIs, OpenAI │
-│   2-3 lines of prose                                   │
-│                                                        │
-│   Campus Service Desk                                  │
-│   Java 17 · Maven · JUnit 5                            │
-│   2-3 lines (links to repo)                            │
-│                                                        │
-│   Qualcomm field session             <- experience     │
-│   FastAPI · Pydantic · MySQL · SQL Server · React      │
-│   2-3 lines                                            │
-│                                                        │
-│   ────────────────────────────────                     │
-│   skills                                               │
-│   one paragraph, mono-separated groups                 │
-│                                                        │
-│   ────────────────────────────────                     │
-│   education                                            │
-│   B.S. Computer Science, Colorado School of Mines,2026│
-│                                                        │
-│   footer: © Ian Combe (step-0, muted)                  │
-└────────────────────────────────────────────────────────┘
+  [portrait]  Ian Combe                                  <- h1, step-3
+              Integration Engineer                       <- bold
+              Python, CI/CD, APIs · Denver, CO           <- muted
+              GitHub  LinkedIn  Email
+
+  ───────────────────────────────────────────────────── divider
+  Now             Integration Engineer at Sedna Inc ...   <- lede, step-2
+  ───────────────────────────────────────────────────── divider
+  Selected work   Market Signal Summarizer
+                  Team project · React, TypeScript ...    <- mono, muted
+                  2-3 lines
+                  ─────────────────────────────── lighter divider
+                  Campus Service Desk
+                  ...
+  ───────────────────────────────────────────────────── divider
+  Skills          one paragraph
+  ───────────────────────────────────────────────────── divider
+  Education       B.S. Computer Science ...
+  ───────────────────────────────────────────────────── divider
+  © Ian Combe · Last updated <date> · Source on GitHub
+  Plain HTML and one CSS file. No framework, no build step, no trackers.
 ```
 
-Semantic structure: `<header>`, `<main>` with one `<section>` per block, `<footer>`. One `<h1>`; section headings `<h2>`; project titles `<h3>`. Skip link not needed (page is short), but landmarks are present.
+Semantic structure: `<header>`, `<main>` with one `<section>` per block, `<footer>`. One `<h1>`; section headings `<h2>`; project titles `<h3>`.
 
 ## Decisions from Ian (step 0 review)
 - No public résumé and no personal email on the page (spam). Drop `resume.pdf` and the Résumé link; roadmap step 1 updated.

@@ -15,6 +15,9 @@ Goal: a one-page, minimal, editorial site for Ian Combe. Recruiters read it in 3
 ## Verify
 Serve with `python3 -m http.server 8000` and check in a browser with JavaScript disabled. Lint and CI arrive in step 3.
 
+## Editing the site
+Read `docs/editing.md` before any content or style change. All links open in new tabs (except the 404 home link); update the footer's last-updated date on content changes.
+
 ## Roadmap
 - [x] 0. Design brief. Write `docs/design.md` (audience, point of view, type scale, color tokens, ASCII layout) and this file. Stop and wait for approval.
 - [x] 1. Static rebuild. Create `index.html`, `styles.css`, `assets/` (headshot as optimized webp under 60 KB, og image 1200x630), `404.html`. Remove the React/Vite/Tailwind/Three.js sources, configs, tests and `public/videos/` (list them and ask first). Done when: it renders fully with JavaScript disabled and total page weight is under 300 KB, excluding the PDF.
