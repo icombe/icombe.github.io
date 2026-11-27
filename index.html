@@ -1,17 +1,213 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Ian Combe portfolio with selected software projects, implementation details, and project links." />
-    <title>Ian Combe</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ian Combe | Integration Engineer in Denver</title>
+  <meta name="description" content="Ian Combe is an Integration Engineer in Denver, Colorado, building Python integrations that run in GitLab CI/CD. B.S. Computer Science, Colorado School of Mines.">
+  <link rel="canonical" href="https://icombe.github.io/">
+  <meta name="color-scheme" content="light dark">
+  <!-- Phone browser bar matches --bg in styles.css -->
+  <meta name="theme-color" content="#f7f7f4" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#151821" media="(prefers-color-scheme: dark)">
+  <!-- Search Console: paste the verification tag here, then delete this comment.
+  <meta name="google-site-verification" content="TOKEN_FROM_SEARCH_CONSOLE">
+  -->
+
+  <!-- Social previews (LinkedIn, Slack, X) -->
+  <meta property="og:type" content="profile">
+  <meta property="og:url" content="https://icombe.github.io/">
+  <meta property="og:title" content="Ian Combe | Integration Engineer in Denver">
+  <meta property="og:description" content="Integration Engineer building Python integrations that run in GitLab CI/CD. Denver, Colorado.">
+  <meta property="og:image" content="https://icombe.github.io/assets/og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Ian Combe, Integration Engineer, Denver, Colorado">
+  <meta property="profile:first_name" content="Ian">
+  <meta property="profile:last_name" content="Combe">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/styles.css">
+
+  <!-- Structured data for search engines (schema.org Person) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Ian Combe",
+    "jobTitle": "Integration Engineer",
+    "url": "https://icombe.github.io/",
+    "image": "https://icombe.github.io/assets/ian-combe.webp",
+    "sameAs": [
+      "https://www.linkedin.com/in/iancombe",
+      "https://github.com/icombe"
+    ],
+    "alumniOf": {
+      "@type": "CollegeOrUniversity",
+      "name": "Colorado School of Mines",
+      "url": "https://www.mines.edu/"
+    },
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Denver",
+      "addressRegion": "CO",
+      "addressCountry": "US"
+    }
+  }
+  </script>
+</head>
+<!--
+  HOW THIS PAGE IS BUILT (full guide: docs/editing.md)
+  - Content lives here. Look and feel lives in styles.css (tokens at the top).
+  - Each block below is a .section: a heading in the left margin, content on the right.
+  - To add a project, copy one <article class="entry"> block. To add a section, copy a <section>.
+  - Every link uses target="_blank" rel="noopener noreferrer".
+-->
+<body>
+
+  <!-- HEADER: portrait, name, role line, links -->
+  <header class="site-header">
+    <img src="/assets/ian-combe.webp" width="96" height="96" alt="Headshot of Ian Combe in a suit and tie, outdoors in front of a tree">
+    <div>
+      <h1>Ian Combe</h1>
+      <p class="role">Integration Engineer in Denver, Colorado<span>Python, CI/CD and APIs</span></p>
+      <nav aria-label="Profiles and contact">
+        <a href="https://github.com/icombe" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <a href="https://www.linkedin.com/in/iancombe" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <a href="mailto:ian.combe.percent053@slmail.me" target="_blank" rel="noopener noreferrer">Email</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- SECTION: Now (one sentence on current work; update the stamp when it changes) -->
+    <section class="section" aria-labelledby="now">
+      <h2 class="section__title" id="now">Now</h2>
+      <div class="section__body">
+        <p class="lede">At Sedna Inc I connect infrastructure systems to iTop: Python collectors, custom iTop extensions, and the GitLab CI/CD pipelines that run and deploy them.</p>
+        <p>Preparing for the HashiCorp Terraform Associate.</p>
+        <p class="stamp">Updated <time datetime="2026-11">November 2026</time></p>
+      </div>
+    </section>
+
+    <!-- SECTION: Experience. One <article class="entry"> per role, newest first. -->
+    <section class="section" aria-labelledby="experience">
+      <h2 class="section__title" id="experience">Experience</h2>
+      <div class="section__body">
+
+        <article class="entry">
+          <div class="entry__head">
+            <h3 class="entry__title">Integration Engineer, Sedna Inc</h3>
+            <span class="entry__date">Aug 2026 – present</span>
+          </div>
+          <p class="entry__stack">Python, PHP, iTop, GitLab CI/CD, Proxmox, NetBox</p>
+          <ul class="points">
+            <li>Python collectors on scheduled pipelines sync Proxmox and NetBox inventory into iTop for CMDB and ticketing, replacing manual tracking.</li>
+            <li>A custom iTop extension, deployed through the pipeline, that adds custom fields to tickets.</li>
+            <li>An iTop extension in PHP and the XML datamodel that attaches SLAs to tickets automatically, a step that used to be manual.</li>
+            <li>The pipeline jobs, schedules, CI variables and secrets behind all of it.</li>
+          </ul>
+        </article>
+
+        <article class="entry">
+          <div class="entry__head">
+            <h3 class="entry__title">Qualcomm field session</h3>
+            <span class="entry__date">Summer 2025</span>
+          </div>
+          <p class="entry__stack">FastAPI, Pydantic, MySQL, SQL Server, React</p>
+          <ul class="points">
+            <li>A FastAPI backend with 5 REST endpoints and Pydantic validation over MySQL and SQL Server, connected to a React frontend.</li>
+            <li>Scrum Lead for a 3&#8209;person team.</li>
+          </ul>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- SECTION: Projects. One <article class="entry"> per project, newest first. -->
+    <section class="section" aria-labelledby="projects">
+      <h2 class="section__title" id="projects">Projects</h2>
+      <div class="section__body">
+
+        <article class="entry">
+          <div class="entry__head">
+            <h3 class="entry__title">Campus Service Desk</h3>
+            <a class="entry__link" href="https://github.com/icombe/campus-service-desk" target="_blank" rel="noopener noreferrer">Source on GitHub</a>
+            <span class="entry__date">Summer 2026</span>
+          </div>
+          <p class="entry__stack">Java 17, Maven, JUnit 5</p>
+          <ul class="points">
+            <li>A command-line service desk with separate model, repository and service layers, dependency injection and two repository backends.</li>
+            <li>Status-transition rules covered by 51 JUnit 5 tests.</li>
+            <li>Written entirely by hand, for a deeper understanding of every layer.</li>
+          </ul>
+        </article>
+
+        <article class="entry">
+          <div class="entry__head">
+            <h3 class="entry__title">Tipsy Taxi</h3>
+            <a class="entry__link" href="https://github.com/icombe/tipsy-taxi" target="_blank" rel="noopener noreferrer">Source on GitHub</a>
+            <span class="entry__date">Spring 2026</span>
+          </div>
+          <p class="entry__stack">Team project. Godot, GDScript</p>
+          <ul class="points">
+            <li>An arcade driving game: controls, collisions, scoring, UI feedback and restart states, tuned through playtesting.</li>
+            <li>Four-person team working in two-week sprints during my final semester.</li>
+          </ul>
+        </article>
+
+        <article class="entry">
+          <div class="entry__head">
+            <h3 class="entry__title">Market Signal Summarizer</h3>
+            <a class="entry__link" href="https://github.com/icombe/market-signal-summarizer" target="_blank" rel="noopener noreferrer">Source on GitHub</a>
+            <span class="entry__date">Fall 2025</span>
+          </div>
+          <p class="entry__stack">Team project. React, TypeScript, REST APIs, OpenAI</p>
+          <ul class="points">
+            <li>Built the frontend: React and TypeScript components that display AI-generated market summaries and signal data.</li>
+            <li>Integrated them with the backend APIs, working with backend teammates on the API contracts.</li>
+          </ul>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- SECTION: Skills (groups separated by semicolons; learning on its own line) -->
+    <section class="section" aria-labelledby="skills">
+      <h2 class="section__title" id="skills">Skills</h2>
+      <div class="section__body">
+        <p>Python, Bash, SQL, Java, TypeScript, PHP; REST APIs, FastAPI; GitLab CI/CD, Linux, Proxmox, NetBox, iTop, Git; PostgreSQL, MySQL.</p>
+        <p>Learning OpenTofu/Terraform and AWS.</p>
+      </div>
+    </section>
+
+    <!-- SECTION: Education -->
+    <section class="section" aria-labelledby="education">
+      <h2 class="section__title" id="education">Education</h2>
+      <div class="section__body">
+        <p>B.S. Computer Science, Colorado School of Mines, 2026</p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER: update the date whenever content changes. Hidden in print. -->
+  <footer class="site-footer">
+    <div class="site-footer__body">
+      <p>© 2026 Ian Combe. Last updated <time datetime="2026-11-27">27 November 2026</time>. <a href="https://github.com/icombe/icombe.github.io" target="_blank" rel="noopener noreferrer">Site source</a></p>
+      <button type="button" class="print-button" hidden>Save as PDF</button>
+    </div>
+  </footer>
+
+  <!-- The only script: reveals the Save as PDF button and opens the print dialog,
+       which lays the page out as a one-page résumé (print rules in styles.css). -->
+  <script>
+    const printButton = document.querySelector(".print-button");
+    printButton.hidden = false;
+    printButton.addEventListener("click", () => window.print());
+  </script>
+
+</body>
 </html>
