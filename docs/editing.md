@@ -29,7 +29,7 @@ Each can be given to Claude as one prompt. Claude should read this file first.
 | Edit the current role | "Update the Now section to say ..." Edit the `.lede` block. |
 | Add or reorder a section | "Add a section called X after Skills." Copy a `<section class="section">`; keep the `aria-labelledby` and heading `id` matched. |
 | Change a color | "Make the accent green." Edit `--accent` (light) and its dark value, then recheck contrast. |
-| Change the font | "Use a serif body." Edit `--font`. System stacks only. |
+| Change the font | Edit `--font`. System stacks only (currently a serif stack). |
 | Change width or spacing | Edit `--measure`, `--margin-col`, `--section-space`. |
 | Swap the headshot | Replace `assets/ian-combe.webp` (square, under 60 KB) and keep the `alt` text accurate. |
 | Add a link | Copy an existing `<a>` so the new-tab attributes come along. |
@@ -45,7 +45,10 @@ Each can be given to Claude as one prompt. Claude should read this file first.
 ## Entry pattern
 ```html
 <article class="entry">
-  <h3 class="entry__title">Title</h3>
+  <div class="entry__head">
+    <h3 class="entry__title">Title</h3>
+    <!-- optional: <a class="entry__link" href="..." target="_blank" rel="noopener noreferrer">Source on GitHub</a> -->
+  </div>
   <p class="entry__stack">Tech, tech, tech</p>
   <p>Two or three lines.</p>
 </article>
