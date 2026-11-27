@@ -17,7 +17,7 @@ Avoided on purpose: gradient blobs, glassmorphism, emoji headings, centered hero
 ## Constraints
 
 - Static files only: `index.html`, `styles.css`, assets. No framework, no build step, no trackers.
-- JS: none by default. At most a few lines for a theme toggle, and only if `prefers-color-scheme` alone proves insufficient. Current plan: no JS.
+- JS: none by default (the JSON-LD block is data, not script). At most a few lines for a theme toggle, and only if `prefers-color-scheme` alone proves insufficient. Current plan: no JS.
 - Page weight under 300 KB.
 
 ## Type scale
@@ -63,11 +63,11 @@ A two-column grid from 52rem up. The portrait and the italic section headings si
   ───────────────────────────────────────────────────────── divider
   Now             Integration Engineer at Sedna Inc ...   <- lede, step-2
   ───────────────────────────────────────────────────────── divider
-  Selected work   Market Signal Summarizer                <- bold
+  Selected work   Market Signal Summarizer  Source   2025  <- bold; date right, muted
                   Team project. React, TypeScript ...     <- italic, muted, step-0
                   2-3 lines
                                                           <- space, no divider
-                  Campus Service Desk   Source on GitHub
+                  Campus Service Desk   Source on GitHub   Summer 2026
                   ...
   ───────────────────────────────────────────────────────── divider
   Skills          one paragraph
@@ -84,4 +84,14 @@ Semantic structure: `<header>`, `<main>` with one `<section>` per block, `<foote
 - Contact: LinkedIn and GitHub links. Email via a free SimpleLogin forwarding alias (Proton-owned, open source), shown as plain text. Ian creates the alias and supplies the address; it can be disabled if it attracts spam.
 - Headshot source: `public/assets/images/ian-combe-headshot.png` (copy and convert in step 1 before `public/` is removed).
 - Campus Service Desk links to its repo.
-- Qualcomm field session (May 2025 to June 2025): shown without dates, since the brief asks only for the experience.
+- Qualcomm field session (May 2025 to June 2025): originally undated.
+
+## Decisions from Ian (November 2026 design pass)
+- Every entry shows a date at the right of its title: Market Signal Summarizer 2025, Campus Service Desk Summer 2026, Qualcomm Summer 2025. Market Signal Summarizer links to its repo; Ian built the frontend and its integration with the backend APIs.
+- No "open to roles" line: Ian is currently employed.
+- Print or "Save as PDF" gives a one-page résumé: black on white, no portrait, link addresses spelled out, email hidden.
+
+## SEO (roadmap step 2)
+- Title, meta description naming Ian, canonical URL, Open Graph and Twitter card tags, `og.png` at 1200x630.
+- JSON-LD `Person` (a data block, not executable JS): name, jobTitle, url, image, sameAs LinkedIn and GitHub, alumniOf Colorado School of Mines, address Denver, CO.
+- `robots.txt` and `sitemap.xml`; commented placeholder for the Search Console verification tag.
