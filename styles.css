@@ -8,12 +8,13 @@
 :root {
   color-scheme: light dark;
 
-  /* Color (light): cool chalk paper, ink, spruce accent. Dark overrides in section 2. */
-  --bg: #f6f7f5;
-  --text: #1a1d1c;
-  --muted: #565d5a;
-  --accent: #1f5a4c;
-  --rule: #d5dad6;          /* decorative dividers only, never text */
+  /* Color (light): neutral paper, blue-black ink, indigo fountain-pen accent.
+     Dark overrides in section 2. */
+  --bg: #f7f7f4;
+  --text: #1b1d26;
+  --muted: #575b68;
+  --accent: #3343a3;
+  --rule: #dcdde3;          /* decorative dividers only, never text */
 
   /* Type: four sizes, no more */
   --step-0: 0.875rem;       /* stack lines, links row, footer */
@@ -38,11 +39,11 @@
    Follows the visitor's system setting. Keep contrast at or above 4.5:1 for text. */
 @media (prefers-color-scheme: dark) {
   :root {
-    --bg: #121614;
-    --text: #e4e8e6;
-    --muted: #a2aaa6;
-    --accent: #8cc7b4;
-    --rule: #2a312e;
+    --bg: #151821;          /* blue night, not black */
+    --text: #e7e8ef;
+    --muted: #a4a8b8;
+    --accent: #a3b2ff;      /* periwinkle: the indigo ink lifted for dark paper */
+    --rule: #2b2f3d;
   }
 }
 
@@ -100,7 +101,9 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-
   border-top: 1px solid var(--rule);
 }
 .section__body { max-width: var(--measure); }
-/* Accent mark: a short spruce segment where each divider begins */
+/* Margin headings in the accent ink, like notes written beside the text */
+.section__title { color: var(--accent); }
+/* Accent mark: a short indigo segment where each divider begins */
 .section::before {
   content: "";
   position: absolute;
@@ -131,7 +134,7 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-
 .entry__date { margin-left: auto; }
 .entry__stack { margin: 0 0 0.625rem; }
 
-/* Points: short lines with a spruce dash, easier to scan than a paragraph */
+/* Points: short lines with an indigo dash, easier to scan than a paragraph */
 .points { margin: 0; padding: 0; list-style: none; }
 .points li { position: relative; padding-left: 1.25rem; }
 .points li + li { margin-top: 0.375rem; }
@@ -139,8 +142,26 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-
 .entry > :last-child { margin-bottom: 0; }
 
 /* 7. FOOTER ------------------------------------------------------------ */
-.site-footer { padding-top: 1.5rem; border-top: 1px solid var(--rule); color: var(--muted); font-size: var(--step-0); }
+.site-footer { display: grid; padding-top: 1.5rem; border-top: 1px solid var(--rule); color: var(--muted); }
+/* Font size set here, not on the footer, so the grid's 66ch matches the sections */
+.site-footer__body { font-size: var(--step-0); display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 0.75rem 1.5rem; }
 .site-footer p { margin: 0; }
+
+/* Save as PDF: hidden until the script at the end of index.html reveals it,
+   so visitors without JavaScript never see a dead button. */
+.print-button {
+  padding: 0.3rem 0.9rem;
+  border: 1px solid color-mix(in srgb, var(--accent) 45%, transparent);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--accent);
+  font: inherit;
+  cursor: pointer;
+  transition: background-color 0.15s, border-color 0.15s;
+}
+.print-button[hidden] { display: none; }
+.print-button:hover { border-color: var(--accent); background: color-mix(in srgb, var(--accent) 8%, transparent); }
+.print-button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
 
 /* 8. RESPONSIVE ---------------------------------------------------------
    Wide screens: portrait and headings in the left column, everything else on one axis.
@@ -148,11 +169,12 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-
 @media (min-width: 52rem) {
   body { padding-top: 6rem; }
   .site-header,
-  .section { grid-template-columns: var(--margin-col) minmax(0, var(--measure)); column-gap: var(--gap); }
+  .section,
+  .site-footer { grid-template-columns: var(--margin-col) minmax(0, var(--measure)); column-gap: var(--gap); }
   .section { align-items: baseline; }   /* heading sits on the body's first line */
   .site-header { align-items: start; margin-bottom: 4rem; }
   .site-header img { margin-top: 0.4rem; }
-  .site-footer { display: none; }  /* site metadata, not résumé content */
+  .site-footer__body { grid-column: 2; }  /* footer text shares the content edge */
 }
 @media (max-width: 30rem) {
   :root { --step-3: 2.25rem; --section-space: 2.25rem; }
@@ -161,9 +183,9 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-
   .site-header img { width: 80px; height: 80px; }
 }
 
-/* Motion: the link underline fade is the only transition */
+/* Motion: link underline and button hover fades are the only transitions */
 @media (prefers-reduced-motion: reduce) {
-  a { transition: none; }
+  a, .print-button { transition: none; }
 }
 
 /* 9. PRINT --------------------------------------------------------------
@@ -176,6 +198,7 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-
   body { max-width: none; padding: 0; }
   .site-header, .section { grid-template-columns: var(--margin-col) minmax(0, 1fr); column-gap: var(--gap); }
   .section { align-items: baseline; }
+  .section__body { max-width: none; }  /* use the page width; keeps dates on the title line */
   .site-header { margin-bottom: 1rem; }
   .site-header img { visibility: hidden; height: 0; }
   .lede { font-size: var(--step-1); }

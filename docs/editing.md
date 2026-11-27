@@ -16,7 +16,7 @@ Preview: `python3 -m http.server 8000`, then open http://localhost:8000.
 ## Rules that must hold after any edit
 - Use only facts Ian supplied. If something is missing, ask. No employer internals (see `CLAUDE.md`).
 - Every `<a>` has `target="_blank" rel="noopener noreferrer"`, except the 404 home link.
-- Four type sizes only (`--step-0` to `--step-3`). System fonts. No JavaScript, no trackers.
+- Four type sizes only (`--step-0` to `--step-3`). System fonts. No trackers. The only script is the Save as PDF one at the end of `index.html`; add no other.
 - Text contrast stays at or above 4.5:1 in light and dark.
 - Update the Now stamp (`<p class="stamp">`) when Now changes.
 - Update the footer's "Last updated" date (`<time datetime>` and its visible text) and the sitemap `<lastmod>` whenever content changes.
@@ -63,6 +63,6 @@ Sections, top to bottom: Now, Experience, Projects, Skills, Education.
 
 ## Check before committing
 1. Reload the page in light and dark mode and at phone width.
-2. Confirm no executable `<script>` was added (the JSON-LD `application/ld+json` block in `<head>` is data and stays; keep it in sync with the visible content) and total size is still small (`du -sh` on the repo root files, excluding `.git`).
+2. Confirm no new executable `<script>` was added beyond the Save as PDF one (the JSON-LD `application/ld+json` block in `<head>` is data and stays; keep it in sync with the visible content) and total size is still small (`du -sh` on the repo root files, excluding `.git`).
 3. Print preview (Ctrl+P) still fits one Letter page.
 4. Commit with a conventional message, for example `content: add project X`.

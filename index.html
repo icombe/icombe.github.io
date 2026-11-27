@@ -159,7 +159,7 @@
           <div class="entry__head">
             <h3 class="entry__title">Market Signal Summarizer</h3>
             <a class="entry__link" href="https://github.com/icombe/market-signal-summarizer" target="_blank" rel="noopener noreferrer">Source on GitHub</a>
-            <span class="entry__date">2025</span>
+            <span class="entry__date">Fall 2025</span>
           </div>
           <p class="entry__stack">Team project. React, TypeScript, REST APIs, OpenAI</p>
           <ul class="points">
@@ -190,10 +190,21 @@
 
   </main>
 
-  <!-- FOOTER: update the date whenever content changes -->
+  <!-- FOOTER: update the date whenever content changes. Hidden in print. -->
   <footer class="site-footer">
-    <p>© Ian Combe. Last updated <time datetime="2026-11-27">27 November 2026</time>. <a href="https://github.com/icombe/icombe.github.io" target="_blank" rel="noopener noreferrer">Site source</a></p>
+    <div class="site-footer__body">
+      <p>© 2026 Ian Combe. Last updated <time datetime="2026-11-27">27 November 2026</time>. <a href="https://github.com/icombe/icombe.github.io" target="_blank" rel="noopener noreferrer">Site source</a></p>
+      <button type="button" class="print-button" hidden>Save as PDF</button>
+    </div>
   </footer>
+
+  <!-- The only script: reveals the Save as PDF button and opens the print dialog,
+       which lays the page out as a one-page résumé (print rules in styles.css). -->
+  <script>
+    const printButton = document.querySelector(".print-button");
+    printButton.hidden = false;
+    printButton.addEventListener("click", () => window.print());
+  </script>
 
 </body>
 </html>
